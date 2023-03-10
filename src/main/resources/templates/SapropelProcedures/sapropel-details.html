@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <th:block th:insert="/fragments/meta"></th:block>
     <th:block th:insert="/fragments/navigation"></th:block>
@@ -8,15 +8,19 @@
 
 </head>
 <body>
-<main><h1>Product details</h1></main>
-<div class="container" th:object="${searched}">
-    <div class="card-deck" ></div>
-    <h4 th:text="*{name}"></h4>
-    <img class="card-img-top" th:src="*{imageUrl}"></img>
-    <p th:text="*{description}"></p>
-    <h3 th:text="*{price}"></h3>
-    <div></div>
-
-</div>
+<main><h1 class="text-center">Product details</h1>
+    <div class="container" th:object="${searched}">
+        <div class="card" style="background-color: rgba(200,200,200,0.7); border-radius: 8px">
+            <div><h3 class="text-center" th:text="*{name}" style="color: ghostwhite"></h3></div>
+            <span class="d-flex">
+    <img class="card-img-top" style="width: 50%; height: 50%" th:src="*{imageUrl}" alt="">
+         <p class="text-white" th:text="*{description}"></p>
+        </span>
+            <h3 class="text-white" th:text="| Price: *{price}|"></h3>
+            <a class="btn btn-sm btn-outline-light" sec:authorize="isAuthenticated()" th:href="@{/sapropel/buy/{id}(id = *{id})}"
+            >Add to cart</a>
+        </div>
+    </div>
+</main>
 </body>
 </html>

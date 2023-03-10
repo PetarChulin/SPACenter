@@ -18,6 +18,9 @@ public class SapropelProceduresDTO {
     @Positive(message = "Price must be positive")
     private Double price;
 
+    @NotNull
+    private String description;
+
     public SapropelProceduresDTO() {
     }
 
@@ -43,5 +46,13 @@ public class SapropelProceduresDTO {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

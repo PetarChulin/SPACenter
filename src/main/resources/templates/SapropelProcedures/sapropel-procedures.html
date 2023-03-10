@@ -26,7 +26,7 @@
                     <p class="card-text" th:text="*{name}"></p>
                     <p class="card-text" th:text="|Price: *{price} &euro;|"></p>
 
-                    <a class="btn btn-sm btn-info" th:href="@{/sapropel/buy/{id}(id = *{id})}"
+                    <a class="btn btn-sm btn-info" sec:authorize="isAuthenticated()" th:href="@{/sapropel/buy/{id}(id = *{id})}"
                        >Add to cart</a>
                     <a class="btn btn-sm btn-info" th:href="@{/sapropel/details/{id}(id = *{id})}">Details</a>
 

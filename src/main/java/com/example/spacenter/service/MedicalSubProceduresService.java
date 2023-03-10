@@ -49,6 +49,7 @@ public class MedicalSubProceduresService {
         sapropelProcedure.setType(sapropelProcedure.getType());
         sapropelProcedure.setName(sapropelProceduresDTO.getName());
         sapropelProcedure.setImageUrl(sapropelProceduresDTO.getImageUrl());
+        sapropelProcedure.setDescription(sapropelProceduresDTO.getDescription());
         sapropelProcedure.setPrice(sapropelProceduresDTO.getPrice());
 
         this.sapropelRepository.save(sapropelProcedure);
