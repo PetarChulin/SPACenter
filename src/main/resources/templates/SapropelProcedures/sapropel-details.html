@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <th:block th:insert="/fragments/meta"></th:block>
+    <th:block th:insert="/fragments/navigation"></th:block>
+    <meta charset="UTF-8">
+    <title>Details</title>
+
+</head>
+<body>
+<main><h1>Product details</h1></main>
+<div class="container" th:object="${searched}">
+    <div class="card-deck" ></div>
+    <h4 th:text="*{name}"></h4>
+    <img class="card-img-top" th:src="*{imageUrl}"></img>
+    <p th:text="*{description}"></p>
+    <h3 th:text="*{price}"></h3>
+    <div></div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <th:block th:insert="/fragments/meta"></th:block>
+</head>
+<body>
+<header>
+    <th:block th:insert="/fragments/navigation"></th:block>
+</header>
+<main><div class="bg-dark bg-opacity-75"><h1 class="text-center">Laser procedures<a
+        class="btn btn-md btn-dark text-right" sec:authorize="hasRole('ADMIN')"
+        th:href="@{/medical/add/laser}">Add procedure</a></h1></div>
+    </h1>
+    <div class="row" style="margin: auto; background-color: rgba(90,90,100, 0.7)">
+        <div class="col-md-3" th:each="p : ${laserProcedures}" th:object="${p}">
+            <div class="card  bg-dark text-white text-md-center" style="width: 18rem;">
+                <img th:src="*{imageUrl}" class="card-img-top">
+                <div class="card-body">
+                    <p class="card-text" th:text="*{name}"></p>
+                    <p class="card-text" th:text="|Price: *{price} &euro;|"></p>
+
+                    <a class="btn btn -sm btn-info" th:href="@{/laser/buy/{id}(id = *{id})}">Add to cart</a>
+                    <a class="btn btn-sm btn-info" th:href="@{/details/{id}(id = *{id})}">Details</a>
+                </div>
+            </div>
+        </div>
+    </div></main>
+</body>
+</html>

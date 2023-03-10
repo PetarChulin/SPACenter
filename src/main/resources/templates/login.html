@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:insert="/fragments/meta"></th:block>
+
+</head>
+<body style="background-image: url(/images/spa-1.jpg);">
+<header>
+    <th:block th:insert="/fragments/navigation"></th:block>
+</header>
+<main>
+    <hr class="hr-5 w-50 "/>
+    <form class="mx-auto auth-forms"
+          th:method="post" th:action="@{/login}" >
+
+<!--th:object="${loginUserDTO}"-->
+        <div class="errors text-danger" th:if="${badCredentials}" >Incorrect username or password!</div>
+
+
+        <h1 class="text-center mt-2"><span class="badge badge-pill ">Login</span></h1>
+        <div class="form-floating" style="width: 400px; margin: auto">
+            <input class="form-control auth-inputs"
+                   id="username"
+                   name="username"
+                   placeholder="Username" />
+<!--                   th:field="*{username}"-->
+<!--                   th:errorclass="is-invalid"-->
+<!--            <small th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="text-danger"></small>-->
+            <label for="username">Username</label>
+        </div>
+        <div class="form-floating" style="width: 400px; margin: auto">
+            <input type="password" class="form-control auth-inputs"
+                   id="password"
+                   name="password"
+                   placeholder="Password" />
+<!--                   th:field="*{password}"-->
+<!--                   th:errorclass="is-invalid"-->
+
+<!--            <small th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger"></small>-->
+            <label for="password">Password</label>
+        </div>
+        <button type="submit" class="btn btn-primary auth-button">Login</button>
+    </form>
+
+
+</main>
+<footer class="footer bg-transparent py-2">
+    <div class="container-fluid text-center">
+        <div class="footer-background h5 text-primary text-stroke fixed-bottom">
+            &copy; PeterC 2023. All rights reserved.
+        </div>
+    </div>
+</footer>
+</body>
+</html>
+
+

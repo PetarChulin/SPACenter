@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <th:block th:insert="/fragments/meta"></th:block>
+</head>
+<body>
+<header>
+    <th:block th:insert="/fragments/navigation"></th:block>
+</header>
+<main class="text-center"><h1><th:block sec:authentication="name"></th:block> cart</h1>
+
+
+    <div class="bg-dark bg-opacity-75 "></div>
+    <div style="margin: auto; align-content: center; text-align: center">
+        <div class="card"
+             style="width: 60%; height: 60%; background-color: rgba(0,0,0,0.25);border-radius: 4px; margin: auto; align-content: center; text-align: center">
+            <table class="table" style="background-color: rgba(0,0,0,0.25); border-radius: 6px;">
+                <thead style=" background-color: rgba(0,0,0,0.8); color: #80bdff; font-size: large">
+                <tr style="border-radius: 6px;">
+                    <th scope="col">#</th>
+                    <th scope="col">Product</th>
+                    <th scope="col"></th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col"></th>
+
+                </tr>
+                </thead>
+                <tbody style=" background-color: rgba(0,0,0,0.25); color: #80bdff; font-size: large; font-weight: bold">
+                <tr th:each="o : ${allOrders}" th:object="${o}">
+                    <th class="card" scope="row" th:text="${counter.incrementAndGet()}"></th>
+                    <td>
+                        <div class="card" style="background-color: #6c757d;" th:text="*{name}"></div>
+                    </td>
+                    <td><img th:src="*{imageUrl}" style="width: 100px; height: 100px; "></td>
+                    <td th:id="'price' + *{type} + *{id}"
+                        th:value="*{price}"
+                        th:text="|*{price} &euro;|"></td>
+                    <td><input type="number" th:id="'quantity' + *{type} + *{id}" class="form-control" step="1" min="1"
+                               max=""
+                               name="quantity" value="1" title="Qty" size="4" inputmode="numeric"></td>
+                    <td th:id="'total' + *{type} + *{id}" type="number"></td>
+                    <td><a th:href="@{'/' + *{type} + '/delete/{id}'(id = *{id})}"
+                           class="btn btn-outline-light">Remove</a></td>
+                </tr>
+                </tbody>
+
+
+                <script th:inline="javascript">
+
+                    async function calculate() {
+                        let itemId = [[${allOrders}]];
+                        for (const itemIdKey in itemId) {
+                            let temp = document.getElementById('price' + itemId[itemIdKey].type + itemId[itemIdKey].id).textContent;
+                            let qty = await document.getElementById('quantity' + itemId[itemIdKey].type + itemId[itemIdKey].id).value;
+                            const regexp = /-?(\d+)(\.\d+)?/;
+                            let result = temp.match(regexp)[0];
+                            let price = parseFloat(result);
+                            document.getElementById('total' + itemId[itemIdKey].type + itemId[itemIdKey].id).innerHTML = (price * parseFloat(qty)).toFixed(2);
+                        }
+                    }
+
+                    setTimeout(() => {
+                        calculate()
+                    }, 100);
+                </script>
+            </table>
+
+            <div>
+                <button class="btn btn-lg btn-outline-light" onclick="calculate()">Update Amount</button>
+                <button class="btn btn-lg btn-outline-light">Buy</button>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="footer bg-transparent py-2">
+    <div class="container-fluid text-center">
+        <div class="footer-background h5 text-primary text-stroke fixed-bottom">
+            &copy; PeterC 2023. All rights reserved.
+        </div>
+    </div>
+</footer>
+</body>
+</html>
