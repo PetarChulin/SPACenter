@@ -4,7 +4,9 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -31,7 +33,7 @@ public class UserEntity {
     private String email;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    private List<Role> roles = new ArrayList<>();
+    private Set<Role> roles = new HashSet<>();
 
 
     public UserEntity() {
@@ -39,6 +41,11 @@ public class UserEntity {
 
     public UserEntity addRole(Role role) {
         this.roles.add(role);
+        return this;
+    }
+
+    public UserEntity removeRole(Role role) {
+        this.roles.remove(role);
         return this;
     }
     public Long getId() {
@@ -90,11 +97,11 @@ public class UserEntity {
 
     }
 
-    public List<Role> getRoles() {
+    public Set<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<Role> roles) {
+    public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
 }

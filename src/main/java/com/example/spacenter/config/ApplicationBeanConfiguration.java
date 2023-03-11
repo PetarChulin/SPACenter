@@ -29,13 +29,14 @@ public class ApplicationBeanConfiguration {
         http.
                 authorizeHttpRequests()
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                .requestMatchers("/home", "/medical-procedures",  "/sapropel/details/**", "/SapropelProcedures/sapropel-procedures",
+                .requestMatchers("/","/home", "/medical-procedures",  "/sapropel/details/**", "/SapropelProcedures/sapropel-procedures",
                         "/LaserProcedures/laser-procedures" , "/LaserProcedures/laser/details/**").permitAll()
                 .requestMatchers("/login", "/register").anonymous()
                 .requestMatchers("/logout", "/cart", "/sapropel/buy/**", "/sapropel/delete/**",
                         "/laser/buy/**", "/laser/delete/**").authenticated()
                 .requestMatchers("/").hasRole(RoleEnum.USER.name())
-                .requestMatchers("/change/role" , "/medical/add/**").hasRole(RoleEnum.ADMIN.name())
+                .requestMatchers("/medical/add/**").hasRole(RoleEnum.MODERATOR.name())
+                .requestMatchers("/change/role" , "/delete/role", "/medical/add/**").hasRole(RoleEnum.ADMIN.name())
                 .and()
                 .formLogin()
                 .loginPage("/login")

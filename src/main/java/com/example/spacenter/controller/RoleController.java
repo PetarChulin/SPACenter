@@ -28,41 +28,19 @@ public class RoleController {
         this.authService = authService;
     }
 
-//    @GetMapping("/change/role")
-//    public ModelAndView add(ModelAndView modelAndView) {
-//
-//        if (!this.authService.isLoggedIn()) {
-//            modelAndView.setViewName("home");
-//
-//        }
-//
-//        modelAndView.addObject("users", this.userRepository
-//                .findAll()
-//                .stream()
-//                .map(User::getUsername)
-//                .collect(Collectors.toList()));
-//        modelAndView.setViewName("change-role");
-//
-//        return modelAndView;
-//    }
-
     @GetMapping("/change/role")
     public String add(Model model) {
 
-//        if (!this.authService.isLoggedIn()) {
-//            return "redirect:/home";
-//
-//        }
-
-        model.addAttribute("users" , this.userRepository
+        model.addAttribute("users", this.userRepository
                 .findAll()
                 .stream()
-                .map(UserEntity::getUsername)
+                .map(UserEntity::getEmail)
                 .collect(Collectors.toList()));
 
 
         return "change-role";
     }
+
 
     @PostMapping("/change/role")
     public String addRoles(@ModelAttribute("roleAddBinding") RoleDTO roleDTO,
@@ -70,6 +48,7 @@ public class RoleController {
                            RedirectAttributes attributes) {
 
         this.roleService.addRoleToUser(roleDTO.getUsername(), roleDTO.getRole());
+//        this.roleService.removeRoleFromUser(roleDTO.getUsername(), roleDTO.getRole());
 
         if (result.hasErrors()) {
             attributes.addFlashAttribute("roleDTO", roleDTO);
@@ -77,6 +56,14 @@ public class RoleController {
                     result);
             return "redirect:/change-role";
         }
+
+        return "redirect:/home";
+    }
+
+    @GetMapping("/delete/role")
+    public String deleteRoles(RoleDTO roleDTO) {
+
+        this.roleService.removeRoleFromUser(roleDTO.getUsername(), roleDTO.getRole());
 
         return "redirect:/home";
     }

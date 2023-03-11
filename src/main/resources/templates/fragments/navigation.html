@@ -2,31 +2,27 @@
      style="z-index: 1; background-color: rgba(0,0,0, 0.7); color: #9fcdff; position: sticky">
     <div class="container-fluid" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-        <a class="navbar-brand" style="color: #9fcdff" href="/home">Home</a>
+        <a class="btn btn-outline-light"  href="/home">Home</a>
 
 
-        <div class="nav-item dropdown">
+        <div class="nav-item dropdown btn btn-outline-light">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                aria-expanded="false">
                 Medical procedures
             </a>
-            <ul class="dropdown-menu " style="background-color: rgba(0,0,0, 0.7);">
-                <li><a class="dropdown-item" style=" color: #9fcdff" href="/medical-procedures">Medical procedures</a>
+            <ul class="dropdown-menu btn btn-outline-light" style="background-color: rgba(0,0,0, 0.7);">
+                <li><a class="dropdown-item "  href="/medical-procedures">Procedures</a>
                 </li>
                 <li>
                     <hr class="dropdown-divider">
                 </li>
-                <li><a class="dropdown-item" style=" color: #9fcdff" sec:authorize="hasRole('ADMIN')"
+                <li><a class="dropdown-item btn btn-outline-light" style="color: whitesmoke" sec:authorize="hasAnyRole('ADMIN' , 'MODERATOR')"
                        href="/medical/add">Add medical procedures</a></li>
-                <!--th:if="${@loggedUser.id > 0 && @loggedUser.role == 'ADMIN'}"-->
             </ul>
         </div>
-        <!--            <a class="navbar-brand" href="/medical-procedures">Medical procedures</a>-->
-        <!--            <a class="navbar-brand" th:if="${@loggedUser.id > 0}" href="/medical/add">Add medical procedures</a>-->
 
         <a class="navbar-brand" href="/spa-procedures">SPA procedures</a>
         <a class="navbar-brand" href="/spa-center">SPA center</a>
-        <!--        <a class="navbar-brand" style="color: #9fcdff" th:if="${@loggedUser.id > 0}" href="/logout">Logout</a>-->
 
         <a class="navbar-brand" style="color: #9fcdff" sec:authorize="hasRole('ADMIN')"
            href="/change/role">Admin</a>
@@ -37,13 +33,10 @@
                 <input class="btn btn-link nav-link" type="submit" value="Logout">
             </form>
         </div>
-        <!--        th:if="${@loggedUser.id > 0 && @loggedUser.role == 'ADMIN'}"-->
-        <!--        <a class="navbar-brand" aria-current="page" style="color: #9fcdff" th:if="${@loggedUser.id == 0}" href="/login">Login</a>-->
-        <!--        <a class="navbar-brand" aria-current="page" style="color: #9fcdff" th:if="${@loggedUser.id == 0}" href="/register">Register</a>-->
         <div>
-        <a class="navbar-brand" aria-current="page" style="color: #9fcdff" sec:authorize="!isAuthenticated()"
+        <a class="btn btn-outline-light" aria-current="page"  sec:authorize="!isAuthenticated()"
            href="/login">Login</a>
-        <a class="navbar-brand" aria-current="page" style="color: #9fcdff" sec:authorize="!isAuthenticated()"
+        <a class="btn btn-outline-light" aria-current="page"  sec:authorize="!isAuthenticated()"
            href="/register">Register</a>
             <a class="btn btn-outline-light position-relative" sec:authorize="isAuthenticated()" href="/cart">
                <th:block sec:authentication="name"></th:block> cart

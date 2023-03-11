@@ -47,9 +47,6 @@ public class MedicalControllerAdd {
     @GetMapping("/medical/add")
     public String add() {
 
-//        if (!this.authService.isLoggedIn()) {
-//            return "redirect:/medical-procedures";
-//        }
 
         return "add-medical-procedures";
 

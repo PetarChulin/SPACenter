@@ -10,9 +10,10 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(unique = true)
 //    @Enumerated(EnumType.STRING)
     private String name;
+
 
     public Role() {
     }
