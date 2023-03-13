@@ -15,7 +15,7 @@
 </header>
 <main>
     <div class="bg-dark bg-opacity-75"><h1 class="text-center">Sapropel procedures<a
-            class="btn btn-md btn-dark text-right" sec:authorize="hasRole('ADMIN')"
+            class="btn btn-md btn-dark text-right" sec:authorize="hasAnyRole('ADMIN' , 'MODERATOR')"
             th:href="@{/medical/add/sapropel}">Add procedure</a></h1></div>
     </h1>
     <div class="row " style="margin: auto; background-color: rgba(90,90,100, 0.7)">
@@ -26,7 +26,7 @@
                     <p class="card-text" th:text="*{name}"></p>
                     <p class="card-text" th:text="|Price: *{price} &euro;|"></p>
 
-                    <a class="btn btn-sm btn-info" sec:authorize="isAuthenticated()" th:href="@{/sapropel/buy/{id}(id = *{id})}"
+                    <a class="btn btn-sm btn-info" data-toggle="modal" data-target="#myModal" sec:authorize="isAuthenticated()" th:href="@{/sapropel/buy/{id}(id = *{id})}"
                        >Add to cart</a>
                     <a class="btn btn-sm btn-info" th:href="@{/sapropel/details/{id}(id = *{id})}">Details</a>
 

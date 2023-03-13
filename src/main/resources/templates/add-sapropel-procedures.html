@@ -33,7 +33,7 @@
     </div>
     <div class="form-floating" style="width: 400px; margin: auto">
       <input type="number" class="form-control auth-inputs"
-             id="floatingPrice" name="price" placeholder="price"
+             id="floatingPrice" name="price" placeholder="price" step="0.01"
              th:field="*{price}"
              th:errorclass="is-invalid"/>
       <small th:if="${#fields.hasErrors('price')}" th:errors="*{price}" class="text-danger"></small>

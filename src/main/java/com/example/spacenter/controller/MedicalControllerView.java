@@ -61,7 +61,6 @@ public class MedicalControllerView {
 
     @GetMapping("/SapropelProcedures/sapropel-procedures")
     public String sapropel(Model model) {
-        Long userId = this.loggedUser.getId();
 
         List<SapropelProcedure> procedures = this.sapropelRepository.findAll();
 

@@ -74,12 +74,12 @@ public class RoleService {
 
         assert user != null;
         UserDetails details = detailsService.loadUserByUsername(user.getEmail());
-//        if (details.getAuthorities().stream()
-//                .noneMatch(a -> a.getAuthority().equals(role))) {
+        if (details.getAuthorities().stream()
+                .noneMatch(a -> a.getAuthority().equals(role))) {
 
         Role roleEntity = this.roleRepository.findByName(role);
         user.removeRole(roleEntity);
         this.userRepository.saveAndFlush(user);
-//        }
+        }
     }
 }

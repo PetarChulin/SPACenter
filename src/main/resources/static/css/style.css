@@ -11,6 +11,7 @@
     color: #9fcdff;
     text-shadow: #6c757d;
 }
+
 h1 {
     margin: auto;
     color: #9fcdff;
@@ -46,7 +47,7 @@ h1 {
 }
 
 body {
-    background-image: url(/images/background.jpg);
+    background-image: url(/images/spa-4.jpg);
     background-position: center;
     background-attachment: fixed;
     background-size: cover;
@@ -102,4 +103,33 @@ footer {
     0 0.07em white,
     -0.07em 0 white,
     0 -0.07em white;
+}
+
+
+
+@keyframes swing {
+    15% {
+        -webkit-transform: translateY(5px);
+        transform: translateY(5px);
+    }
+    /*30% {*/
+    /*    -webkit-transform: translateY(-5px);*/
+    /*    transform: translateY(-5px);*/
+    /*}*/
+    /*50% {*/
+    /*    -webkit-transform: translateY(3px);*/
+    /*    transform: translateY(3px);*/
+    /*}*/
+    /*65% {*/
+    /*    -webkit-transform: translateY(-3px);*/
+    /*    transform: translateY(-3px);*/
+    /*}*/
+    /*80% {*/
+    /*    -webkit-transform: translateY(2px);*/
+    /*    transform: translateY(2px);*/
+    /*}*/
+    100% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
 }

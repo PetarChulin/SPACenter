@@ -48,7 +48,6 @@ public class RoleController {
                            RedirectAttributes attributes) {
 
         this.roleService.addRoleToUser(roleDTO.getUsername(), roleDTO.getRole());
-//        this.roleService.removeRoleFromUser(roleDTO.getUsername(), roleDTO.getRole());
 
         if (result.hasErrors()) {
             attributes.addFlashAttribute("roleDTO", roleDTO);

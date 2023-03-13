@@ -10,13 +10,13 @@
                aria-expanded="false">
                 Medical procedures
             </a>
-            <ul class="dropdown-menu btn btn-outline-light" style="background-color: rgba(0,0,0, 0.7);">
-                <li><a class="dropdown-item "  href="/medical-procedures">Procedures</a>
+            <ul class="dropdown-menu btn btn-outline-light" style="background-color: rgba(0,0,0, 0.85);">
+                <li><a class="dropdown-item btn btn-outline-light" style="color: #0056b3" href="/medical-procedures">Procedures</a>
                 </li>
                 <li>
                     <hr class="dropdown-divider">
                 </li>
-                <li><a class="dropdown-item btn btn-outline-light" style="color: whitesmoke" sec:authorize="hasAnyRole('ADMIN' , 'MODERATOR')"
+                <li><a class="dropdown-item btn btn-outline-light" style="color: #0056b3" sec:authorize="hasAnyRole('ADMIN' , 'MODERATOR')"
                        href="/medical/add">Add medical procedures</a></li>
             </ul>
         </div>
