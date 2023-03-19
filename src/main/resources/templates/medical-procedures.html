@@ -24,7 +24,7 @@
     <div class="row">
         <div class="col-md-3" th:each="p : ${procedures}" th:object="${p}">
             <div class="card box-shadow bg-dark" style="width: 18rem; height: 30rem">
-                <img th:src="*{imageUrl}" class="card-img-top" th:href="@{/sapropel-procedures}">
+                <img th:src="*{imageUrl}" class="card-img-top">
                 <div class="card-body d-flex flex-column text-white">
                     <h5 class="card-title text-center" th:text="*{name}"></h5>
                     <p class="card-text" th:text="*{description}"></p>

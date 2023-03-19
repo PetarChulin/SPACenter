@@ -2,12 +2,19 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.w3.org/1999/xhtml">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/assets/izitoast/js/iziToast.min.js}"></script>
+
 <head>
     <th:block th:insert="/fragments/meta"></th:block>
-<!--    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>-->
-<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>-->
-<!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>-->
-<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">-->
+
 </head>
 <body>
 <header>
@@ -18,43 +25,50 @@
             class="btn btn-md btn-dark text-right" sec:authorize="hasAnyRole('ADMIN' , 'MODERATOR')"
             th:href="@{/medical/add/sapropel}">Add procedure</a></h1></div>
     </h1>
-    <div class="row " style="margin: auto; background-color: rgba(90,90,100, 0.7)">
-        <div class="col-md-3 " style="margin: auto" th:each="p : ${sapropelProcedures}" th:object="${p}">
+
+    <div class="row " style="margin: auto; background-color: rgba(90,90,100, 0.7)" >
+    <p class="text-success text-center text-white" style="background-color: #17a2b8" th:if="${alreadyInCart}" >Already in cart!</p>
+    <p class="text-success text-center text-white" style="background-color: #17a2b8" th:if="${added}" >Product added</p>
+        <div  class="col-md-3 " style="margin: auto" th:each="p : ${sapropelProcedures}" th:object="${p}">
             <div class="card  bg-dark text-white text-md-center" style="width: 18rem;">
                 <img th:src="*{imageUrl}" class="card-img-top">
                 <div class="card-body">
                     <p class="card-text" th:text="*{name}"></p>
                     <p class="card-text" th:text="|Price: *{price} &euro;|"></p>
 
-                    <a class="btn btn-sm btn-info" data-toggle="modal" data-target="#myModal" sec:authorize="isAuthenticated()" th:href="@{/sapropel/buy/{id}(id = *{id})}"
-                       >Add to cart</a>
+                    <a class="btn btn-sm btn-info"
+                       sec:authorize="isAuthenticated()" th:href="@{/sapropel/buy/{id}(id = *{id})}"
+                        >Add to cart</a>
                     <a class="btn btn-sm btn-info" th:href="@{/sapropel/details/{id}(id = *{id})}">Details</a>
 
-<!--                    data-toggle="modal" data-target="#myModal"-->
-                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-                             aria-labelledby="exampleModalLabel"
-                             aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content" style="background-color: rgba(0,0,0,0.4)">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p style="color: #80bdff" th:text="|Already in cart|"></p>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
+                    <!--                    data-toggle="modal" th:data-target="${'#'+ p.name}"-->
+
+                </div>
+            </div>
+
+            <div class="modal fade" id="modal" tabindex="-1" role="dialog"
+                 aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content" style="background-color: rgba(0,0,0,0.4)">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
+                        <div class="modal-body">
+                            <p style="color: #80bdff" th:text="|You add *{name} in cart|"></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+
     </div>
 
 </main>

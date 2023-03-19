@@ -1,17 +1,355 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>SPA center</title>
-    <link rel="stylesheet" href="/css/style.css"/>
+    <!-- This script got from frontendfreecode.com -->
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            font-family: "Poppins", Arial, sans-serif;
+            font-size: 14px;
+            line-height: 1.8;
+            font-weight: normal;
+            color: gray;
+            background: transparent;
+        }
+        a {
+            -webkit-transition: 0.3s all ease;
+            -o-transition: 0.3s all ease;
+            transition: 0.3s all ease;
+            color: #3445b4;
+        }
+        a:hover,
+        a:focus {
+            text-decoration: none !important;
+            outline: none !important;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+        }
+        button {
+            -webkit-transition: 0.3s all ease;
+            -o-transition: 0.3s all ease;
+            transition: 0.3s all ease;
+        }
+        button:hover,
+        button:focus {
+            text-decoration: none !important;
+            outline: none !important;
+            -webkit-box-shadow: none !important;
+            box-shadow: none !important;
+        }
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        .h1,
+        .h2,
+        .h3,
+        .h4,
+        .h5 {
+            line-height: 1.5;
+            font-weight: 400;
+            font-family: "Poppins", Arial, sans-serif;
+            color: #000;
+        }
+        .ftco-section {
+            padding: 7em 0;
+        }
+        .ftco-no-pt {
+            padding-top: 0;
+        }
+        .ftco-no-pb {
+            padding-bottom: 0;
+        }
+        .heading-section {
+            font-size: 28px;
+            color: #000;
+        }
+        .heading-section small {
+            font-size: 18px;
+        }
+        .img {
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+        }
+        .wrapper {
+            width: 100%;
+        }
+        #sidebar {
+            min-width: 270px;
+            max-width: 270px;
+            background: #3445b4;
+            color: #fff;
+            -webkit-transition: all 0.3s;
+            -o-transition: all 0.3s;
+            transition: all 0.3s;
+            position: relative;
+        }
+        #sidebar .h6 {
+            color: #fff;
+        }
+        #sidebar.active {
+            margin-left: -270px;
+        }
+        #sidebar h1 {
+            margin-bottom: 20px;
+            font-weight: 700;
+            font-size: 30px;
+        }
+        #sidebar h1 .logo {
+            color: #fff;
+        }
+        #sidebar h1 .logo span {
+            font-size: 14px;
+            color: #44bef1;
+            display: block;
+        }
+        #sidebar ul.components {
+            padding: 0;
+        }
+        #sidebar ul li {
+            font-size: 16px;
+        }
+        #sidebar ul li > ul {
+            margin-left: 10px;
+        }
+        #sidebar ul li > ul li {
+            font-size: 14px;
+        }
+        #sidebar ul li a {
+            padding: 10px 0;
+            display: block;
+            color: rgba(255, 255, 255, 0.6);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        #sidebar ul li a span {
+            color: #44bef1;
+        }
+        #sidebar ul li a:hover {
+            color: #fff;
+        }
+        #sidebar ul li.active > a {
+            background: transparent;
+            color: #fff;
+        }
+        @media (max-width: 991.98px) {
+            #sidebar {
+                margin-left: -270px;
+            }
+            #sidebar.active {
+                margin-left: 0;
+            }
+        }
+        #sidebar .custom-menu {
+            display: inline-block;
+            position: absolute;
+            top: 20px;
+            right: 0;
+            margin-right: -20px;
+            -webkit-transition: 0.3s;
+            -o-transition: 0.3s;
+            transition: 0.3s;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            #sidebar .custom-menu {
+                -webkit-transition: none;
+                -o-transition: none;
+                transition: none;
+            }
+        }
+        #sidebar .custom-menu .btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            position: relative;
+        }
+        #sidebar .custom-menu .btn i {
+            margin-right: -40px;
+            font-size: 14px;
+        }
+        #sidebar .custom-menu .btn.btn-primary {
+            background: transparent;
+            border-color: transparent;
+        }
+        #sidebar .custom-menu .btn.btn-primary:after {
+            z-index: -1;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            content: "";
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+            background: #3445b4;
+            border-radius: 10px;
+        }
+        #sidebar .custom-menu .btn.btn-primary:hover,
+        #sidebar .custom-menu .btn.btn-primary:focus {
+            background: transparent !important;
+            border-color: transparent !important;
+        }
+        a[data-toggle="collapse"] {
+            position: relative;
+        }
+        .dropdown-toggle::after {
+            display: block;
+            position: absolute;
+            top: 50%;
+            right: 0;
+            -webkit-transform: translateY(-50%);
+            -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+        }
+        @media (max-width: 991.98px) {
+            #sidebarCollapse span {
+                display: none;
+            }
+        }
+        #content {
+            width: 100%;
+            padding: 0;
+            min-height: 100vh;
+            -webkit-transition: all 0.3s;
+            -o-transition: all 0.3s;
+            transition: all 0.3s;
+        }
+        .btn.btn-primary {
+            background: #3445b4;
+            border-color: #3445b4;
+        }
+        .btn.btn-primary:hover,
+        .btn.btn-primary:focus {
+            background: #3445b4 !important;
+            border-color: #3445b4 !important;
+        }
+        .footer p {
+            color: rgba(255, 255, 255, 0.5);
+            text-align: center;
+        }
+        .form-control {
+            height: 40px !important;
+            background: #fff;
+            color: #000;
+            font-size: 13px;
+            border-radius: 4px;
+            -webkit-box-shadow: none !important;
+            box-shadow: none !important;
+            border: transparent;
+        }
+        .form-control:focus,
+        .form-control:active {
+            border-color: #000;
+        }
+        .form-control::-webkit-input-placeholder {
+            /* Chrome/Opera/Safari */
+            color: rgba(255, 255, 255, 0.5);
+        }
+        .form-control::-moz-placeholder {
+            /* Firefox 19+ */
+            color: rgba(255, 255, 255, 0.5);
+        }
+        .form-control:-ms-input-placeholder {
+            /* IE 10+ */
+            color: rgba(255, 255, 255, 0.5);
+        }
+        .form-control:-moz-placeholder {
+            /* Firefox 18- */
+            color: rgba(255, 255, 255, 0.5);
+        }
+        .subscribe-form .form-control {
+            background: #3b4ec6;
+        }
+    </style>
 
 </head>
 <body>
-<header>
-    <th:block th:insert="/fragments/navigation"></th:block>
-</header>
-<main><h1style="margin: auto;
-    color: #9fcdff;">Welcome to Healthy Spa Center</h1></main>
+<!--<div class="wrapper d-flex align-items-stretch bg-transparent">-->
+    <nav id="sidebar">
+        <div class="custom-menu">
+            <button type="button" id="sidebarCollapse" class="btn btn-primary">
+                <i class="fa fa-bars"></i>
+                <span class="sr-only">Toggle Menu</span>
+            </button>
+        </div>
+        <div class="p-4">
+            <h1>
+                <a href="#" class="logo">Portfolic <span>Portfolio Agency</span></a>
+            </h1>
+            <ul class="list-unstyled components mb-5">
+                <li class="active">
+                    <a href="#"><span class="fa fa-home mr-3"></span> Home</a>
+                </li>
+                <li>
+                    <a href="#"><span class="fa fa-user mr-3"></span> About</a>
+                </li>
+                <li>
+                    <a href="#"><span class="fa fa-briefcase mr-3"></span> Works</a>
+                </li>
+                <li>
+                    <a href="#"><span class="fa fa-sticky-note mr-3"></span> Blog</a>
+                </li>
+                <li>
+                    <a href="#"><span class="fa fa-suitcase mr-3"></span> Gallery</a>
+                </li>
+                <li>
+                    <a href="#"><span class="fa fa-cogs mr-3"></span> Services</a>
+                </li>
+                <li>
+                    <a href="#"><span class="fa fa-paper-plane mr-3"></span> Contacts</a>
+                </li>
+            </ul>
+
+            <div class="mb-5">
+                <h3 class="h6 mb-3">Subscribe for newsletter</h3>
+                <form action="#" class="subscribe-form">
+                    <div class="form-group d-flex">
+                        <div class="icon"><span class="icon-paper-plane"></span></div>
+                        <input type="text" class="form-control" placeholder="Enter Email Address" />
+                    </div>
+                </form>
+            </div>
+
+            <div class="footer">
+                <p>
+                    Copyright &copy;
+
+                    All rights reserved
+                </p>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Content  -->
+    <div id="content" class="p-4 p-md-5 pt-5 bg-transparent">
+        <h2 class="mb-4">Sidebar</h2>
+
+<!--    </div>-->
+<!--</div><div id="bcl"><a style="font-size:8pt;text-decoration:none;" href="http://www.devanswer.com">Free Frontend</a></div>-->
+<script>
+    (function ($) {
+        "use strict";
+        var fullHeight = function () {
+            $(".js-fullheight").css("height", $(window).height());
+            $(window).resize(function () {
+                $(".js-fullheight").css("height", $(window).height());
+            });
+        };
+        fullHeight();
+        $("#sidebarCollapse").on("click", function () {
+            $("#sidebar").toggleClass("active");
+        });
+    })(jQuery);
+</script>
 
 </body>
 </html>

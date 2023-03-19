@@ -7,6 +7,7 @@ import jakarta.validation.constraints.Size;
 
 public class SapropelProceduresDTO {
 
+    Long id;
     @NotNull
     @Size(min = 5 , message = "Name must be at least 5 characters long")
     private String name;
@@ -22,6 +23,14 @@ public class SapropelProceduresDTO {
     private String description;
 
     public SapropelProceduresDTO() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

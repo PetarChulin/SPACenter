@@ -10,7 +10,7 @@ import java.util.List;
 public class HomeController {
 
     @GetMapping("/home")
-    public String index(Model model) {
+    public String index() {
 
 
         return "index";

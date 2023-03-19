@@ -11,13 +11,16 @@ import com.example.spacenter.service.MedicalSubProceduresService;
 import com.example.spacenter.session.LoggedUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.spacenter.service.MedicalSubProceduresService.getUserId;
+import static com.example.spacenter.service.MedicalSubProceduresService.inCart;
 
 @Controller
 public class CartController {
@@ -41,16 +44,17 @@ public class CartController {
     }
 
     @GetMapping("/sapropel/buy/{id}")
-    public String buySapropel(@PathVariable Long id) {
+    public String buySapropel(@PathVariable Long id, RedirectAttributes attributes) {
 
-//        if (medicalSubProceduresService.inCart(id)) {
-//            return "redirect:/already-bought";
-//        }
         medicalSubProceduresService.addSapropelToCart(id);
 
-        return "redirect:/cart";
+        checkForAvailability(attributes);
+        return "redirect:/SapropelProcedures/sapropel-procedures";
 
     }
+
+
+
 
     @GetMapping("/sapropel/delete/{id}")
     public String removeSapropel(@PathVariable Long id) {
@@ -61,11 +65,12 @@ public class CartController {
     }
 
     @GetMapping("/laser/buy/{id}")
-    public String buyLaser(@PathVariable Long id) {
+    public String buyLaser(@PathVariable Long id, RedirectAttributes attributes) {
 
         medicalSubProceduresService.addLaserToCart(id);
 
-        return "redirect:/cart";
+        checkForAvailability(attributes);
+        return "redirect:/LaserProcedures/laser-procedures";
     }
 
     @GetMapping("/laser/delete/{id}")
@@ -91,17 +96,32 @@ public class CartController {
 
         int countOfSapropelOrders = sapropelOrders.size();
         int countOfAllOrders = allOrders.size();
-        Double totalPrice = this.cartService.getTotalOrderPrice(userId);
+//        Double totalPrice = this.cartService.getTotalOrderPrice(userId);
 
         model.addAttribute("countOfSapropelOrders", countOfSapropelOrders);
         model.addAttribute("countOfAllOrders", countOfAllOrders);
         model.addAttribute("sapropelOrders", sapropelOrders);
-        model.addAttribute("laserOrders" , laserOrders);
-        model.addAttribute("totalPrice", totalPrice);
+        model.addAttribute("laserOrders", laserOrders);
+//        model.addAttribute("totalPrice", totalPrice);
         model.addAttribute("counter", new Counter());
-        model.addAttribute("allOrders" , allOrders);
+        model.addAttribute("allOrders", allOrders);
 
         return "cart";
     }
 
+    @GetMapping("/delete/all")
+    public String deleteAllFromCart() {
+
+        this.cartService.deleteAllFromUserCart();
+
+        return "redirect:/cart";
+    }
+
+    private static void checkForAvailability(RedirectAttributes attributes) {
+        if (inCart) {
+            attributes.addFlashAttribute("alreadyInCart", true);
+        } else {
+            attributes.addFlashAttribute("added", true);
+        }
+    }
 }

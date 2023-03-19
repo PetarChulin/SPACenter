@@ -18,25 +18,15 @@
             <div>Please select user to change its role</div>
             <select class="custom-select col-xl-9 col-lg-8 col-md-8 col-sm-7 auth-inputs" id="username" name="username"
             >
-                <!--      <option value="" selected>Select user</option>-->
-
                 <option th:each="u : ${users}" th:value="${u}" th:text="${u}"></option>
 
             </select>
-            <!--    <small th:if="${#fields.hasErrors('users')}" th:errors="*{users}" id="artistError" class="form-text bg-danger rounded"></small>-->
         </div>
-<!--        <div>Please select role</div>-->
         <div >
             <select class="custom-select col-xl-9 col-lg-8 col-md-8 col-sm-7 auth-inputs" id="role" name="role">
                 <option>Please select role</option>
             <option th:each="r : ${T(com.example.spacenter.model.entity.RoleEnum).values()}"  th:value="${r}" th:text="${r}"></option>
             </select>
-<!--            <div style="margin: auto; text-align: center; color: whitesmoke">-->
-<!--                <input type="radio" id="user" name="role" value="USER">-->
-<!--                <label for="user">User</label>-->
-<!--                <input type="radio" id="admin" name="role" value="ADMIN">-->
-<!--                <label for="admin">Admin</label><br/>-->
-<!--            </div>-->
 
         <div class="input-group mb-3">
                 <a type="button" class="btn btn-primary" href="/delete/role">Delete role</a>

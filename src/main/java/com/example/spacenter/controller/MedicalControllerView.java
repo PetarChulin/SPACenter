@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 
+import static com.example.spacenter.service.MedicalSubProceduresService.getUserId;
+
 @Controller
 public class MedicalControllerView {
 
@@ -33,7 +35,7 @@ public class MedicalControllerView {
     @GetMapping("/")
     public String showOrders(Model model){
 
-        Long userId = this.loggedUser.getId();
+        Long userId = getUserId();
 
         List<SapropelProcedure> sapropelOrders = this.sapropelRepository.findByBuyers_Id(userId);
 
@@ -47,7 +49,7 @@ public class MedicalControllerView {
     public String medical(Model model) {
 
         List<MedicalProcedure> procedures = this.medicalProceduresRepository.findAll();
-        Long userId = this.loggedUser.getId();
+        Long userId = getUserId();
 
         List<SapropelProcedure> sapropelOrders = this.sapropelRepository.findByBuyers_Id(userId);
         int countOfSapropelOrders = sapropelOrders.size();

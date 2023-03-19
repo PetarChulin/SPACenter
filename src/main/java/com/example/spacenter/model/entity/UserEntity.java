@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+
 @Entity
 @Table(name = "users")
 public class UserEntity {
@@ -104,4 +105,5 @@ public class UserEntity {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
 }

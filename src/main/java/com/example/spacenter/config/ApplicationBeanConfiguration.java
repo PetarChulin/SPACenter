@@ -7,13 +7,11 @@ import org.modelmapper.ModelMapper;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 
 @Configuration
@@ -29,21 +27,24 @@ public class ApplicationBeanConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.
                 authorizeHttpRequests()
+                .requestMatchers("/login-error").permitAll()
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                .requestMatchers("/","/home", "/medical-procedures",  "/sapropel/details/**", "/SapropelProcedures/sapropel-procedures",
+                .requestMatchers("/","/home", "/medical-procedures", "/spa-procedures", "/sapropel/details/**", "/laser/details/**",
+                        "/SapropelProcedures/sapropel-procedures",
                         "/LaserProcedures/laser-procedures" , "/LaserProcedures/laser/details/**").permitAll()
                 .requestMatchers("/login", "/register").anonymous()
                 .requestMatchers("/logout", "/cart", "/sapropel/buy/**", "/sapropel/delete/**",
-                        "/laser/buy/**", "/laser/delete/**").authenticated()
+                        "/laser/buy/**", "/laser/delete/**" , "/delete/all", "/change/username").authenticated()
                 .requestMatchers("/").hasRole(RoleEnum.USER.name())
-                .requestMatchers("/medical/add/**","/laser/add/**")
+                .requestMatchers("/medical/add/**","/laser/add/**", "/spa/add/**")
                 .hasAnyRole(RoleEnum.ADMIN.name(), RoleEnum.MODERATOR.name())
-                .requestMatchers("/change/role", "/delete/role").hasRole(RoleEnum.ADMIN.name())
+                .requestMatchers("/change/role").hasRole(RoleEnum.ADMIN.name())
+                .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .usernameParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY)
-                .passwordParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_PASSWORD_KEY)
+                .usernameParameter("username")
+                .passwordParameter("password")
                 .defaultSuccessUrl("/home", true)
                 .failureForwardUrl("/login-error")
                 .and()
@@ -55,7 +56,7 @@ public class ApplicationBeanConfiguration {
 //                .and()
 //                .rememberMe()
 //                .key("someUniqueKey")
-//                .tokenValiditySeconds(3)
+//                .tokenValiditySeconds(300)
 //                .userDetailsService(userDetailsService(userRepository));
 
         return http.build();

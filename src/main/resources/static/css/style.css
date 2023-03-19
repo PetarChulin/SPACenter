@@ -22,7 +22,7 @@ h1 {
     width: 350px;
     height: 250px;
     color: whitesmoke;
-    background-color: rgba(19, 55, 118, 0.66);;
+    background-color: rgba(63, 73, 82, 0.82);;
     border-color: #6c757d;
     border-radius: 6px;
     text-align: center;
@@ -44,6 +44,9 @@ h1 {
 
 .auth-button {
     margin: 10px;
+}
+.alert {
+    display:none;
 }
 
 body {

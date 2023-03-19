@@ -19,8 +19,6 @@ public class SpaProcedure {
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    @Column
-    private Double price;
 
     public SpaProcedure() {
     }
@@ -57,11 +55,5 @@ public class SpaProcedure {
         this.description = description;
     }
 
-    public Double getPrice() {
-        return price;
-    }
 
-    public void setPrice(Double price) {
-        this.price = price;
-    }
 }

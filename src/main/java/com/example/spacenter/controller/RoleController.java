@@ -60,7 +60,13 @@ public class RoleController {
     }
 
     @GetMapping("/delete/role")
-    public String deleteRoles(RoleDTO roleDTO) {
+    public String deleteRoles(RoleDTO roleDTO, Model model) {
+
+        model.addAttribute("users", this.userRepository
+                .findAll()
+                .stream()
+                .map(UserEntity::getEmail)
+                .collect(Collectors.toList()));
 
         this.roleService.removeRoleFromUser(roleDTO.getUsername(), roleDTO.getRole());
 

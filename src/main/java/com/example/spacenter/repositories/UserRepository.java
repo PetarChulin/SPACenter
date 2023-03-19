@@ -1,8 +1,12 @@
 package com.example.spacenter.repositories;
 
 import com.example.spacenter.model.entity.UserEntity;
+import jakarta.transaction.Transactional;
 import org.hibernate.Hibernate;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -13,7 +17,14 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
     Optional<UserEntity> findByEmail(String email);
 
+//    UserEntity getByEmail(String email);
+
+    @Query("SELECT u FROM UserEntity u WHERE u.email = :email")
+    public UserEntity getUserByEmail(@Param("email") String email);
+
     Optional<UserEntity> findByUsername(String username);
+
+    UserEntity getUserEntityByUsername(String username);
 
     UserEntity getUsersById(Long id);
 
@@ -21,4 +32,10 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
 
     Optional<UserEntity> findUserEntityByEmail(String email);
+
+    @Transactional
+    @Modifying
+    @Query("update UserEntity as u SET  u.username=:username where u.id=:id ")
+    void editUsername(@Param("id") Long id,
+                          @Param("username") String username);
 }

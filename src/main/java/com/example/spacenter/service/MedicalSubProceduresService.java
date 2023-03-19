@@ -40,6 +40,7 @@ public class MedicalSubProceduresService {
 
     public boolean addSapropelProcedure(SapropelProceduresDTO sapropelProceduresDTO) {
 
+
         SapropelProcedure sapropelProcedure = new SapropelProcedure();
 
         Optional<SapropelProcedure> findByName = this.sapropelRepository.findByName(sapropelProceduresDTO.getName());
@@ -57,27 +58,31 @@ public class MedicalSubProceduresService {
         return true;
     }
 
-    public boolean inCart(Long id) {
-        SapropelProcedure sapropelProcedure = this.sapropelRepository.findById(id).get();
-
-        UserEntity user = this.userRepository.getUsersById(this.loggedUser.getId());
-
-        UserEntity existingUser = sapropelProcedure.getBuyer()
-                .stream()
-                .filter(found -> user.getId().equals(found.getId()))
-                .findAny().orElse(new UserEntity());
-
-
-        if (sapropelProcedure.getBuyer().contains(existingUser)) {
-            System.out.println("Already in the cart!");
-
-            return true;
-        }
-        return false;
-    }
-
+//    public boolean inCart(Long id) {
+//        SapropelProcedure sapropelProcedure = this.sapropelRepository.findById(id).get();
+//
+//        Long userId = getUserId();
+//
+//
+//        UserEntity user = this.userRepository.getUsersById(userId);
+//
+//        UserEntity existingUser = sapropelProcedure.getBuyer()
+//                .stream()
+//                .filter(found -> user.getId().equals(found.getId()))
+//                .findFirst().get();
+//
+//
+//        if (sapropelProcedure.getBuyer().contains(existingUser)) {
+//            System.out.println("Already in the cart!");
+//
+//            return true;
+//        }
+//        return false;
+//    }
+    public static boolean inCart = false;
     @Transactional
     public void addSapropelToCart(Long id) {
+
 
         SapropelProcedure sapropelProcedure = this.sapropelRepository.findById(id).get();
 
@@ -85,8 +90,19 @@ public class MedicalSubProceduresService {
 
         UserEntity user = this.userRepository.getUsersById(userId);
 
-        sapropelProcedure.addBuyer(user);
+        UserEntity existingUser = sapropelProcedure.getBuyers()
+                .stream()
+                .filter(found -> user.getId().equals(found.getId()))
+                .findFirst().orElse(new UserEntity());
 
+
+        if (sapropelProcedure.getBuyers().contains(existingUser)) {
+            System.out.println("Already in the cart!");
+            inCart = true;
+        } else {
+            inCart = false;
+            sapropelProcedure.addBuyer(user);
+        }
     }
 
 
@@ -131,7 +147,18 @@ public class MedicalSubProceduresService {
 
         UserEntity user = this.userRepository.getUsersById(userId);
 
-        laserProcedure.addBuyer(user);
+        UserEntity existingUser = laserProcedure.getBuyers()
+                .stream()
+                .filter(found -> user.getId().equals(found.getId()))
+                .findFirst().orElse(new UserEntity());
+
+        if (laserProcedure.getBuyers().contains(existingUser)) {
+            System.out.println("Already in the cart!");
+            inCart = true;
+        } else {
+            inCart = false;
+            laserProcedure.addBuyer(user);
+        }
     }
 
     @Transactional
@@ -151,7 +178,6 @@ public class MedicalSubProceduresService {
 
         AppUserDetails userDetails = (AppUserDetails) authentication.getPrincipal();
 
-        Long userId = userDetails.getId();
-        return userId;
+        return userDetails.getId();
     }
 }

@@ -14,8 +14,7 @@
     <form class="mx-auto auth-forms"
           th:method="post" th:action="@{/login}" >
 
-<!--th:object="${loginUserDTO}"-->
-        <div class="errors text-danger" th:if="${badCredentials}" >Incorrect username or password!</div>
+        <!--th:object="${loginUserDTO}"-->
 
 
         <h1 class="text-center mt-2"><span class="badge badge-pill ">Login</span></h1>
@@ -24,23 +23,20 @@
                    id="username"
                    name="username"
                    placeholder="Username" />
-<!--                   th:field="*{username}"-->
-<!--                   th:errorclass="is-invalid"-->
-<!--            <small th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="text-danger"></small>-->
-            <label for="username">Username</label>
+
+            <label for="username">Email</label>
         </div>
         <div class="form-floating" style="width: 400px; margin: auto">
             <input type="password" class="form-control auth-inputs"
                    id="password"
                    name="password"
                    placeholder="Password" />
-<!--                   th:field="*{password}"-->
-<!--                   th:errorclass="is-invalid"-->
 
-<!--            <small th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger"></small>-->
             <label for="password">Password</label>
         </div>
         <button type="submit" class="btn btn-primary auth-button">Login</button>
+        <p class="errors text-danger" th:if="${badCredentials}" >Incorrect username or password!</p>
+
     </form>
 
 

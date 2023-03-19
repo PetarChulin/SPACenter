@@ -7,9 +7,11 @@ import java.util.Collection;
 
 public class AppUserDetails extends User {
 
-    private Long id;
+    Long id;
 
-    public AppUserDetails(String username, String password, Collection<? extends GrantedAuthority> authorities, Long id) {
+
+
+    public AppUserDetails(String username, String password, Collection<? extends GrantedAuthority> authorities , Long id) {
         super(username, password, authorities);
         this.id = id;
     }
@@ -17,4 +19,8 @@ public class AppUserDetails extends User {
     public Long getId() {
         return id;
     }
+
+
+
+
 }
