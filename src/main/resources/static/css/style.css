@@ -17,24 +17,36 @@ h1 {
     color: #9fcdff;
 }
 
+button::selection{
+
+    background-color: rgb(123, 180, 17);
+
+}
+
 .change-role {
 
     width: 350px;
     height: 250px;
     color: whitesmoke;
-    background-color: rgba(63, 73, 82, 0.82);;
+    background-color: rgba(63, 73, 82, 0.82);
     border-color: #6c757d;
-    border-radius: 6px;
+    border-radius: 8px;
     text-align: center;
     align-items: center;
 }
 
 
+.auth-forms div {
+    width: 60%;
+    margin: auto;
+}
+
+
 .auth-forms {
-    width: 50%;
+    width: 30%;
     height: 50%;
     color: #005cbf;
-    background-color: rgba(5, 35, 52, 0.5);;
+    background-color: rgba(63, 73, 82, 0.82);
     border-color: #6c757d;
     border-radius: 6px;
     text-align: center;
@@ -45,9 +57,7 @@ h1 {
 .auth-button {
     margin: 10px;
 }
-.alert {
-    display:none;
-}
+
 
 body {
     background-image: url(/images/spa-4.jpg);

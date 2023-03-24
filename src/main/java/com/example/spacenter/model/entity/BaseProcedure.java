@@ -2,6 +2,8 @@ package com.example.spacenter.model.entity;
 
 import jakarta.persistence.*;
 
+import java.util.Set;
+
 @MappedSuperclass
 public abstract class BaseProcedure {
 
@@ -17,6 +19,21 @@ public abstract class BaseProcedure {
 
     @Column(columnDefinition = "TEXT")
     private String description;
+
+    @Column
+    private Double price;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<UserEntity> buyers;
+
+    public void addBuyer(UserEntity user) {
+
+        this.buyers.add(user);
+    }
+
+    public void removeBuyer(UserEntity user) {
+        this.buyers.remove(user);
+    }
 
 
     public BaseProcedure() {
@@ -54,4 +71,19 @@ public abstract class BaseProcedure {
         this.description = description;
     }
 
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public Set<UserEntity> getBuyers() {
+        return buyers;
+    }
+
+    public void setBuyers(Set<UserEntity> buyers) {
+        this.buyers = buyers;
+    }
 }

@@ -14,7 +14,7 @@
           th:method="post" th:action="@{/medical/add/laser}" th:object="${laserProceduresDTO}">
 
 
-        <h1 class="text-center mt-2"><span class="badge badge-pill text-white">Add procedure</span></h1>
+        <h1 class="text-center mt-2"><span class="badge badge-pill text-white">Add laser procedure</span></h1>
         <div class="form-floating" style="width: 400px; margin: auto">
             <input type="text" class="form-control auth-inputs" id="floatingInput" name="name" placeholder="name"
                    th:field="*{name}"
@@ -37,6 +37,15 @@
                    th:errorclass="is-invalid"/>
             <small th:if="${#fields.hasErrors('price')}" th:errors="*{price}" class="text-danger"></small>
             <label for="floatingPrice">Price</label>
+        </div>
+
+        <div class="form-floating" style="width: 400px; margin: auto">
+            <input type="text" class="form-control auth-inputs"
+                   id="description" name="description" placeholder="description"
+                   th:field="*{description}"
+                   th:errorclass="is-invalid"/>
+            <small th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="text-danger"></small>
+            <label for="description">Description</label>
         </div>
 
         <button type="submit" class="btn btn-primary auth-button">Add</button>

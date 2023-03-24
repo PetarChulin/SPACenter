@@ -6,10 +6,15 @@ import com.example.spacenter.model.entity.MedicalProcedures.SapropelProcedure;
 import com.example.spacenter.repositories.MedicalProceduresRepository;
 import com.example.spacenter.repositories.MedicalSubProceduresRepos.LaserRepository;
 import com.example.spacenter.repositories.MedicalSubProceduresRepos.SapropelRepository;
+import com.example.spacenter.service.MedicalSubProceduresService;
 import com.example.spacenter.session.LoggedUser;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -20,13 +25,16 @@ public class MedicalControllerView {
 
     private final MedicalProceduresRepository medicalProceduresRepository;
 
+    private final MedicalSubProceduresService medicalSubProceduresService;
+
     private final SapropelRepository sapropelRepository;
 
     private final LoggedUser loggedUser;
     private final LaserRepository laserRepository;
 
-    public MedicalControllerView(MedicalProceduresRepository medicalProceduresRepository, SapropelRepository sapropelRepository, LoggedUser loggedUser, LaserRepository laserRepository) {
+    public MedicalControllerView(MedicalProceduresRepository medicalProceduresRepository, MedicalSubProceduresService medicalSubProceduresService, SapropelRepository sapropelRepository, LoggedUser loggedUser, LaserRepository laserRepository) {
         this.medicalProceduresRepository = medicalProceduresRepository;
+        this.medicalSubProceduresService = medicalSubProceduresService;
         this.sapropelRepository = sapropelRepository;
         this.loggedUser = loggedUser;
         this.laserRepository = laserRepository;
@@ -40,6 +48,7 @@ public class MedicalControllerView {
         List<SapropelProcedure> sapropelOrders = this.sapropelRepository.findByBuyers_Id(userId);
 
         int countOfSapropelOrders = sapropelOrders.size();
+
         model.addAttribute("countOfSapropelOrders" , countOfSapropelOrders);
 
         return "/index";
@@ -49,12 +58,9 @@ public class MedicalControllerView {
     public String medical(Model model) {
 
         List<MedicalProcedure> procedures = this.medicalProceduresRepository.findAll();
-        Long userId = getUserId();
 
-        List<SapropelProcedure> sapropelOrders = this.sapropelRepository.findByBuyers_Id(userId);
-        int countOfSapropelOrders = sapropelOrders.size();
-        model.addAttribute("countOfSapropelOrders" , countOfSapropelOrders);
-        model.addAttribute("procedures" , procedures);
+
+        model.addAttribute("mprocedures" , procedures);
 
         return "medical-procedures";
     }
@@ -62,24 +68,27 @@ public class MedicalControllerView {
 
 
     @GetMapping("/SapropelProcedures/sapropel-procedures")
-    public String sapropel(Model model) {
+    public String sapropel(Model model, @PageableDefault(sort = "name", size = 4) Pageable pageable) {
 
-        List<SapropelProcedure> procedures = this.sapropelRepository.findAll();
+
+        var procedures = medicalSubProceduresService.getAllSapropel(pageable);
 
         model.addAttribute("sapropelProcedures" , procedures);
-//        List<SapropelProcedure> sapropelOrders = this.sapropelRepository.findByBuyers_Id(userId);
-//        int countOfSapropelOrders = sapropelOrders.size();
-//        model.addAttribute("countOfSapropelOrders" , countOfSapropelOrders);
+        model.addAttribute("totalPages" , procedures.getTotalPages());
 
         return "SapropelProcedures/sapropel-procedures";
     }
 
     @GetMapping("LaserProcedures/laser-procedures")
-    public String laser(Model model) {
+    public String laser(Model model, @PageableDefault(sort = "name", size = 4) Pageable pageable) {
 
-        List<LaserProcedure> procedures = this.laserRepository.findAll();
+
+        var procedures = medicalSubProceduresService.getAllLaser(pageable);
+
 
         model.addAttribute("laserProcedures" , procedures);
+        model.addAttribute("totalPages" , procedures.getTotalPages());
+
 
         return "LaserProcedures/laser-procedures";
     }

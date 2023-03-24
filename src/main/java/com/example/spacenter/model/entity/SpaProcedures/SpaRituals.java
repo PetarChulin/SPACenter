@@ -1,19 +1,18 @@
-package com.example.spacenter.model.entity.MedicalProcedures;
+package com.example.spacenter.model.entity.SpaProcedures;
 
 import com.example.spacenter.model.entity.BaseProcedure;
-import com.example.spacenter.model.entity.UserEntity;
 import jakarta.persistence.*;
 
 import java.util.Set;
 
 @Entity
-@Table(name = "laser-procedures")
-public class LaserProcedure extends BaseProcedure {
+@Table(name = "spa_rituals")
+public class SpaRituals extends BaseProcedure {
 
     @Column
-    private String type = "laser";
+    private String type = "spa-rituals";
 
-    public LaserProcedure() {
+    public SpaRituals() {
     }
 
     public String getType() {
@@ -23,7 +22,4 @@ public class LaserProcedure extends BaseProcedure {
     public void setType(String type) {
         this.type = type;
     }
-
-
-
 }

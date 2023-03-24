@@ -5,7 +5,7 @@
         <a class="btn btn-outline-light" href="/home">Home</a>
 
 
-        <div class="nav-item dropdown btn btn-outline-light">
+        <div class="nav-item dropdown btn btn-outline-light" sec:authorize="hasAnyRole('ADMIN' , 'MODERATOR')">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                aria-expanded="false">
                 Medical procedures
@@ -17,12 +17,17 @@
                     <hr class="dropdown-divider">
                 </li>
                 <li><a class="dropdown-item btn btn-outline-light" style="color: #0056b3"
-                       sec:authorize="hasAnyRole('ADMIN' , 'MODERATOR')"
+
                        href="/medical/add">Add medical procedures</a></li>
             </ul>
         </div>
 
-        <div class="nav-item dropdown btn btn-outline-light">
+        <a class="btn btn-outline-light" sec:authorize="isAnonymous()" href="/medical-procedures">Medical procedures</a>
+
+        <a class="btn btn-outline-light" sec:authorize="hasRole('USER')" href="/medical-procedures">Medical
+            procedures</a>
+
+        <div class="nav-item dropdown btn btn-outline-light" sec:authorize="hasAnyRole('ADMIN' , 'MODERATOR')">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                aria-expanded="false">
                 SPA procedures
@@ -34,21 +39,47 @@
                     <hr class="dropdown-divider">
                 </li>
                 <li><a class="dropdown-item btn btn-outline-light" style="color: #0056b3"
-                       sec:authorize="hasAnyRole('ADMIN' , 'MODERATOR')"
                        href="/spa/add">Add SPA procedures</a></li>
             </ul>
         </div>
 
-        <a class="navbar-brand" href="/spa-center">SPA center</a>
+        <a class="btn btn-outline-light" sec:authorize="isAnonymous()" href="/spa-procedures">SPA procedures</a>
 
-        <a class="navbar-brand" style="color: #9fcdff" sec:authorize="hasRole('ADMIN')"
-           href="/change/role">Admin</a>
-        <div class="navbar-brand" style="color: #9fcdff" sec:authorize="isAuthenticated()">
-            <form
-                    th:method="post"
-                    th:action="@{/logout}">
-                <input class="btn btn-link nav-link" type="submit" value="Logout">
-            </form>
+        <a class="btn btn-outline-light" sec:authorize="hasRole('USER')" href="/spa-procedures">SPA procedures</a>
+
+
+        <div class="nav-item dropdown btn btn-outline-light" sec:authorize="isAuthenticated()">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+               aria-expanded="false">
+                <th:block sec:authentication="name"></th:block>
+                profile
+            </a>
+            <ul class="dropdown-menu btn btn-outline-light" style="background-color: rgba(0,0,0, 0.85);">
+                <li><a class="dropdown-item btn btn-outline-light" style="color: #0056b3"
+                       href="/change/username">Change username</a>
+                </li>
+                <li><a class="dropdown-item btn btn-outline-light" style="color: #0056b3"
+                       sec:authorize="hasRole('ADMIN')"
+                       href="/change/role">Change role</a>
+                </li>
+                <li>
+                    <a class="dropdown-item btn btn-outline-light" style="color: #0056b3"
+                       href="/cart">My orders
+                        <img src="/images/cart.png" alt=""/>
+                        <span class="position-absolute top-50 start-90 translate-middle badge rounded-pill bg-gray"
+                              th:text="${countOfAllOrders}">
+  </span>
+                    </a>
+                </li>
+                <li>
+                    <form
+                            th:method="post"
+                            th:action="@{/logout}">
+                        <input class="dropdown-item btn btn-outline-light" style="color: #0056b3" type="submit"
+                               value="Logout">
+                    </form>
+                </li>
+            </ul>
         </div>
         <div>
             <a class="btn btn-outline-light" aria-current="page" sec:authorize="!isAuthenticated()"
@@ -56,15 +87,7 @@
             <a class="btn btn-outline-light" aria-current="page" sec:authorize="!isAuthenticated()"
                href="/register">Register</a>
 
-            <a class="btn btn-outline-light" aria-current="page" sec:authorize="isAuthenticated()"
-               href="/change/username"><th:block sec:authentication="name"></th:block> profile</a>
-            <a class="btn btn-outline-light position-relative" sec:authorize="isAuthenticated()" href="/cart">
-                <th:block sec:authentication="name"></th:block>
-                cart
-                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-gray"
-                      th:text="${countOfAllOrders}">
-  </span>
-            </a>
+
             <!--                    <form class="d-flex" role="search">-->
             <!--                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">-->
             <!--                        <button class="btn btn-outline-success" type="submit">Search</button>-->

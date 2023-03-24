@@ -10,4 +10,5 @@ import java.util.Optional;
 public interface SpaProceduresRepository extends JpaRepository<SpaProcedure, Long> {
 
     Optional<SpaProcedure> findByName(String name);
+
 }

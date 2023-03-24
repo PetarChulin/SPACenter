@@ -1,8 +1,10 @@
 package com.example.spacenter.controller;
 
+import com.example.spacenter.model.dto.SpaProcedureDTO.SpaRitualsDTO;
 import com.example.spacenter.model.dto.SpaProceduresDTO;
 import com.example.spacenter.repositories.SpaProceduresRepository;
 import com.example.spacenter.service.SpaProcedureService;
+import com.example.spacenter.service.SpaSubProceduresService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -16,15 +18,21 @@ public class SpaProcedureControllerAdd {
 
     private SpaProceduresRepository spaProceduresRepository;
 
+    private SpaSubProceduresService spaSubProceduresService;
+
     private SpaProcedureService spaProcedureService;
 
-    public SpaProcedureControllerAdd(SpaProceduresRepository spaProceduresRepository, SpaProcedureService spaProcedureService) {
+    public SpaProcedureControllerAdd(SpaProceduresRepository spaProceduresRepository, SpaSubProceduresService spaSubProceduresService, SpaProcedureService spaProcedureService) {
         this.spaProceduresRepository = spaProceduresRepository;
+        this.spaSubProceduresService = spaSubProceduresService;
         this.spaProcedureService = spaProcedureService;
     }
 
     @ModelAttribute("spaProceduresDTO")
     public SpaProceduresDTO initSpaProceduresDTO(){return new SpaProceduresDTO();}
+
+    @ModelAttribute("spaRitualsDTO")
+    public SpaRitualsDTO initSpaRitualsDTO(){return new SpaRitualsDTO();}
 
 
     @GetMapping("/spa/add")
@@ -47,5 +55,26 @@ public class SpaProcedureControllerAdd {
         }
 
         return "redirect:/spa-procedures";
+    }
+
+    @GetMapping("/spa/add/rituals")
+    public String spaRituals() {
+
+        return "add-spa-rituals";
+
+    }
+
+    public String addSpaRituals(@Valid SpaRitualsDTO spaRitualsDTO,
+                              BindingResult result,
+                              RedirectAttributes attributes) {
+
+        if (result.hasErrors() || !this.spaSubProceduresService.addSpaRituals(spaRitualsDTO)) {
+            attributes.addFlashAttribute("spaRitualsDTO", spaRitualsDTO);
+            attributes.addFlashAttribute("org.springframework.validation.BindingResult.spaRitualsDTO",
+                    result);
+            return "redirect:/spa/add/rituals";
+        }
+
+        return "redirect:/SPARituals/spa-rituals";
     }
 }

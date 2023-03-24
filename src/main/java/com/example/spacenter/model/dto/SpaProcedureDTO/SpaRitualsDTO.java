@@ -1,12 +1,13 @@
-package com.example.spacenter.model.dto.MedicalProcedureDTO;
+package com.example.spacenter.model.dto.SpaProcedureDTO;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 
-public class LaserProceduresDTO {
+public class SpaRitualsDTO {
 
+    Long id;
     @NotNull
     @Size(min = 5 , message = "Name must be at least 5 characters long")
     private String name;
@@ -21,7 +22,15 @@ public class LaserProceduresDTO {
     @NotNull
     private String description;
 
-    public LaserProceduresDTO() {
+    public SpaRitualsDTO() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -56,4 +65,3 @@ public class LaserProceduresDTO {
         this.description = description;
     }
 }
-

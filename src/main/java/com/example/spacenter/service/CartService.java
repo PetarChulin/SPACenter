@@ -1,5 +1,6 @@
 package com.example.spacenter.service;
 
+import com.example.spacenter.model.entity.BaseProcedure;
 import com.example.spacenter.model.entity.MedicalProcedures.LaserProcedure;
 import com.example.spacenter.model.entity.MedicalProcedures.SapropelProcedure;
 import com.example.spacenter.model.entity.UserEntity;
@@ -10,6 +11,7 @@ import com.example.spacenter.session.LoggedUser;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.spacenter.service.MedicalSubProceduresService.getUserId;
@@ -33,16 +35,6 @@ public class CartService {
         this.laserRepository = laserRepository;
     }
 
-
-    //    @Transient
-//    public Double getTotalOrderPrice(Long id) {
-//        double sum = 0D;
-//    List<SapropelProcedure> sapropelOrders = this.sapropelRepository.findByBuyers_Id(id);
-//        for (SapropelProcedure op : sapropelOrders) {
-//            sum += op.getPrice();
-//        }
-//        return sum;
-//    }
     @Transactional
     public void deleteAllFromUserCart() {
 
@@ -51,18 +43,21 @@ public class CartService {
         UserEntity user = this.userRepository.getUsersById(id);
 
         List<SapropelProcedure> sapropelOrders = this.sapropelRepository.findByBuyers_Id(id);
+        List<LaserProcedure> laserOrders = this.laserRepository.findByBuyers_Id(id);
 
-
-        for (SapropelProcedure sapropelOrder : sapropelOrders) {
-            sapropelOrder.removeBuyer(user);
-        }
-//
-//        List<LaserProcedure> laserOrders = this.laserRepository.findByBuyers_Id(userId);
-//
-//        for (LaserProcedure laserOrder : laserOrders) {
-//            laserOrder.removeBuyer(user);
-//        }
-
+        allOrders(sapropelOrders, laserOrders, user);
 
     }
+
+    public static void allOrders(List<SapropelProcedure> sapropelOrders, List<LaserProcedure> laserOrders, UserEntity user) {
+        List<BaseProcedure> allOrders = new ArrayList<>();
+        allOrders.addAll(sapropelOrders);
+        allOrders.addAll(laserOrders);
+
+        for (BaseProcedure allOrder : allOrders) {
+            allOrder.removeBuyer(user);
+        }
+    }
+
+
 }

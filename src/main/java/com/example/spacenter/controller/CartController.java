@@ -54,12 +54,13 @@ public class CartController {
     }
 
 
-
-
     @GetMapping("/sapropel/delete/{id}")
-    public String removeSapropel(@PathVariable Long id) {
+    public String removeSapropel(@PathVariable Long id, RedirectAttributes attributes) {
 
         medicalSubProceduresService.deleteSapropelFromCart(id);
+
+        attributes.addFlashAttribute("deleted" , true);
+
 
         return "redirect:/cart";
     }
@@ -110,9 +111,10 @@ public class CartController {
     }
 
     @GetMapping("/delete/all")
-    public String deleteAllFromCart() {
+    public String deleteAllFromCart(RedirectAttributes attributes) {
 
         this.cartService.deleteAllFromUserCart();
+
 
         return "redirect:/cart";
     }

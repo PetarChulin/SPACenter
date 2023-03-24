@@ -29,7 +29,7 @@
           <h5 class="card-title text-center" th:text="*{name}"></h5>
           <p class="card-text" th:text="*{description}"></p>
 
-          <a th:href="@{'/' + *{name.split(' ')[0]} + 'Procedures/' + *{name.split(' ')[0].toLowerCase()} + '-procedures'}"
+          <a th:href="@{'/' + *{name.split(' ')[0]} + 'Rituals/' + *{name.split(' ')[0].toLowerCase()} + '-rituals'}"
              class="btn btn-xs  btn-outline-primary mt-auto" >Choose procedures</a>
         </div>
       </div>

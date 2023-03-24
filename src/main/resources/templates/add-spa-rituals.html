@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <th:block th:insert="fragments/meta"></th:block>
+</head>
+<body>
+<header>
+  <th:block th:insert="fragments/navigation"></th:block>
+</header>
+<main>
+
+  <form class="mx-auto auth-forms"
+        th:method="post" th:action="@{/spa/add/rituals}" th:object="${spaRitualsDTO}">
+
+
+    <h1 class="text-center mt-2"><span class="badge badge-pill text-white">Add spa ritual</span></h1>
+    <div class="form-floating" style="width: 400px; margin: auto">
+      <input hidden type="text" th:value="sapropel" name="type">
+      <input type="text" class="form-control auth-inputs" id="floatingInput" name="name" placeholder="name"
+             th:field="*{name}"
+             th:errorclass="is-invalid"/>
+      <small th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger"></small>
+      <label for="floatingInput">Name</label>
+    </div>
+    <div class="form-floating" style="width: 400px; margin: auto">
+      <input type="text" class="form-control auth-inputs"
+             id="floatingImage" name="imageUrl" placeholder="image"
+             th:field="*{imageUrl}"
+             th:errorclass="is-invalid"/>
+      <small th:if="${#fields.hasErrors('imageUrl')}" th:errors="*{imageUrl}" class="text-danger"></small>
+      <label for="floatingImage">Image url</label>
+    </div>
+    <div class="form-floating" style="width: 400px; margin: auto">
+      <input type="number" class="form-control auth-inputs"
+             id="floatingPrice" name="price" placeholder="price" step="0.01"
+             th:field="*{price}"
+             th:errorclass="is-invalid"/>
+      <small th:if="${#fields.hasErrors('price')}" th:errors="*{price}" class="text-danger"></small>
+      <label for="floatingPrice">Price</label>
+    </div>
+    <div class="form-floating" style="width: 400px; margin: auto">
+      <input type="text" class="form-control auth-inputs"
+             id="description" name="description" placeholder="description"
+             th:field="*{description}"
+             th:errorclass="is-invalid"/>
+      <small th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="text-danger"></small>
+      <label for="description">Description</label>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary auth-button">Add</button>
+  </form>
+</main>
+<footer class="footer bg-transparent py-2">
+  <div class="container-fluid text-center">
+    <div class="footer-background h5 text-primary text-stroke fixed-bottom">
+      &copy; PeterC  2023. All rights reserved.
+    </div>
+  </div>
+</footer>
+</body>
+</html>

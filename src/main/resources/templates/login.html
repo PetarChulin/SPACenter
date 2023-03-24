@@ -14,11 +14,8 @@
     <form class="mx-auto auth-forms"
           th:method="post" th:action="@{/login}" >
 
-        <!--th:object="${loginUserDTO}"-->
-
-
         <h1 class="text-center mt-2"><span class="badge badge-pill ">Login</span></h1>
-        <div class="form-floating" style="width: 400px; margin: auto">
+        <div class="form-floating">
             <input class="form-control auth-inputs"
                    id="username"
                    name="username"
@@ -26,7 +23,7 @@
 
             <label for="username">Email</label>
         </div>
-        <div class="form-floating" style="width: 400px; margin: auto">
+        <div class="form-floating">
             <input type="password" class="form-control auth-inputs"
                    id="password"
                    name="password"

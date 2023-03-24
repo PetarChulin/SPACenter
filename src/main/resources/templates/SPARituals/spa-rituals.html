@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<th:block th:insert="fragments/bootstrap"></th:block>
+
+<head>
+    <th:block th:insert="fragments/meta"></th:block>
+    <title>SPA rituals</title>
+
+</head>
+<body>
+<header>
+    <th:block th:insert="fragments/navigation"></th:block>
+</header>
+<main>
+    <div class="bg-dark bg-opacity-75"><h1 class="text-center">SPA rituals
+        <a class="btn btn-md btn-dark text-center" sec:authorize="hasAnyRole('ADMIN' , 'MODERATOR')"
+           th:href="@{/spa/add/rituals}">Add procedure</a></h1></div>
+
+
+    <div class="row " style="margin: auto; background-color: rgba(90,90,100, 0.7)">
+
+        <div class="col-md-3 " style="margin: auto; padding-top: 20px" th:each="p : ${spaRituals}" th:object="${p}">
+            <div class="card bg-dark text-white text-md-center shadow-lg mb-5 rounded" style="width: 18rem; height: 26rem; margin: auto">
+                <img th:src="*{imageUrl}" class="card-img-top">
+                <div class="card-body">
+                    <p th:id="*{name}" class="card-text" th:text="*{name}"></p>
+                    <p class="card-text" th:text="|Price: *{price} &euro;|"></p>
+
+                    <a class="btn btn-sm btn-outline-light mt-auto"
+                       sec:authorize="isAuthenticated()" th:href="@{/spa/buy/{id}(id = *{id})}"
+                    >Add to cart</a>
+                    <a class="btn btn-sm btn-outline-light mt-auto" th:href="@{/spa/details/{id}(id = *{id})}">Details</a>
+                </div>
+            </div>
+
+
+            <script>
+                setTimeout(() => {
+                    document.querySelectorAll('div.alert').forEach(d => d.style.display = 'none')
+                }, 4000);
+            </script>
+
+        </div>
+        <ul class="pagination justify-content-center" style="margin-top: 20px" th:if="${!spaRituals.isEmpty()}">
+            <div th:each="i: ${#numbers.sequence(1, totalPages)}">
+                <li class="page-item">
+                    <a class="btn btn-lg btn-outline-light" th:href="@{'/SPARituals/spa-rituals?size=4&page=' + ${i - 1}}">[[${i}]]</a>
+                </li>
+            </div>
+        </ul>
+    </div>
+
+
+</main>
+<div style="width: 40%; margin: auto">
+    <div id="warning" class="alert alert-warning text-center" role="alert" th:if="${alreadyInCart}">Already
+        in cart!
+    </div>
+    <div id="success" class="alert alert-success text-center" role="alert" th:if="${added}">Product added to cart!
+    </div>
+
+
+</div>
+</body>
+</html>
