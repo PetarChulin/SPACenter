@@ -30,9 +30,9 @@
                     <p class="card-text" th:text="|Price: *{price} &euro;|"></p>
 
                     <a class="btn btn-sm btn-outline-light mt-auto"
-                       sec:authorize="isAuthenticated()" th:href="@{/spa/buy/{id}(id = *{id})}"
+                       sec:authorize="isAuthenticated()" th:href="@{/spa-rituals/buy/{id}(id = *{id})}"
                     >Add to cart</a>
-                    <a class="btn btn-sm btn-outline-light mt-auto" th:href="@{/spa/details/{id}(id = *{id})}">Details</a>
+                    <a class="btn btn-sm btn-outline-light mt-auto" th:href="@{/spa-rituals/details/{id}(id = *{id})}">Details</a>
                 </div>
             </div>
 
@@ -44,7 +44,15 @@
             </script>
 
         </div>
+
         <ul class="pagination justify-content-center" style="margin-top: 20px" th:if="${!spaRituals.isEmpty()}">
+            <div style="width: 40%; margin: auto">
+                <div id="warning" class="alert alert-warning text-center shadow-lg" role="alert" th:if="${alreadyInCart}">Already
+                    in cart!
+                </div>
+                <div id="success" class="alert alert-success text-center shadow-lg" role="alert" th:if="${added}">Product added to cart!
+                </div>
+            </div>
             <div th:each="i: ${#numbers.sequence(1, totalPages)}">
                 <li class="page-item">
                     <a class="btn btn-lg btn-outline-light" th:href="@{'/SPARituals/spa-rituals?size=4&page=' + ${i - 1}}">[[${i}]]</a>
@@ -55,14 +63,6 @@
 
 
 </main>
-<div style="width: 40%; margin: auto">
-    <div id="warning" class="alert alert-warning text-center" role="alert" th:if="${alreadyInCart}">Already
-        in cart!
-    </div>
-    <div id="success" class="alert alert-success text-center" role="alert" th:if="${added}">Product added to cart!
-    </div>
 
-
-</div>
 </body>
 </html>

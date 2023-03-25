@@ -64,6 +64,7 @@ public class SpaProcedureControllerAdd {
 
     }
 
+    @PostMapping("/spa/add/rituals")
     public String addSpaRituals(@Valid SpaRitualsDTO spaRitualsDTO,
                               BindingResult result,
                               RedirectAttributes attributes) {

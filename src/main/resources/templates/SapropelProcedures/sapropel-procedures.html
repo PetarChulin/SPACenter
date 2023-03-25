@@ -22,14 +22,16 @@
 
     <div class="row " style="margin: auto; background-color: rgba(90,90,100, 0.7)">
 
-        <div class="col-md-3 " style="margin: auto; padding-top: 20px" th:each="p : ${sapropelProcedures}" th:object="${p}">
-            <div class="card bg-dark text-white text-md-center shadow-lg mb-5 rounded" style="width: 18rem; height: 26rem; margin: auto">
+        <div class="col-md-3 " style="margin: auto; padding-top: 20px" th:each="p : ${sapropelProcedures}"
+             th:object="${p}">
+            <div class="card bg-dark text-white text-md-center shadow-lg mb-5 rounded"
+                 style="width: 18rem; height: 26rem; margin: auto">
                 <img th:src="*{imageUrl}" class="card-img-top">
                 <div class="card-body">
                     <p th:id="*{name}" class="card-text" th:text="*{name}"></p>
                     <p class="card-text" th:text="|Price: *{price} &euro;|"></p>
 
-                    <a class="btn btn-sm btn-outline-light mt-auto"
+                    <a th:id="'Added' + *{name}" class="btn btn-sm btn-outline-light mt-auto"
                        sec:authorize="isAuthenticated()" th:href="@{/sapropel/buy/{id}(id = *{id})}"
                     >Add to cart</a>
                     <a class="btn btn-sm btn-outline-light mt-auto" th:href="@{/sapropel/details/{id}(id = *{id})}">Details</a>
@@ -66,24 +68,25 @@
             </div>
         </div>
         <ul class="pagination justify-content-center" style="margin-top: 20px" th:if="${!sapropelProcedures.isEmpty()}">
+            <div style="width: 40%; margin: auto">
+                <div id="warning" class="alert alert-warning text-center shadow-lg" role="alert"
+                     th:if="${alreadyInCart}">Already
+                    in cart!
+                </div>
+
+                <div id="success" class="alert alert-success text-center shadow-lg" role="alert" th:if="${added}">
+                    Product added to cart!
+                </div>
+            </div>
             <div th:each="i: ${#numbers.sequence(1, totalPages)}">
                 <li class="page-item">
-                    <a class="btn btn-lg btn-outline-light" th:href="@{'/SapropelProcedures/sapropel-procedures?size=4&page=' + ${i - 1}}">[[${i}]]</a>
+                    <a class="btn btn-lg btn-outline-light"
+                       th:href="@{'/SapropelProcedures/sapropel-procedures?size=4&page=' + ${i - 1}}">[[${i}]]</a>
                 </li>
             </div>
         </ul>
     </div>
-
-
 </main>
-<div style="width: 40%; margin: auto">
-    <div id="warning" class="alert alert-warning text-center" role="alert" th:if="${alreadyInCart}">Already
-        in cart!
-    </div>
-    <div id="success" class="alert alert-success text-center" role="alert" th:if="${added}">Product added to cart!
-    </div>
 
-
-</div>
 </body>
 </html>

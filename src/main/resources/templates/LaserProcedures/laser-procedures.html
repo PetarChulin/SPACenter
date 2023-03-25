@@ -60,6 +60,15 @@
         </div>
 
         <ul class="pagination justify-content-center" style="margin-top: 20px" th:if="${!laserProcedures.isEmpty()}">
+            <div style="width: 40%; margin: auto">
+                <div id="warning" class="alert alert-warning text-center" role="alert" th:if="${alreadyInCart}">Already
+                    in cart!
+                </div>
+                <div id="success" class="alert alert-success text-center" role="alert" th:if="${added}">Product added to cart!
+                </div>
+
+
+            </div>
             <div th:each="i: ${#numbers.sequence(1, totalPages)}">
                 <li class="page-item">
                     <a class="btn btn-lg btn-outline-light" th:href="@{'/LaserProcedures/laser-procedures?size=4&page=' + ${i - 1}}">[[${i}]]</a>
@@ -70,14 +79,6 @@
 
 
 </main>
-<div style="width: 40%; margin: auto">
-    <div id="warning" class="alert alert-warning text-center" role="alert" th:if="${alreadyInCart}">Already
-        in cart!
-    </div>
-    <div id="success" class="alert alert-success text-center" role="alert" th:if="${added}">Product added to cart!
-    </div>
 
-
-</div>
 </body>
 </html>

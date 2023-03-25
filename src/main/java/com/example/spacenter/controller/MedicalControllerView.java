@@ -18,7 +18,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
-import static com.example.spacenter.service.MedicalSubProceduresService.getUserId;
+import static com.example.spacenter.service.CommonService.getUserId;
+
 
 @Controller
 public class MedicalControllerView {

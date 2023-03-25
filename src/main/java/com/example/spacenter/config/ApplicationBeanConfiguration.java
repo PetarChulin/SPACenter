@@ -30,7 +30,8 @@ public class ApplicationBeanConfiguration {
                 .requestMatchers("/login-error").permitAll()
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                 .requestMatchers("/login", "/register").anonymous()
-                .requestMatchers("/","/home","/medical-procedures", "/spa-procedures", "/sapropel/details/**", "/laser/details/**",
+                .requestMatchers("/","/home","/medical-procedures", "/spa-procedures", "/sapropel/details/**",
+                        "/laser/details/**", "/spa-rituals/details/**",
                         "/SapropelProcedures/sapropel-procedures", "/SPARituals/spa-rituals",
                         "/LaserProcedures/laser-procedures" , "/LaserProcedures/laser/details/**").permitAll()
                 .requestMatchers("/logout", "/cart", "/sapropel/buy/**", "/sapropel/delete/**",

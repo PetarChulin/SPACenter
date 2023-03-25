@@ -21,8 +21,6 @@
     </h1>
 
 
-
-
     <div class="bg-dark bg-opacity-75 "></div>
     <div style="margin: auto; align-content: center; text-align: center">
         <p th:text="${message}"></p>
@@ -58,7 +56,9 @@
                     </td>
                     <td th:id="'total' + *{type} + *{id}" type="number"></td>
                     <td><a th:href="@{'/' + *{type} + '/delete/{id}'(id = *{id})}"
-                           class="btn btn-outline-light">Remove</a></td>
+                           class="btn btn-outline-light">Remove</a>
+                        <a th:href="@{'/' + *{type} + '/details/{id}'(id = *{id})}"
+                           class="btn btn-outline-light">Details</a></td>
                 </tr>
                 </tbody>
 
@@ -72,8 +72,25 @@
                             const regexp = /-?(\d+)(\.\d+)?/;
                             let result = temp.match(regexp)[0];
                             let price = parseFloat(result);
-                            document.getElementById('total' + itemId[itemIdKey].type + itemId[itemIdKey].id).innerHTML = (price * parseFloat(qty)).toFixed(2);
+                            let total = (price * parseFloat(qty)).toFixed(2);
+                            document.getElementById('total' + itemId[itemIdKey].type
+                                + itemId[itemIdKey].id).innerHTML = total;
+
+
+                            // window.onbeforeunload = () => {
+                            //     let amount = document.getElementById('total' + itemId[itemIdKey].type
+                            //         + itemId[itemIdKey].id).innerHTML;
+                            //     localStorage.setItem(itemId[itemIdKey].id, amount);
+                            // }
+                            //
+                            // let stored = localStorage.getItem(itemId[itemIdKey].id);
+                            // window.onload = () => {
+                            //     document.getElementById('total' + itemId[itemIdKey].type
+                            //         + itemId[itemIdKey].id).innerHTML = stored;
+                            // }
                         }
+
+
                         getTotalAmount();
                     }
 
@@ -89,27 +106,30 @@
                         }
                         document.getElementById('totalAmount').innerHTML = sum.toFixed(2);
                     }
+
+                    getValues = (e) => {
+                        document.getElementById(e.id).innerHTML = localStorage.getItem(e.value);
+                    }
                 </script>
             </table>
 
             <div>
-                <div style="font-size: 20px; color: whitesmoke; position: absolute; bottom: 20px; right: 135px;">Total
+                <div style="font-size: 20px; color: whitesmoke; position: absolute; bottom: 20px; right: 135px;" th:if="${allOrders.size() != 0}">Total
                     amount:
                 </div>
-                <div id="totalAmount"
+                <div id="totalAmount" th:if="${allOrders.size() != 0}"
                      style="font-size: 20px; color: whitesmoke; position: absolute; bottom: 20px; right: 65px;">0.00
                 </div>
-                <button class="btn btn-lg btn-outline-light" data-toggle="modal" data-target="#buyModal"
-                th:classappend="${allOrders.size() == 0 ? 'disabled' : ''}">Buy all
+                <button class="btn btn-lg btn-outline-light" data-toggle="modal" data-target="#buyModal" th:if="${allOrders.size() != 0}"
+                        >Buy all
                 </button>
 
 
-
-                    <script>
-                        setTimeout(() => {
-                            document.querySelectorAll('div.alert').forEach(d => d.style.display = 'none')
-                        }, 4000);
-                    </script>
+                <script>
+                    setTimeout(() => {
+                        document.querySelectorAll('div.alert').forEach(d => d.style.display = 'none')
+                    }, 4000);
+                </script>
 
                 <div class="modal fade" id="buyModal" tabindex="-1" role="dialog"
                      aria-labelledby="exampleModalLabel"
@@ -117,8 +137,9 @@
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content" style="background-color: rgba(255,255,255,0.85)">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel" >
-                                    <th:block sec:authentication="name"></th:block> your order includes
+                                <h5 class="modal-title" id="exampleModalLabel">
+                                    <th:block sec:authentication="name"></th:block>
+                                    your order includes
                                 </h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
@@ -129,22 +150,27 @@
                             </div>
                             <p th:text="|your order total amount is: |"></p>
                             <div class="modal-footer">
-                                <a type="button" class="btn btn-secondary" >Buy and Save order</a>
+                                <a type="button" class="btn btn-secondary">Buy and Save order</a>
                                 <a type="button" class="btn btn-secondary" th:href="@{/delete/all}">
                                     Only buy
-<!--                                    <a th:href="@{/delete/all}">Only buy</a>-->
+                                    <!--                                    <a th:href="@{/delete/all}">Only buy</a>-->
                                 </a>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div id="danger" class="alert alert-danger text-center" role="alert" style="width: 40%; margin: auto"
+                <div  class="alert alert-danger text-center" role="alert" style="width: 40%; margin: auto"
                      th:if="${deleted}">Product was removed from cart!
+                </div>
+
+                <div  class="alert alert-danger text-center" role="alert" style="width: 40%; margin: auto"
+                      th:if="${allOrders.isEmpty()}">There are no products in cart!
+                </div>
+
 
             </div>
         </div>
-    </div>
 </main>
 
 

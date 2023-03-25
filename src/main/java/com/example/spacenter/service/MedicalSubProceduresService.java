@@ -21,6 +21,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
+import static com.example.spacenter.service.CommonService.getUserEntity;
+
 @Service
 public class MedicalSubProceduresService {
 
@@ -65,13 +67,8 @@ public class MedicalSubProceduresService {
     @Transactional
     public void addSapropelToCart(Long id) {
 
-
         SapropelProcedure sapropelProcedure = this.sapropelRepository.findById(id).get();
-
-        Long userId = getUserId();
-
-        UserEntity user = this.userRepository.getUsersById(userId);
-
+        UserEntity user = getUserEntity();
         addProcedure(sapropelProcedure, user);
     }
 
@@ -91,11 +88,7 @@ public class MedicalSubProceduresService {
 
 
         SapropelProcedure sapropelProcedure = this.sapropelRepository.findById(id).get();
-
-        Long userId = getUserId();
-
-        UserEntity user = this.userRepository.getUsersById(userId);
-
+        UserEntity user = getUserEntity();
         sapropelProcedure.removeBuyer(user);
     }
 
@@ -123,36 +116,24 @@ public class MedicalSubProceduresService {
     public void addLaserToCart(Long id) {
 
         LaserProcedure laserProcedure = this.laserRepository.findById(id).get();
-
-        Long userId = getUserId();
-
-        UserEntity user = this.userRepository.getUsersById(userId);
-
+        UserEntity user = getUserEntity();
         addProcedure(laserProcedure, user);
 
     }
+
+
 
     @Transactional
     public void deleteLaserFromCart(Long id) {
 
         LaserProcedure laserProcedure = this.laserRepository.findById(id).get();
-
-        Long userId = getUserId();
-
-        UserEntity user = this.userRepository.getUsersById(userId);
-
+        UserEntity user = getUserEntity();
         laserProcedure.removeBuyer(user);
     }
 
-    public static Long getUserId() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        AppUserDetails userDetails = (AppUserDetails) authentication.getPrincipal();
 
-        return userDetails.getId();
-    }
-
-    private static void addProcedure(BaseProcedure procedure, UserEntity user) {
+    static void addProcedure(BaseProcedure procedure, UserEntity user) {
         UserEntity existingUser = procedure.getBuyers()
                 .stream()
                 .filter(found -> user.getId().equals(found.getId()))

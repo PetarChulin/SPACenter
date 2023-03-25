@@ -12,14 +12,15 @@
 <main>
     <hr class="hr-5 w-50 "/>
     <form class="mx-auto auth-forms"
-          th:method="post" th:action="@{/login}" >
+          th:method="post" th:action="@{/login}">
 
         <h1 class="text-center mt-2"><span class="badge badge-pill ">Login</span></h1>
         <div class="form-floating">
             <input class="form-control auth-inputs"
                    id="username"
                    name="username"
-                   placeholder="Username" />
+                   type="email"
+                   placeholder="Username"/>
 
             <label for="username">Email</label>
         </div>
@@ -27,12 +28,14 @@
             <input type="password" class="form-control auth-inputs"
                    id="password"
                    name="password"
-                   placeholder="Password" />
+                   min="3"
+                   max="15"
+                   placeholder="Password"/>
 
             <label for="password">Password</label>
         </div>
         <button type="submit" class="btn btn-primary auth-button">Login</button>
-        <p class="errors text-danger" th:if="${badCredentials}" >Incorrect username or password!</p>
+        <p class="errors text-danger" th:if="${badCredentials}">Incorrect username or password!</p>
 
     </form>
 

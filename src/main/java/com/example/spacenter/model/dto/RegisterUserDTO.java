@@ -21,7 +21,7 @@ public class RegisterUserDTO {
     @Size(min = 3, max = 20, message = "Password length must be between 3 and 20 characters!")
     private String password;
 
-    @Size(min = 3, max = 20, message = "Password length must be between 3 and 20 characters!")
+    @NotNull(message = "Passwords mismatched!")
     private String repeatPassword;
 
     @Email

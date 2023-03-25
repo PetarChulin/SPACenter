@@ -14,8 +14,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Optional;
 
-import static com.example.spacenter.service.MedicalSubProceduresService.getUserId;
-import static com.example.spacenter.service.UserProfileService.getPrincipalName;
+import static com.example.spacenter.service.CommonService.getUserId;
+
 
 @Controller
 public class UserProfileController {

@@ -67,40 +67,4 @@ public class AuthService {
         return true;
     }
 
-    public boolean login(LoginUserDTO loginUserDTO) {
-
-
-        Optional<UserEntity> confirmCredentials = this.userRepository
-                .findByUsernameAndPassword(loginUserDTO.getUsername(),
-                        loginUserDTO.getPassword());
-
-
-        if (confirmCredentials.isEmpty()) {
-            return false;
-        }
-
-
-        this.session.login(confirmCredentials.get());
-        return true;
-    }
-
-    public boolean authenticate(String username, String password) {
-        Optional<UserEntity> userOptional = userRepository.findByUsername(username);
-        if (userOptional.isEmpty()) {
-            return false;
-        } else {
-            return passwordEncoder.matches(password, userOptional.get().getPassword());
-        }
-    }
-
-
-    public void logout() {
-        this.session.logout();
-    }
-
-
-    public boolean isLoggedIn() {
-
-        return this.session.getId() > 0;
-    }
 }

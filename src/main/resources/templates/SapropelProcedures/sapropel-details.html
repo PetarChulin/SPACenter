@@ -10,16 +10,20 @@
 <body>
 <main><h1 class="text-center" style="background-color: rgba(0,0,0, 0.46)">Product details</h1>
     <div class="container" th:object="${searched}">
-        <div class="card" style="background-color: rgba(200,200,200,0.7); border-radius: 8px">
-            <div><h3 class="text-center" th:text="*{name}" style="color: ghostwhite"></h3></div>
+        <div class="card" style="background-color: rgba(200,200,200,0.87); border-radius: 8px">
+            <div><h3 class="text-center" th:text="*{name}" style="color: ghostwhite; background-color: #23272b;
+border-top-left-radius: 8px; border-top-right-radius: 8px"></h3></div>
             <span class="d-flex">
     <img class="card-img-top" style="width: 50%; height: 50%;" th:src="*{imageUrl}" alt="">
          <div class="container" style="position: relative;">
              <p class="text-white" style="margin-left: 20px" th:text="*{description}"></p>
-             <a class="btn btn-sm btn-outline-light" style="position: absolute; bottom: 20px; right: 25px; font-size: 15px; padding-right: 20px; padding-left: 20px;" sec:authorize="isAuthenticated()"
+             <a class="btn btn-sm btn-outline-light"
+                style="position: absolute; bottom: 20px; right: 25px; font-size: 15px; padding-right: 20px; padding-left: 20px;"
+                sec:authorize="isAuthenticated()"
                 th:href="@{/sapropel/buy/{id}(id = *{id})}"
              ><b th:text="| Price: *{price}  &euro; Add to cart|"></b></a>
-             <a class="btn btn-sm btn-outline-light"  style="position: absolute; bottom: 20px; right: 250px;" onclick="history.go(-1);">
+             <a class="btn btn-sm btn-outline-light" style="position: absolute; bottom: 20px; right: 250px;"
+                onclick="history.go(-1);">
              Back</a>
              </div>
         </span>

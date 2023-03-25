@@ -14,7 +14,7 @@ public class LoginController {
 
 
     @GetMapping("/login")
-    public String login() {
+    public String login(RedirectAttributes attributes) {
 
         return "login";
     }

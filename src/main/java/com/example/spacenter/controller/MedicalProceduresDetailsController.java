@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class DetailsController {
+public class MedicalProceduresDetailsController {
 
     private final SapropelRepository sapropelRepository;
 
     private final LaserRepository laserRepository;
 
-    public DetailsController(SapropelRepository sapropelRepository, LaserRepository laserRepository) {
+    public MedicalProceduresDetailsController(SapropelRepository sapropelRepository, LaserRepository laserRepository) {
         this.sapropelRepository = sapropelRepository;
 
         this.laserRepository = laserRepository;

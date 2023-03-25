@@ -33,10 +33,6 @@ public class RegisterController {
 
     @GetMapping("/register")
     public String register() {
-//
-//        if (this.authService.isLoggedIn()) {
-//            return "redirect:/";
-//        }
         return "register";
 
     }
@@ -45,9 +41,7 @@ public class RegisterController {
     public String register(@Valid RegisterUserDTO registerUserDTO,
                            BindingResult result,
                            RedirectAttributes attributes) {
-//        if (this.authService.isLoggedIn()) {
-//            return "redirect:/";
-//        }
+
 
         if (result.hasErrors() || !this.authService.register(registerUserDTO)) {
             attributes.addFlashAttribute("registerUserDTO", registerUserDTO);
