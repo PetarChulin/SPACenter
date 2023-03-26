@@ -9,7 +9,6 @@ import com.example.spacenter.repositories.MedicalSubProceduresRepos.LaserReposit
 import com.example.spacenter.repositories.MedicalSubProceduresRepos.SapropelRepository;
 import com.example.spacenter.repositories.SpaSubProceduresRepos.SpaRitualsRepository;
 import com.example.spacenter.repositories.UserRepository;
-import com.example.spacenter.session.LoggedUser;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,7 +20,6 @@ import static com.example.spacenter.service.CommonService.getUserId;
 @Service
 public class CartService {
 
-    private LoggedUser loggedUser;
     private SapropelRepository sapropelRepository;
 
     private UserRepository userRepository;
@@ -31,8 +29,7 @@ public class CartService {
 
     private SpaRitualsRepository spaRitualsRepository;
 
-    public CartService(LoggedUser loggedUser, SapropelRepository sapropelRepository, UserRepository userRepository, MedicalSubProceduresService medicalSubProceduresService, LaserRepository laserRepository, SpaRitualsRepository spaRitualsRepository) {
-        this.loggedUser = loggedUser;
+    public CartService(SapropelRepository sapropelRepository, UserRepository userRepository, MedicalSubProceduresService medicalSubProceduresService, LaserRepository laserRepository, SpaRitualsRepository spaRitualsRepository) {
         this.sapropelRepository = sapropelRepository;
         this.userRepository = userRepository;
         this.medicalSubProceduresService = medicalSubProceduresService;

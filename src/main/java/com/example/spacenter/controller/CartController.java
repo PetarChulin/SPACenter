@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.spacenter.service.CommonService.getUserId;
-import static com.example.spacenter.service.MedicalSubProceduresService.inCart;
+import static com.example.spacenter.service.CommonService.inCart;
 
 @Controller
 public class CartController {

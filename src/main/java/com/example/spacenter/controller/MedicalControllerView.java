@@ -7,7 +7,6 @@ import com.example.spacenter.repositories.MedicalProceduresRepository;
 import com.example.spacenter.repositories.MedicalSubProceduresRepos.LaserRepository;
 import com.example.spacenter.repositories.MedicalSubProceduresRepos.SapropelRepository;
 import com.example.spacenter.service.MedicalSubProceduresService;
-import com.example.spacenter.session.LoggedUser;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -30,14 +29,12 @@ public class MedicalControllerView {
 
     private final SapropelRepository sapropelRepository;
 
-    private final LoggedUser loggedUser;
     private final LaserRepository laserRepository;
 
-    public MedicalControllerView(MedicalProceduresRepository medicalProceduresRepository, MedicalSubProceduresService medicalSubProceduresService, SapropelRepository sapropelRepository, LoggedUser loggedUser, LaserRepository laserRepository) {
+    public MedicalControllerView(MedicalProceduresRepository medicalProceduresRepository, MedicalSubProceduresService medicalSubProceduresService, SapropelRepository sapropelRepository,  LaserRepository laserRepository) {
         this.medicalProceduresRepository = medicalProceduresRepository;
         this.medicalSubProceduresService = medicalSubProceduresService;
         this.sapropelRepository = sapropelRepository;
-        this.loggedUser = loggedUser;
         this.laserRepository = laserRepository;
     }
 

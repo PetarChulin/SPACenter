@@ -7,7 +7,6 @@ import com.example.spacenter.service.AuthService;
 import com.example.spacenter.service.CartService;
 import com.example.spacenter.service.MedicalSubProceduresService;
 import com.example.spacenter.service.SpaSubProceduresService;
-import com.example.spacenter.session.LoggedUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,7 +22,6 @@ public class AllOrdersController {
 
     private AuthService authService;
 
-    private LoggedUser loggedUser;
     private CartService cartService;
     private LaserRepository laserRepository;
 
@@ -31,11 +29,10 @@ public class AllOrdersController {
 
     private SpaSubProceduresService spaSubProceduresService;
 
-    public AllOrdersController(SapropelRepository sapropelRepository, MedicalSubProceduresService medicalSubProceduresService, AuthService authService, LoggedUser loggedUser, CartService cartService, LaserRepository laserRepository, SpaRitualsRepository spaRitualsRepository, SpaSubProceduresService spaSubProceduresService) {
+    public AllOrdersController(SapropelRepository sapropelRepository, MedicalSubProceduresService medicalSubProceduresService, AuthService authService,  CartService cartService, LaserRepository laserRepository, SpaRitualsRepository spaRitualsRepository, SpaSubProceduresService spaSubProceduresService) {
         this.sapropelRepository = sapropelRepository;
         this.medicalSubProceduresService = medicalSubProceduresService;
         this.authService = authService;
-        this.loggedUser = loggedUser;
         this.cartService = cartService;
         this.laserRepository = laserRepository;
         this.spaRitualsRepository = spaRitualsRepository;

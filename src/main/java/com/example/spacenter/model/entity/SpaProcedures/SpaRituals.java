@@ -3,7 +3,6 @@ package com.example.spacenter.model.entity.SpaProcedures;
 import com.example.spacenter.model.entity.BaseProcedure;
 import jakarta.persistence.*;
 
-import java.util.Set;
 
 @Entity
 @Table(name = "spa_rituals")

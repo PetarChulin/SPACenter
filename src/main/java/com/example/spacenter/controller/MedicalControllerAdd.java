@@ -9,10 +9,8 @@ import com.example.spacenter.repositories.UserRepository;
 import com.example.spacenter.service.AuthService;
 import com.example.spacenter.service.MedicalProcedureService;
 import com.example.spacenter.service.MedicalSubProceduresService;
-import com.example.spacenter.session.LoggedUser;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -28,16 +26,14 @@ public class MedicalControllerAdd {
     private AuthService authService;
     private SapropelRepository sapropelRepository;
 
-    private LoggedUser loggedUser;
     private MedicalSubProceduresService medicalSubProceduresService;
     private UserRepository userRepository;
 
-    public MedicalControllerAdd(MedicalProceduresRepository medicalProceduresRepository, MedicalProcedureService medicalProcedureService, AuthService authService, SapropelRepository sapropelRepository, LoggedUser loggedUser, MedicalSubProceduresService medicalSubProceduresService, UserRepository userRepository) {
+    public MedicalControllerAdd(MedicalProceduresRepository medicalProceduresRepository, MedicalProcedureService medicalProcedureService, AuthService authService, SapropelRepository sapropelRepository, MedicalSubProceduresService medicalSubProceduresService, UserRepository userRepository) {
         this.medicalProceduresRepository = medicalProceduresRepository;
         this.medicalProcedureService = medicalProcedureService;
         this.authService = authService;
         this.sapropelRepository = sapropelRepository;
-        this.loggedUser = loggedUser;
         this.medicalSubProceduresService = medicalSubProceduresService;
         this.userRepository = userRepository;
     }
@@ -84,6 +80,8 @@ public class MedicalControllerAdd {
             attributes.addFlashAttribute("medicalProceduresDTO", medicalProceduresDTO);
             attributes.addFlashAttribute("org.springframework.validation.BindingResult.medicalProceduresDTO",
                     result);
+            attributes.addFlashAttribute("existed", true);
+
             return "redirect:/medical/add";
         }
 

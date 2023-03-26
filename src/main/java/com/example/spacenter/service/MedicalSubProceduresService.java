@@ -1,26 +1,22 @@
 package com.example.spacenter.service;
 
-import com.example.spacenter.model.AppUserDetails;
 import com.example.spacenter.model.dto.MedicalProcedureDTO.LaserProceduresDTO;
 import com.example.spacenter.model.dto.MedicalProcedureDTO.SapropelProceduresDTO;
-import com.example.spacenter.model.entity.BaseProcedure;
 import com.example.spacenter.model.entity.MedicalProcedures.LaserProcedure;
 import com.example.spacenter.model.entity.MedicalProcedures.SapropelProcedure;
 import com.example.spacenter.model.entity.UserEntity;
 import com.example.spacenter.repositories.MedicalSubProceduresRepos.LaserRepository;
 import com.example.spacenter.repositories.MedicalSubProceduresRepos.SapropelRepository;
 import com.example.spacenter.repositories.UserRepository;
-import com.example.spacenter.session.LoggedUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
+import static com.example.spacenter.service.CommonService.addProcedure;
 import static com.example.spacenter.service.CommonService.getUserEntity;
 
 @Service
@@ -30,25 +26,22 @@ public class MedicalSubProceduresService {
 
     private LaserRepository laserRepository;
     private UserRepository userRepository;
-    private LoggedUser loggedUser;
 
     @Autowired
-    public MedicalSubProceduresService(SapropelRepository sapropelRepository, LaserRepository laserRepository, UserRepository userRepository, LoggedUser loggedUser) {
+    public MedicalSubProceduresService(SapropelRepository sapropelRepository, LaserRepository laserRepository, UserRepository userRepository) {
         this.sapropelRepository = sapropelRepository;
         this.laserRepository = laserRepository;
         this.userRepository = userRepository;
-        this.loggedUser = loggedUser;
     }
 
 
     public boolean addSapropelProcedure(SapropelProceduresDTO sapropelProceduresDTO) {
 
-
         SapropelProcedure sapropelProcedure = new SapropelProcedure();
 
         Optional<SapropelProcedure> findByName = this.sapropelRepository.findByName(sapropelProceduresDTO.getName());
         if (findByName.isPresent()) {
-            return false;
+            return true;
         }
         sapropelProcedure.setType(sapropelProcedure.getType());
         sapropelProcedure.setName(sapropelProceduresDTO.getName());
@@ -62,8 +55,6 @@ public class MedicalSubProceduresService {
     }
 
 
-    public static boolean inCart = false;
-
     @Transactional
     public void addSapropelToCart(Long id) {
 
@@ -71,8 +62,6 @@ public class MedicalSubProceduresService {
         UserEntity user = getUserEntity();
         addProcedure(sapropelProcedure, user);
     }
-
-
 
     public Page<SapropelProcedure> getAllSapropel(Pageable pageable) {
         return sapropelRepository.findAll(pageable);
@@ -85,7 +74,6 @@ public class MedicalSubProceduresService {
 
     @Transactional
     public void deleteSapropelFromCart(Long id) {
-
 
         SapropelProcedure sapropelProcedure = this.sapropelRepository.findById(id).get();
         UserEntity user = getUserEntity();
@@ -121,8 +109,6 @@ public class MedicalSubProceduresService {
 
     }
 
-
-
     @Transactional
     public void deleteLaserFromCart(Long id) {
 
@@ -133,17 +119,5 @@ public class MedicalSubProceduresService {
 
 
 
-    static void addProcedure(BaseProcedure procedure, UserEntity user) {
-        UserEntity existingUser = procedure.getBuyers()
-                .stream()
-                .filter(found -> user.getId().equals(found.getId()))
-                .findFirst().orElse(new UserEntity());
 
-        if (procedure.getBuyers().contains(existingUser)) {
-            inCart = true;
-        } else {
-            inCart = false;
-            procedure.addBuyer(user);
-        }
-    }
 }

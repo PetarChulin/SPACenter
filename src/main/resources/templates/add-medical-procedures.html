@@ -20,6 +20,7 @@
              th:field="*{name}"
              th:errorclass="is-invalid"/>
       <small th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger"></small>
+      <p class="errors text-danger" th:if="${existed}">Procedure is already existing!</p>
       <label for="floatingInput">Name</label>
     </div>
     <div class="form-floating" style="width: 400px; margin: auto">

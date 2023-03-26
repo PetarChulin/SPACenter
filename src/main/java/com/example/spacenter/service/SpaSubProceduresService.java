@@ -13,8 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
+import static com.example.spacenter.service.CommonService.addProcedure;
 import static com.example.spacenter.service.CommonService.getUserId;
-import static com.example.spacenter.service.MedicalSubProceduresService.addProcedure;
 
 @Service
 public class SpaSubProceduresService {
@@ -57,11 +57,8 @@ public class SpaSubProceduresService {
     public void addSpaRitualToCart(Long id) {
 
         SpaRituals spaRituals = this.spaRitualsRepository.findById(id).get();
-
         Long userId = getUserId();
-
         UserEntity user = this.userRepository.getUsersById(userId);
-
         addProcedure(spaRituals, user);
 
     }
@@ -70,11 +67,8 @@ public class SpaSubProceduresService {
     public void deleteSpaRitualFromCart(Long id) {
 
         SpaRituals spaRituals = this.spaRitualsRepository.findById(id).get();
-
         Long userId = getUserId();
-
         UserEntity user = this.userRepository.getUsersById(userId);
-
         spaRituals.removeBuyer(user);
     }
 }

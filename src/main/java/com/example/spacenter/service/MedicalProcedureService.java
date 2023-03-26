@@ -23,14 +23,12 @@ public class MedicalProcedureService {
 
     public boolean add(MedicalProceduresDTO medicalProceduresDTO) {
 
-
         Optional<MedicalProcedure> findByName = this.medicalProceduresRepository.findByName(medicalProceduresDTO.getName());
         if (findByName.isPresent()) {
             return false;
         }
 
         MedicalProcedure medicalProcedure = new MedicalProcedure();
-
 
         medicalProcedure.setName(medicalProceduresDTO.getName());
         medicalProcedure.setDescription(medicalProceduresDTO.getDescription());

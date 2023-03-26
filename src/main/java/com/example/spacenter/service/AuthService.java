@@ -5,7 +5,6 @@ import com.example.spacenter.model.dto.RegisterUserDTO;
 import com.example.spacenter.model.entity.UserEntity;
 import com.example.spacenter.repositories.RoleRepository;
 import com.example.spacenter.repositories.UserRepository;
-import com.example.spacenter.session.LoggedUser;
 import com.example.spacenter.model.entity.Role;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,18 +18,15 @@ public class AuthService {
 
     private UserRepository userRepository;
 
-    private LoggedUser session;
-    private LoggedUser loggedUser;
+
 
     private PasswordEncoder passwordEncoder;
     private RoleRepository roleRepository;
 
 
     @Autowired
-    public AuthService(UserRepository userRepository, LoggedUser session, LoggedUser loggedUser, PasswordEncoder passwordEncoder, RoleRepository roleRepository) {
+    public AuthService(UserRepository userRepository, PasswordEncoder passwordEncoder, RoleRepository roleRepository) {
         this.userRepository = userRepository;
-        this.session = session;
-        this.loggedUser = loggedUser;
         this.passwordEncoder = passwordEncoder;
         this.roleRepository = roleRepository;
     }

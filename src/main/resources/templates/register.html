@@ -26,6 +26,8 @@
                th:field="*{username}"
                th:errorclass="is-invalid"/>
         <small th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="text-danger"></small>
+        <p class="errors text-danger" th:if="${existedName}">User with this username already existing!</p>
+
         <label for="floatingInput">Username</label>
       </div>
       <div class="form-floating">
@@ -41,6 +43,8 @@
                th:field="*{email}"
                th:errorclass="is-invalid"/>
         <small th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger"></small>
+        <p class="errors text-danger" th:if="${existedEmail}">User with this email already existing!</p>
+
         <label for="floatingInput">Email</label>
       </div>
       <div class="form-floating">
@@ -55,12 +59,10 @@
                th:field="*{repeatPassword}"
                th:errorclass="is-invalid"/>
         <small th:if="${#fields.hasErrors('repeatPassword')}" th:errors="*{repeatPassword}" class="text-danger"></small>
+        <p class="errors text-danger" th:if="${mismatched}">Passwords mismatched!</p>
+
         <label for="repeatPassword" >Repeat password</label>
       </div>
-<!--      <div class="form-floating mb-3 form-check">-->
-<!--        <input type="checkbox" class="form-check-input" id="exampleCheck1">-->
-<!--        <label class="form-check-label" for="exampleCheck1">Check me out</label>-->
-<!--      </div>-->
       <button type="submit" class="btn btn-primary auth-button">Register</button>
     </form>
   </main>
