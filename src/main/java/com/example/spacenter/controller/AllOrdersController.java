@@ -43,8 +43,8 @@ public class AllOrdersController {
     public String buySapropel(@PathVariable Long id, RedirectAttributes attributes) {
 
         medicalSubProceduresService.addSapropelToCart(id);
-
         checkForAvailability(attributes);
+
         return "redirect:/SapropelProcedures/sapropel-procedures";
 
     }
@@ -54,7 +54,6 @@ public class AllOrdersController {
     public String removeSapropel(@PathVariable Long id, RedirectAttributes attributes) {
 
         medicalSubProceduresService.deleteSapropelFromCart(id);
-
         attributes.addFlashAttribute("deleted" , true);
 
         return "redirect:/cart";
@@ -73,7 +72,6 @@ public class AllOrdersController {
     public String removeLaser(@PathVariable Long id, RedirectAttributes attributes) {
 
         medicalSubProceduresService.deleteLaserFromCart(id);
-
         attributes.addFlashAttribute("deleted" , true);
 
         return "redirect:/cart";
@@ -83,8 +81,8 @@ public class AllOrdersController {
     public String buySpaRitual(@PathVariable Long id, RedirectAttributes attributes) {
 
         spaSubProceduresService.addSpaRitualToCart(id);
-
         checkForAvailability(attributes);
+
         return "redirect:/SPARituals/spa-rituals";
     }
 
@@ -92,7 +90,6 @@ public class AllOrdersController {
     public String removeSpaRituals(@PathVariable Long id, RedirectAttributes attributes) {
 
         spaSubProceduresService.deleteSpaRitualFromCart(id);
-
         attributes.addFlashAttribute("deleted" , true);
 
         return "redirect:/cart";

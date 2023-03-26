@@ -65,6 +65,7 @@
 
                 <script th:inline="javascript">
                     async function calculate() {
+
                         let itemId = [[${allOrders}]];
                         for (const itemIdKey in itemId) {
                             let temp = document.getElementById('price' + itemId[itemIdKey].type + itemId[itemIdKey].id).textContent;

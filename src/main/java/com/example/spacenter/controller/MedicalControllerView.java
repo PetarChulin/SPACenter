@@ -31,7 +31,8 @@ public class MedicalControllerView {
 
     private final LaserRepository laserRepository;
 
-    public MedicalControllerView(MedicalProceduresRepository medicalProceduresRepository, MedicalSubProceduresService medicalSubProceduresService, SapropelRepository sapropelRepository,  LaserRepository laserRepository) {
+    public MedicalControllerView(MedicalProceduresRepository medicalProceduresRepository, MedicalSubProceduresService medicalSubProceduresService,
+                                 SapropelRepository sapropelRepository,  LaserRepository laserRepository) {
         this.medicalProceduresRepository = medicalProceduresRepository;
         this.medicalSubProceduresService = medicalSubProceduresService;
         this.sapropelRepository = sapropelRepository;

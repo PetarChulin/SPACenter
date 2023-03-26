@@ -29,8 +29,29 @@ public class SubProceduresInitService {
         initSapropelProcedure2();
         initSapropelProcedure3();
         initSapropelProcedure4();
+        initSapropelProcedure5();
     }
 
+    private void initSapropelProcedure5() {
+
+        var sapropel5 = new SapropelProcedure();
+        if (checkForExistingSapropel("Sapropel mask (for the back/ joints)")) return;
+
+
+        sapropel5.setName("Sapropel mask (for the back/ joints)");
+        sapropel5.setType(sapropel5.getType());
+        sapropel5.setImageUrl("https://naturatermospa.com/wp-content/uploads/2019/10/image-4.jpeg");
+        sapropel5.setDescription("Vitamins of the B group that are in the sapropel, participate" +
+                " in the processes of metabolism, help to maintain healthy skin and muscle tone," +
+                " strengthen functions of the immune and neural systems, as well as promote cell growth and division." +
+                " These vitamins help to defeat anaemia, as well as symptoms and causes of stress and depression." +
+                " Bromine, iodine, phosphorus, and magnesium that are in the Sapropel have anaesthetic" +
+                " and calming effect on the neural tissue," +
+                " restores working capacity of the body after the emotional and physical fatigue.");
+        sapropel5.setPrice(14.00);
+
+        this.sapropelRepository.save(sapropel5);
+    }
     private void initSapropelProcedure4() {
 
         var sapropel4 = new SapropelProcedure();
@@ -70,9 +91,43 @@ public class SubProceduresInitService {
     }
 
     private void initSapropelProcedure2() {
+
+        var sapropel2 = new SapropelProcedure();
+        if (checkForExistingSapropel("Sapropel mask for hair")) return;
+
+
+        sapropel2.setName("Sapropel mask for hair");
+        sapropel2.setType(sapropel2.getType());
+        sapropel2.setImageUrl("https://naturatermospa.com/wp-content/uploads/2019/10/image-3.jpeg");
+        sapropel2.setDescription("Every woman dreams about long and healthy hair. “Vacation park” SPA" +
+                " offers elder tested recipes. Sapropel mask for hair is exclusive, because it is unique," +
+                " ecological, uses the most natural substance," +
+                " contains no toxins, is not contaminated with heavy metals and radioactive nuclides.");
+        sapropel2.setPrice(26.00);
+
+        this.sapropelRepository.save(sapropel2);
     }
 
     private void initSapropelProcedure1() {
+
+        var sapropel1 = new SapropelProcedure();
+        if (checkForExistingSapropel("Paraffin bath for feet")) return;
+
+
+        sapropel1.setName("Paraffin bath for feet");
+        sapropel1.setType(sapropel1.getType());
+        sapropel1.setImageUrl("https://naturatermospa.com/wp-content/uploads/2019/10/parafino-aplikacija-sanariu-1-Custom-1.jpg");
+        sapropel1.setDescription("Light scrub and massage of feet are performed before paraffin therapy." +
+                " After that, the feet are immersed in paraffin. It contains many useful materials." +
+                " The temperature of the feet skin coated with the serum raises by one or two degrees," +
+                " and the paraffin layer does not allow the skin to cool.\n" +
+                "Therefore, the horny layer softens, the pairs open, all the active" +
+                " substances penetrate into the deep layers. Warmth causes the skin to sweat," +
+                " thus eliminating toxins. This procedure is effective for a week. Physicians recommend it to anyone with a circulatory disorder. Particularly it is useful for those who feel cold in limbs." +
+                " Paraffin therapy also helps to relieve tension and anxiety.");
+        sapropel1.setPrice(26.00);
+
+        this.sapropelRepository.save(sapropel1);
     }
 
     private boolean checkForExistingSapropel(String name) {

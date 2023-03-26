@@ -3,6 +3,9 @@
     <div class="container-fluid" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
         <a class="btn btn-outline-light" href="/home">Home</a>
+        <input id="searched" onkeyup="filter()" class="form-control me-2" style="width: 55%"
+               type="search" placeholder="filter e.g. mask"
+               aria-label="Search"/>
 
 
         <div class="nav-item dropdown btn btn-outline-light" sec:authorize="hasAnyRole('ADMIN' , 'MODERATOR')">
@@ -41,11 +44,14 @@
                 <li><a class="dropdown-item btn btn-outline-light" style="color: #0056b3"
                        href="/spa/add">Add SPA procedures</a></li>
             </ul>
+
         </div>
 
         <a class="btn btn-outline-light" sec:authorize="isAnonymous()" href="/spa-procedures">SPA procedures</a>
 
         <a class="btn btn-outline-light" sec:authorize="hasRole('USER')" href="/spa-procedures">SPA procedures</a>
+
+
 
 
         <div class="nav-item dropdown btn btn-outline-light" sec:authorize="isAuthenticated()">
@@ -80,6 +86,7 @@
                     </form>
                 </li>
             </ul>
+
         </div>
         <div>
             <a class="btn btn-outline-light" aria-current="page" sec:authorize="!isAuthenticated()"
@@ -88,10 +95,15 @@
                href="/register">Register</a>
 
 
-            <!--                    <form class="d-flex" role="search">-->
-            <!--                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">-->
-            <!--                        <button class="btn btn-outline-success" type="submit">Search</button>-->
-            <!--                    </form>-->
+
+<!--            <form class="d-flex" role="search">-->
+<!--                <button class="btn btn-outline-success" type="submit">Search</button>-->
+<!--            </form>-->
+
+            <script src="/js/filter.js">
+
+            </script>
         </div>
+
     </div>
 </nav>

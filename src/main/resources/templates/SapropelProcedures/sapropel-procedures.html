@@ -28,7 +28,7 @@
                  style="width: 18rem; height: 26rem; margin: auto">
                 <img th:src="*{imageUrl}" class="card-img-top">
                 <div class="card-body">
-                    <p th:id="*{name}" class="card-text" th:text="*{name}"></p>
+                    <h5 th:id="*{name}" class="card-text" th:text="*{name}"></h5>
                     <p class="card-text" th:text="|Price: *{price} &euro;|"></p>
 
                     <a th:id="'Added' + *{name}" class="btn btn-sm btn-outline-light mt-auto"

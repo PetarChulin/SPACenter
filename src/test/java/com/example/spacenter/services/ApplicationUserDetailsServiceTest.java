@@ -47,7 +47,7 @@ public class ApplicationUserDetailsServiceTest {
         Role testUserRole = new Role().setName(String.valueOf(RoleEnum.USER));
         Role testModeratorRole = new Role().setName(String.valueOf(RoleEnum.MODERATOR));
 
-        String EXISTING_EMAIL = "asd@com.com";
+        String EXISTING_EMAIL = "user@com.com";
         UserEntity testUserEntity = new UserEntity();
         testUserEntity.setEmail(EXISTING_EMAIL);
         testUserEntity.setPassword("123");
