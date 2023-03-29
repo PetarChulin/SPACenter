@@ -23,38 +23,14 @@ public class UserProfileService {
         this.detailsService = detailsService;
     }
 
-    public static String getPrincipalName() {
-
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        AppUserDetails userDetails = (AppUserDetails) authentication.getPrincipal();
-
-        String principalName = userDetails.getUsername();
-
-        return principalName;
-    }
-
-    public boolean changeUsername(UserEntity entity) {
-
-
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        AppUserDetails userDetails = (AppUserDetails) authentication.getPrincipal();
-
-        Long principalId = userDetails.getId();
-
-        UserEntity user = this.userRepository.getUsersById(principalId);
-
-
-        user.setUsername(entity.getUsername());
-
-        this.userRepository.save(user);
-
-        return true;
-    }
     public void updateUsername(Long id, String username) {
 
         this.userRepository.editUsername(id, username);
+    }
+
+    public void updatePassword(Long id, String password) {
+
+        this.userRepository.editUserPassword(id, password);
     }
 
 }

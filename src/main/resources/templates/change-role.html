@@ -29,15 +29,22 @@
             </select>
 
         <div class="input-group mb-3">
-                <a type="button" class="btn btn-primary" href="/delete/role">Delete role</a>
             <div class="ml-auto col-xl-8 col-lg-8 col-md-8 col-sm-7 pl-0">
                 <button type="submit" class="btn btn-primary">Change role</button>
             </div>
         </div>
         </div>
-
+        <div id="changed" th:if="${changed != null}" class="alert alert-success" role="alert">
+            [[${changed}]]
+        </div>
     </form>
 </div>
+    <script>
+        setTimeout(() => {
+            document.getElementById('changed').style.display = 'none';
+
+        }, 4000);
+    </script>
 <footer class="footer bg-transparent py-2">
     <div class="container-fluid text-center">
         <div class="footer-background h5 text-primary text-stroke fixed-bottom">

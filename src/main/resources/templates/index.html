@@ -20,7 +20,18 @@
         <div class="col-md-3">
             <img src="/images/spa-4.jpg" class="card-img-top"></div>
     </div>
-
+    <div id="logout" th:if="${param.logout}" style="width: 50%; margin: auto" class="alert alert-success text-center"
+    >Logged out successfully!</div>
+    <div id="login" th:if="${param.login}" style="width: 50%; margin: auto" class="alert alert-primary text-center"
+    >Login successfully!</div>
+    <script>
+        setTimeout(() => {
+            document.getElementById('logout').style.display = 'none';
+        }, 4000);
+        setTimeout(() => {
+            document.getElementById('login').style.display = 'none';
+        }, 4000);
+    </script>
 </main>
 
 <footer class="footer bg-transparent py-2">

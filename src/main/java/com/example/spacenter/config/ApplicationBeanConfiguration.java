@@ -46,19 +46,19 @@ public class ApplicationBeanConfiguration {
                 .loginPage("/login")
                 .usernameParameter("username")
                 .passwordParameter("password")
-                .defaultSuccessUrl("/home", true)
+                .defaultSuccessUrl("/home?login", true)
                 .failureForwardUrl("/login-error")
                 .and()
                 .logout()
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/home")
+                .logoutSuccessUrl("/home?logout")
                 .deleteCookies("JSESSIONID")
-                .clearAuthentication(true);
-//                .and()
-//                .rememberMe()
-//                .key("someUniqueKey")
-//                .tokenValiditySeconds(300)
-//                .userDetailsService(userDetailsService(userRepository));
+                .clearAuthentication(true)
+                .and()
+                .rememberMe()
+                .key("someUniqueKey")
+                .tokenValiditySeconds(300)
+                .userDetailsService(userDetailsService(userRepository));
 
         return http.build();
     }

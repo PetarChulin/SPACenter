@@ -48,6 +48,7 @@ public class RoleController {
                            RedirectAttributes attributes) {
 
         this.roleService.addRoleToUser(roleDTO.getUsername(), roleDTO.getRole());
+        attributes.addFlashAttribute("changed" , "User role was changed!");
 
         if (result.hasErrors()) {
             attributes.addFlashAttribute("roleDTO", roleDTO);
@@ -56,7 +57,7 @@ public class RoleController {
             return "redirect:/change-role";
         }
 
-        return "redirect:/home";
+        return "redirect:/change/role";
     }
 
     @GetMapping("/delete/role")

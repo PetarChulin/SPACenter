@@ -22,7 +22,7 @@ public class ProceduresInitService {
     }
 
     @PostConstruct
-    private void initMedicalProcedures() {
+    public void initMedicalProcedures() {
         initSapropelProcedures();
         initLaserProcedures();
     }
@@ -46,12 +46,13 @@ public class ProceduresInitService {
     }
 
     private void initSapropelProcedures() {
+
         var sapropelProcedure = new MedicalProcedure();
         if (checkForExistingMedical("Sapropel procedures")) return;
 
 
         sapropelProcedure.setName("Sapropel procedures");
-        sapropelProcedure.setImageUrl("https://naturatermospa.com/wp-content/uploads/2019/09/gydomasis-purvas-sapropelis-1.jpg");
+        sapropelProcedure.setImageUrl("https://naturatermospa.com/wp-content/uploads/2019/10/image-2-432x324.jpeg");
         sapropelProcedure.setDescription("In the Natura Termo SPA you can try unique procedures for which sapropel of 38–40 ºC temperature is used.");
 
         this.medicalProceduresRepository.save(sapropelProcedure);
@@ -71,11 +72,11 @@ public class ProceduresInitService {
     }
 
     private boolean checkForExistingMedical(String name) {
-        Optional<MedicalProcedure> entityName = this.medicalProceduresRepository.findByName(name);
-        if (entityName.isPresent()) {
-            System.out.println("This procedure exists");
-            return true;
-        }
+            Optional<MedicalProcedure> entityName = this.medicalProceduresRepository.findByName(name);
+            if (entityName.isPresent()) {
+                System.out.println("This procedure exists");
+                return true;
+            }
         return false;
     }
 

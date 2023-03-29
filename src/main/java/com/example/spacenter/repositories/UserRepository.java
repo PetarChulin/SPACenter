@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -37,4 +38,13 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
     @Query("update UserEntity as u SET  u.username=:username where u.id=:id ")
     void editUsername(@Param("id") Long id,
                           @Param("username") String username);
+
+    @Transactional
+    @Modifying
+    @Query("update UserEntity as u SET  u.password=:password where u.id=:id ")
+    void editUserPassword(@Param("id") Long id,
+                      @Param("password") String password);
+
+    @Query("select u from UserEntity as u order by u.id asc ")
+    List<UserEntity> findAllUserById();
 }

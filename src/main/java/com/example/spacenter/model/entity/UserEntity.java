@@ -40,6 +40,11 @@ public class UserEntity {
     public UserEntity() {
     }
 
+    public UserEntity(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
     public UserEntity addRole(Role role) {
         this.roles.add(role);
         return this;

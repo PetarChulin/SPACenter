@@ -23,8 +23,21 @@ button::selection{
 
 }
 
+.change-details {
+
+    width: 350px;
+    height: 450px;
+    color: whitesmoke;
+    background-color: rgba(63, 73, 82, 0.82);
+    border-color: #6c757d;
+    border-radius: 8px;
+    text-align: center;
+    align-items: center;
+}
+
 .change-role {
 
+    margin-top: 120px;
     width: 350px;
     height: 250px;
     color: whitesmoke;

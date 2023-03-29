@@ -1,6 +1,5 @@
 package com.example.spacenter.service;
 
-import com.example.spacenter.model.entity.MedicalProcedure;
 import com.example.spacenter.model.entity.MedicalProcedures.SapropelProcedure;
 import com.example.spacenter.repositories.MedicalSubProceduresRepos.LaserRepository;
 import com.example.spacenter.repositories.MedicalSubProceduresRepos.SapropelRepository;

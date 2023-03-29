@@ -10,6 +10,8 @@ import com.example.spacenter.service.MedicalSubProceduresService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -63,6 +65,13 @@ public class MedicalControllerView {
 
         return "medical-procedures";
     }
+
+//    @GetMapping(path = "/medical-procedures", consumes="application/json")
+//    public ResponseEntity<List<MedicalProcedure>> getAllMedical() {
+//        var procedures = this.medicalProceduresRepository.findAll();
+//
+//        return ResponseEntity.ok(procedures);
+//    }
 
 
 
