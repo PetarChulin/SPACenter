@@ -1,6 +1,8 @@
 # SPACenter
 SPA center app
 
+For best user experience use google chrome
+
 Simple spring application demonstrates basic functionalities as login/logout user ,validating data , adding and removing items to cart and so on.
 
 After download and start it creates initial database with some products and the following users:
