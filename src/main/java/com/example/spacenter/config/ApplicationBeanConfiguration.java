@@ -1,5 +1,6 @@
 package com.example.spacenter.config;
 
+import com.example.spacenter.interceptor.RequestProcessingTimeInterceptor;
 import com.example.spacenter.model.entity.RoleEnum;
 import com.example.spacenter.repositories.UserRepository;
 import com.example.spacenter.service.ApplicationUserDetailsService;
@@ -79,6 +80,11 @@ public class ApplicationBeanConfiguration {
     @Bean
     public UserDetailsService userDetailsService(UserRepository userRepository) {
         return new ApplicationUserDetailsService(userRepository);
+    }
+
+    @Bean
+    public RequestProcessingTimeInterceptor requestProcessingTimeInterceptor() {
+        return new RequestProcessingTimeInterceptor();
     }
 
 

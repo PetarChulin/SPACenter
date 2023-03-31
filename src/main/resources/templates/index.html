@@ -17,7 +17,7 @@
 </head>
 <body>
 <header>
-    <th:block th:insert="/fragments/navigation"></th:block>
+    <th:block th:insert="~{/fragments/navigation}"></th:block>
 
 </header>
 <main><h1>Welcome to Healthy Spa Center</h1>
@@ -30,17 +30,15 @@
             <img src="/images/spa-3.jpg" class="card-img-top"></div>
         <div class="col-md-3">
             <img src="/images/spa-4.jpg" class="card-img-top"></div>
+        <p th:text="|Your time is ${serverTime}|"></p>
     </div>
-    <div id="logout" th:if="${param.logout}" sec:authorize="!isAuthenticated" style="width: 50%; margin: auto" class="alert alert-success text-center"
+    <div id="logout" th:if="${param.logout}"  style="width: 50%; margin: auto" class="alert alert-success text-center"
     >Logged out successfully!</div>
     <div id="login" th:if="${param.login}" sec:authorize="isAuthenticated" style="width: 50%; margin: auto" class="alert alert-primary text-center"
     >Login successfully!</div>
     <script>
         setTimeout(() => {
-            document.getElementById('logout').style.display = 'none';
-        }, 4000);
-        setTimeout(() => {
-            document.getElementById('login').style.display = 'none';
+            document.querySelectorAll('div.alert').forEach(d => d.style.display = 'none')
         }, 4000);
     </script>
 </main>

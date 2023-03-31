@@ -7,12 +7,12 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 <head>
-    <th:block th:insert="fragments/meta"></th:block>
+    <th:block th:insert="~{/fragments/meta}"></th:block>
 
 </head>
 <body>
 <header>
-    <th:block th:insert="fragments/navigation"></th:block>
+    <th:block th:insert="~{/fragments/navigation}"></th:block>
 </header>
 <main class="text-center">
     <h1>
@@ -77,18 +77,6 @@
                             document.getElementById('total' + itemId[itemIdKey].type
                                 + itemId[itemIdKey].id).innerHTML = total;
 
-
-                            // window.onbeforeunload = () => {
-                            //     let amount = document.getElementById('total' + itemId[itemIdKey].type
-                            //         + itemId[itemIdKey].id).innerHTML;
-                            //     localStorage.setItem(itemId[itemIdKey].id, amount);
-                            // }
-                            //
-                            // let stored = localStorage.getItem(itemId[itemIdKey].id);
-                            // window.onload = () => {
-                            //     document.getElementById('total' + itemId[itemIdKey].type
-                            //         + itemId[itemIdKey].id).innerHTML = stored;
-                            // }
                         }
 
 
@@ -101,11 +89,14 @@
                         let itemId = [[${allOrders}]];
                         let sum = 0;
                         for (const itemIdKey in itemId) {
-                            let currentAmount = document.getElementById('total' + itemId[itemIdKey].type + itemId[itemIdKey].id).innerHTML;
+                            let currentAmount = document.getElementById('total' + itemId[itemIdKey].type
+                                + itemId[itemIdKey].id).innerHTML;
                             let amount = parseFloat(currentAmount)
                             sum += amount;
                         }
                         document.getElementById('totalAmount').innerHTML = sum.toFixed(2);
+                        document.getElementById('buyTotal').innerHTML = 'Your order total amount is: ' + sum.toFixed(2) + ' €';
+
                     }
 
                     getValues = (e) => {
@@ -147,9 +138,9 @@
                                 </button>
                             </div>
                             <div class="modal-body" th:each="o : ${allOrders}" th:object="${o}">
-                                <p style="color: gray" th:text="|*{name} : *{price} &euro;|"></p>
+                                <p style="color: gray" th:text="|*{name}|"></p>
                             </div>
-                            <p th:text="|your order total amount is: |"></p>
+                            <p id="buyTotal"></p>
                             <div class="modal-footer">
                                 <a type="button" class="btn btn-secondary">Buy and Save order</a>
                                 <a type="button" class="btn btn-secondary" th:href="@{/delete/all}">
