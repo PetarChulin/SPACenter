@@ -38,7 +38,7 @@ public class ScheduledJob {
         this.cartService = cartService;
     }
 
-    @Scheduled(cron = "* 16 14 * * *")
+    @Scheduled(cron = "* 00 13 * * *")
     public void reInitMedProcedures() {
         List<MedicalProcedure> procedures = medicalProceduresRepository.findAll();
         if (procedures.size() == 0) {

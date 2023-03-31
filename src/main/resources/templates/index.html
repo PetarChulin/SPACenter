@@ -1,11 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-    <th:block th:insert="/fragments/meta"></th:block>
-</head>
-<body>
-<header>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>SPA center App</title>
@@ -17,6 +13,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
             crossorigin="anonymous"></script>
+
+</head>
+<body>
+<header>
+    <th:block th:insert="/fragments/navigation"></th:block>
 
 </header>
 <main><h1>Welcome to Healthy Spa Center</h1>
@@ -30,9 +31,9 @@
         <div class="col-md-3">
             <img src="/images/spa-4.jpg" class="card-img-top"></div>
     </div>
-    <div id="logout" th:if="${param.logout}" style="width: 50%; margin: auto" class="alert alert-success text-center"
+    <div id="logout" th:if="${param.logout}" sec:authorize="!isAuthenticated" style="width: 50%; margin: auto" class="alert alert-success text-center"
     >Logged out successfully!</div>
-    <div id="login" th:if="${param.login}" style="width: 50%; margin: auto" class="alert alert-primary text-center"
+    <div id="login" th:if="${param.login}" sec:authorize="isAuthenticated" style="width: 50%; margin: auto" class="alert alert-primary text-center"
     >Login successfully!</div>
     <script>
         setTimeout(() => {

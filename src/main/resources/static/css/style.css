@@ -23,6 +23,12 @@ button::selection{
 
 }
 
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .change-details {
 
     width: 350px;
