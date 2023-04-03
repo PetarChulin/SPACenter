@@ -2,6 +2,7 @@ package com.example.spacenter.service;
 
 import com.example.spacenter.model.dto.MedicalProcedureDTO.LaserProceduresDTO;
 import com.example.spacenter.model.dto.MedicalProcedureDTO.SapropelProceduresDTO;
+import com.example.spacenter.model.entity.BaseProcedure;
 import com.example.spacenter.model.entity.MedicalProcedures.LaserProcedure;
 import com.example.spacenter.model.entity.MedicalProcedures.SapropelProcedure;
 import com.example.spacenter.model.entity.UserEntity;
@@ -27,8 +28,12 @@ public class MedicalSubProceduresService {
     private LaserRepository laserRepository;
     private UserRepository userRepository;
 
+
     @Autowired
-    public MedicalSubProceduresService(SapropelRepository sapropelRepository, LaserRepository laserRepository, UserRepository userRepository) {
+    public MedicalSubProceduresService(SapropelRepository sapropelRepository,
+                                       LaserRepository laserRepository,
+                                       UserRepository userRepository
+    ) {
         this.sapropelRepository = sapropelRepository;
         this.laserRepository = laserRepository;
         this.userRepository = userRepository;
@@ -43,6 +48,7 @@ public class MedicalSubProceduresService {
         if (findByName.isPresent()) {
             return true;
         }
+        sapropelProcedure.setId((long) Math.floor(Math.random() * 10));
         sapropelProcedure.setType(sapropelProcedure.getType());
         sapropelProcedure.setName(sapropelProceduresDTO.getName());
         sapropelProcedure.setImageUrl(sapropelProceduresDTO.getImageUrl());
@@ -88,6 +94,7 @@ public class MedicalSubProceduresService {
         if (findByName.isPresent()) {
             return false;
         }
+        laserProcedure.setId((long) Math.floor(Math.random() * 10));
         laserProcedure.setType(laserProcedure.getType());
         laserProcedure.setName(laserProceduresDTO.getName());
         laserProcedure.setImageUrl(laserProceduresDTO.getImageUrl());
@@ -116,8 +123,6 @@ public class MedicalSubProceduresService {
         UserEntity user = getUserEntity();
         laserProcedure.removeBuyer(user);
     }
-
-
 
 
 }

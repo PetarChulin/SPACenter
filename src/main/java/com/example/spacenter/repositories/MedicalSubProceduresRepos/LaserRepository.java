@@ -15,6 +15,8 @@ public interface LaserRepository extends JpaRepository<LaserProcedure, Long> {
 
     Optional<LaserProcedure> findById(Long id);
 
+    LaserProcedure getById(Long id);
+
 
     List<LaserProcedure> findAll();
 

@@ -28,18 +28,19 @@ public class ApplicationBeanConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.
                 authorizeHttpRequests()
-                .requestMatchers("/error","/login-error", "/login").permitAll()
+                .requestMatchers("/error", "/login-error", "/login", "all-comments").permitAll()
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                .requestMatchers("/","/home","/register","/medical-procedures", "/spa-procedures", "/sapropel/details/**",
+                .requestMatchers("/", "/home", "/register", "/medical-procedures", "/spa-procedures",
+                        "/sapropel/details/**",
                         "/laser/details/**", "/spa-rituals/details/**",
-                        "/SapropelProcedures/sapropel-procedures", "/SPARituals/spa-rituals",
-                        "/LaserProcedures/laser-procedures" , "/LaserProcedures/laser/details/**").permitAll()
-                .requestMatchers("/logout", "/cart", "/sapropel/buy/**", "/sapropel/delete/**",
-                        "/laser/buy/**", "/laser/delete/**" , "/delete/all", "/change/username").authenticated()
+                        "/SapropelProcedures/**", "/SPARituals/spa-rituals",
+                        "/LaserProcedures/laser-procedures", "/LaserProcedures/laser/details/**").permitAll()
+                .requestMatchers("/logout", "/cart", "/sapropel/buy/**", "/sapropel/delete/**", "/comment/add/**",
+                        "/laser/buy/**", "/laser/delete/**", "/delete/all", "/change/username").authenticated()
                 .requestMatchers("/").hasRole(RoleEnum.USER.name())
-                .requestMatchers("/medical/add/**","/laser/add/**", "/spa/add/**")
+                .requestMatchers("/medical/add/**", "/laser/add/**", "/spa/add/**")
                 .hasAnyRole(RoleEnum.ADMIN.name(), RoleEnum.MODERATOR.name())
-                .requestMatchers("/change/role").hasRole(RoleEnum.ADMIN.name())
+                .requestMatchers("/change/role", "comment/delete/**").hasRole(RoleEnum.ADMIN.name())
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

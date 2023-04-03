@@ -13,10 +13,15 @@ public interface SapropelRepository extends JpaRepository<SapropelProcedure, Lon
 
     Optional<SapropelProcedure> findById(Long id);
 
+    SapropelProcedure getById(Long id);
+
+    SapropelProcedure getByType(String type);
+
 
     List<SapropelProcedure> findAll();
 
     List<SapropelProcedure> findByBuyers_Id(Long id);
+
 
 
 }

@@ -30,6 +30,7 @@ public class MedicalProcedureService {
 
         MedicalProcedure medicalProcedure = new MedicalProcedure();
 
+        medicalProcedure.setId((long) Math.floor(Math.random() * 10));
         medicalProcedure.setName(medicalProceduresDTO.getName());
         medicalProcedure.setDescription(medicalProceduresDTO.getDescription());
         medicalProcedure.setImageUrl(medicalProceduresDTO.getImageUrl());

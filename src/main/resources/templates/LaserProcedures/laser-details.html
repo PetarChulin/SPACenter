@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-  <th:block th:insert="/fragments/meta"></th:block>
-  <th:block th:insert="/fragments/navigation"></th:block>
+  <th:block th:insert="~{/fragments/meta}"></th:block>
+  <th:block th:insert="~{/fragments/navigation}"></th:block>
   <meta charset="UTF-8">
   <title>Details</title>
 
@@ -11,8 +11,12 @@
 <main><h1 class="text-center" style="background-color: rgba(0,0,0, 0.46)">Product details</h1>
   <div class="container" th:object="${searched}">
     <div class="card" style="background-color: rgba(200,200,200,0.7); border-radius: 8px">
-      <div><h3 class="text-center" th:text="*{name}" style="color: ghostwhite; background-color: #23272b;
-border-top-left-radius: 8px; border-top-right-radius: 8px"></h3></div>
+        <div><h3 class="text-center" th:text="*{name}" style="color: ghostwhite; background-color: #23272b;
+            border-top-left-radius: 8px; border-top-right-radius: 8px; height: 40px"></h3>
+            <a class="btn btn-sm btn-outline-light" sec:authorize="isAuthenticated()" style="position:absolute;top:3px; right:2px;"
+               th:href="@{/comment/add/laser/{id}(id = *{id})}">
+                Leave comment</a>
+        </div>
       <span class="d-flex">
     <img class="card-img-top" style="width: 50%; height: 50%;" th:src="*{imageUrl}" alt="">
          <div class="container" style="position: relative;">

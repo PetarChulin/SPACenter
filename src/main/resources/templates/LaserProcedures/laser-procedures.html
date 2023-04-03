@@ -3,11 +3,11 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-    <th:block th:insert="/fragments/meta"></th:block>
+    <th:block th:insert="~{/fragments/meta}"></th:block>
 </head>
 <body>
 <header>
-    <th:block th:insert="/fragments/navigation"></th:block>
+    <th:block th:insert="~{/fragments/navigation}"></th:block>
 </header>
 <main><div class="bg-dark bg-opacity-75"><h1 class="text-center">Laser procedures<a
         class="btn btn-md btn-dark text-right" sec:authorize="hasAnyRole('ADMIN' , 'MODERATOR')"
@@ -20,8 +20,9 @@
                 <img th:src="*{imageUrl}" class="card-img-top">
                 <div class="card-body">
                     <p th:id="*{name}" class="card-text" th:text="*{name}"></p>
-                    <p class="card-text" th:text="|Price: *{price} &euro;|"></p>
-
+                    <p class="card-text text-right" th:text="|Price: *{price} &euro;|"></p>
+                </div>
+                <div style="position:absolute;bottom:3px; right:2px;">
                     <a class="btn btn-sm btn-outline-light mt-auto"
                        sec:authorize="isAuthenticated()" th:href="@{/laser/buy/{id}(id = *{id})}"
                     >Add to cart</a>

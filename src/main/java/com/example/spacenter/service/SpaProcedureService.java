@@ -28,6 +28,7 @@ public class SpaProcedureService {
 
         SpaProcedure spaProcedure = new SpaProcedure();
 
+        spaProcedure.setId((long) Math.floor(Math.random() * 10));
         spaProcedure.setName(spaProceduresDTO.getName());
         spaProcedure.setDescription(spaProceduresDTO.getDescription());
         spaProcedure.setImageUrl(spaProceduresDTO.getImageUrl());

@@ -36,6 +36,7 @@ public class ProceduresInitService {
         var spaRitual = new SpaProcedure();
         if (checkForExistingSpa("SPA rituals")) return;
 
+        spaRitual.setId((long) Math.floor(Math.random() * 110));
         spaRitual.setName("SPA rituals");
         spaRitual.setImageUrl("https://naturatermospa.com/wp-content/uploads/2019/09/spa-ritualai.jpg");
         spaRitual.setDescription("During SPA rituals, you will feel calm and experience unforgettable " +
@@ -50,7 +51,7 @@ public class ProceduresInitService {
         var sapropelProcedure = new MedicalProcedure();
         if (checkForExistingMedical("Sapropel procedures")) return;
 
-
+        sapropelProcedure.setId((long) Math.floor(Math.random() * 150));
         sapropelProcedure.setName("Sapropel procedures");
         sapropelProcedure.setImageUrl("https://naturatermospa.com/wp-content/uploads/2019/10/image-2-432x324.jpeg");
         sapropelProcedure.setDescription("In the Natura Termo SPA you can try unique procedures for which sapropel of 38–40 ºC temperature is used.");
@@ -63,6 +64,7 @@ public class ProceduresInitService {
         var laserProcedure = new MedicalProcedure();
         if (checkForExistingMedical("Laser Procedures and Dermatology")) return;
 
+        laserProcedure.setId((long) Math.floor(Math.random() * 140));
         laserProcedure.setName("Laser Procedures and Dermatology");
         laserProcedure.setImageUrl("https://naturatermospa.com/wp-content/uploads/2020/05/dermo-432x324.jpg");
         laserProcedure.setDescription("Feel at ease choosing laser procedures performed by professional dermatologists.");

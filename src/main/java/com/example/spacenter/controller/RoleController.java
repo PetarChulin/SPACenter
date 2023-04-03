@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Controller
@@ -44,18 +45,16 @@ public class RoleController {
 
     @PostMapping("/change/role")
     public String addRoles(@ModelAttribute("roleAddBinding") RoleDTO roleDTO,
-                           BindingResult result,
                            RedirectAttributes attributes) {
+
+        if(roleDTO.getRole().isEmpty() || Objects.equals(roleDTO.getRole(), "Please select role")) {
+            attributes.addFlashAttribute("error" , true);
+            return "redirect:/change/role";
+        }
 
         this.roleService.addRoleToUser(roleDTO.getUsername(), roleDTO.getRole());
         attributes.addFlashAttribute("changed" , "User role was changed!");
 
-        if (result.hasErrors()) {
-            attributes.addFlashAttribute("roleDTO", roleDTO);
-            attributes.addFlashAttribute("org.springframework.validation.BindingResult.roleDTO",
-                    result);
-            return "redirect:/change-role";
-        }
 
         return "redirect:/change/role";
     }

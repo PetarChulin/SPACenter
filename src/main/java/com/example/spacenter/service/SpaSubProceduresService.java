@@ -38,6 +38,7 @@ public class SpaSubProceduresService {
             return false;
         }
 
+        spaRituals.setId((long) Math.floor(Math.random() * 10));
         spaRituals.setType(spaRituals.getType());
         spaRituals.setName(spaRitualsDTO.getName());
         spaRituals.setImageUrl(spaRitualsDTO.getImageUrl());

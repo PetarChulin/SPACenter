@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<th:block th:insert="~{fragments/bootstrap}"></th:block>
+
+<head>
+    <th:block th:insert="~{fragments/meta}"></th:block>
+    <title>Sapropel procedures</title>
+
+</head>
+<body>
+<header>
+    <th:block th:insert="~{fragments/navigation}"></th:block>
+</header>
+<main>
+    <div class="bg-dark bg-opacity-75"><h1 class="text-center">Comments</h1>
+
+
+        <div class="row " style="margin: auto; background-color: rgba(90,90,100, 0.7)">
+
+            <div style="margin: auto; padding-top: 20px" th:each="p : ${comments}"
+                 th:object="${p}">
+                <div class="card bg-transparent text-bg-info text-md-center shadow-lg mb-5 rounded border-light"
+                     style="width: 60rem; height: 7rem; margin: auto">
+                    <div>
+                        <div class="card-text text-sm-left "
+                             style="background-color: #1d3248;
+                        border-top-left-radius: 6px;
+                        border-top-right-radius: 6px;
+                         height: 2.5rem">
+                            <p th:text="|Author: *{author.firstName + '  ' + 'Time created: '
+                     + createdOn}|" style="color: ghostwhite; position:absolute;top:5px; left:10px;"></p></div>
+                        <p th:text="*{name}" style="position:absolute;top:5px; right:10px;color: ghostwhite"></p>
+                    </div>
+
+                    <p class="card-text text-left text-white" th:text="*{content}" style="position:absolute;top:40px; left: 4px;"></p>
+                    <a class="btn btn-sm btn-outline-light mt-auto" sec:authorize="hasRole('ADMIN')"
+                       style="position:absolute;bottom:3px; right:2px;"
+                       th:href="@{/comment/delete/{id}(id = *{id})}">
+                        Delete comment</a>
+                <p th:if="${deleted}" class="alert alert-danger text-center">Comment was deleted!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+</body>
+</html>

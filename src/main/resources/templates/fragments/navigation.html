@@ -51,9 +51,6 @@
 
         <a class="btn btn-outline-light" sec:authorize="hasRole('USER')" href="/spa-procedures">SPA procedures</a>
 
-
-
-
         <div class="nav-item dropdown btn btn-outline-light" sec:authorize="isAuthenticated()">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                aria-expanded="false">
@@ -93,8 +90,6 @@
                href="/login">Login</a>
             <a class="btn btn-outline-light" aria-current="page" sec:authorize="!isAuthenticated()"
                href="/register">Register</a>
-
-
 
 <!--            <form class="d-flex" role="search">-->
 <!--                <button class="btn btn-outline-success" type="submit">Search</button>-->

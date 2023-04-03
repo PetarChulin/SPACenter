@@ -27,7 +27,7 @@
                 <option>Please select role</option>
             <option th:each="r : ${T(com.example.spacenter.model.entity.RoleEnum).values()}"  th:value="${r}" th:text="${r}"></option>
             </select>
-
+            <div th:if="${error != null}" class="text-danger text-center">Please select role!</div>
         <div class="input-group mb-3">
             <div class="ml-auto col-xl-8 col-lg-8 col-md-8 col-sm-7 pl-0">
                 <button type="submit" class="btn btn-primary">Change role</button>

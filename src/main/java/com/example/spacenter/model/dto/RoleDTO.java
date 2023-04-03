@@ -1,11 +1,10 @@
 package com.example.spacenter.model.dto;
 
-import jakarta.validation.constraints.NotEmpty;
 
 public class RoleDTO {
 
-    @NotEmpty(message = "Please select user")
     private String username;
+
     private String role;
 
     public RoleDTO() {

@@ -1,14 +1,18 @@
 package com.example.spacenter.model.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
+import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 @MappedSuperclass
-public abstract class BaseProcedure {
+public abstract class BaseProcedure implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false, unique = true)
@@ -23,8 +27,15 @@ public abstract class BaseProcedure {
     @Column
     private Double price;
 
+    @Column
+    private String type;
+
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<UserEntity> buyers;
+
+
+    @ManyToMany
+    private List<Comment> comments;
 
     public void addBuyer(UserEntity user) {
 
@@ -33,6 +44,15 @@ public abstract class BaseProcedure {
 
     public void removeBuyer(UserEntity user) {
         this.buyers.remove(user);
+    }
+
+    public void addComment(Comment comment) {
+
+        this.comments.add(comment);
+    }
+    public void deleteComment(Comment comment) {
+
+        this.comments.remove(comment);
     }
 
 
@@ -85,5 +105,21 @@ public abstract class BaseProcedure {
 
     public void setBuyers(Set<UserEntity> buyers) {
         this.buyers = buyers;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 }

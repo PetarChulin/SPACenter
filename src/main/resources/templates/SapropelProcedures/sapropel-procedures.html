@@ -29,8 +29,11 @@
                 <img th:src="*{imageUrl}" class="card-img-top">
                 <div class="card-body">
                     <h5 th:id="*{name}" class="card-text" th:text="*{name}"></h5>
-                    <p class="card-text" th:text="|Price: *{price} &euro;|"></p>
+                    <p class="card-text text-right" th:text="|Price: *{price} &euro;|"></p>
 
+
+                </div>
+                <div style="position:absolute;bottom:3px; right:2px;">
                     <a th:id="'Added' + *{name}" class="btn btn-sm btn-outline-light mt-auto"
                        sec:authorize="isAuthenticated()" th:href="@{/sapropel/buy/{id}(id = *{id})}"
                     >Add to cart</a>
