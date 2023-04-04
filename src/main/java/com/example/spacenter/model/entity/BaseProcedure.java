@@ -34,7 +34,7 @@ public abstract class BaseProcedure implements Serializable {
     private Set<UserEntity> buyers;
 
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Comment> comments;
 
     public void addBuyer(UserEntity user) {

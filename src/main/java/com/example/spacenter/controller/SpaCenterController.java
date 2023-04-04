@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class SpaCenterController {
 
     @GetMapping("/spa-center")
-    public String index(Model model) {
+    public String index() {
 
 
         return "spa-center";

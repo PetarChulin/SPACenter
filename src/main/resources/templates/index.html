@@ -13,14 +13,17 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
             crossorigin="anonymous"></script>
-
+    <title>Home</title>
 </head>
 <body>
 <header>
     <th:block th:insert="~{/fragments/navigation}"></th:block>
+    <th:block th:insert="~{/fragments/footer}"></th:block>
 
 </header>
-<main><h1>Welcome to Healthy Spa Center</h1>
+<main>
+
+    <h1 style="margin-top: 80px">Welcome to Healthy Spa Center</h1>
     <div class="row " style="margin: auto; background-color: rgba(204,204,215,0.7); border-radius: 6px">
         <div class="col-md-3">
             <img src="/images/spa-1.jpg" class="card-img-top border"></div>
@@ -30,8 +33,32 @@
             <img src="/images/spa-3.jpg" class="card-img-top border"></div>
         <div class="col-md-3">
             <img src="/images/spa-4.jpg" class="card-img-top border"></div>
-        <p th:text="|Your time is ${serverTime}|"></p>
     </div>
+
+
+    <div class="row " style="margin: auto; background-color: rgba(90,90,100, 0.4)">
+        <div class="col-md-3 " style="margin: auto; padding-top: 20px" th:each="p : ${list}"
+             th:object="${p}">
+            <div class="card bg-dark text-white text-md-center shadow-lg mb-5 rounded"
+                 style="width: 18rem; height: 26rem; margin: auto">
+                <img th:src="*{imageUrl}" class="card-img-top">
+                <div class="card-body">
+                    <h5 th:id="*{name}" class="card-text" th:text="*{name}"></h5>
+                    <p class="card-text text-right" th:text="|Price: *{price} &euro;|"></p>
+
+                </div>
+                <div style="position:absolute;bottom:3px; right:2px;">
+                    <a th:id="'Added' + *{name}" class="btn btn-sm btn-outline-light mt-auto"
+                       sec:authorize="isAuthenticated()" th:href="@{'/' + *{type} + '/buy/' + *{id}}"
+                    >Add to cart</a>
+                    <a class="btn btn-sm btn-outline-light mt-auto" th:href="@{'/' + *{type} + '/details/' + *{id}}">Details</a>
+                </div>
+            </div>
+            </div>
+    </div>
+
+
+
     <div id="logout" th:if="${param.logout}"  style="width: 50%; margin: auto" class="alert alert-success text-center"
     >Logged out successfully!</div>
     <div id="login" th:if="${param.login}" sec:authorize="isAuthenticated" style="width: 50%; margin: auto" class="alert alert-primary text-center"
@@ -40,6 +67,8 @@
         setTimeout(() => {
             document.querySelectorAll('div.alert').forEach(d => d.style.display = 'none')
         }, 4000);
+
+
     </script>
 </main>
 

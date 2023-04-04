@@ -26,10 +26,10 @@ public class Comment {
     @Column(name = "created_date")
     private String createdOn;
 
-    @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE })
+    @ManyToOne
     private SapropelProcedure sapropel;
 
-    @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE })
+    @ManyToOne
     private LaserProcedure laser;
 
     public Comment() {

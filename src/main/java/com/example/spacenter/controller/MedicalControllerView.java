@@ -16,12 +16,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 import static com.example.spacenter.service.CommonService.getUserId;
 
 
+//@Controller
 @Controller
 public class MedicalControllerView {
 
@@ -66,7 +68,7 @@ public class MedicalControllerView {
         return "medical-procedures";
     }
 
-//    @GetMapping(path = "/medical-procedures", consumes="application/json")
+//    @GetMapping(path = "/medical-procedures")
 //    public ResponseEntity<List<MedicalProcedure>> getAllMedical() {
 //        var procedures = this.medicalProceduresRepository.findAll();
 //

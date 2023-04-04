@@ -1,10 +1,16 @@
-<nav class="autohide navbar  navbar-expand-lg navbar-fixed-top"
+<nav class="navbar fixed-top"
      style="z-index: 1; background-color: rgba(0,0,0, 0.7); color: #9fcdff;">
-    <div class="container-fluid" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <div class="container-fluid " xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
         <a class="btn btn-outline-light" href="/home">Home</a>
-        <input id="searched" onkeyup="filter()" class="form-control me-2" style="width: 55%"
-               type="search" placeholder="filter e.g. mask"
+        <form class="d-flex" th:action="@{/home}" th:method="get">
+            <input class="form-control me-2" style="width: 100%"
+                   type="text" name="keyword" id="keyword" size="20" th:value="${keyword}"
+                   placeholder="Search..." required/>
+            <button class="btn btn-outline-primary" type="submit">Search</button>
+        </form>
+        <input id="searched" onkeyup="filter()" class="form-control me-2" style="width: 30%"
+               type="search" placeholder="Filter e.g. mask"
                aria-label="Search"/>
 
 
@@ -91,13 +97,9 @@
             <a class="btn btn-outline-light" aria-current="page" sec:authorize="!isAuthenticated()"
                href="/register">Register</a>
 
-<!--            <form class="d-flex" role="search">-->
-<!--                <button class="btn btn-outline-success" type="submit">Search</button>-->
-<!--            </form>-->
-
             <script src="/js/filter.js">
-
             </script>
+
         </div>
 
     </div>

@@ -55,15 +55,46 @@
                                name="quantity" value="1" title="Qty" size="4" inputmode="numeric">
                     </td>
                     <td th:id="'total' + *{type} + *{id}" type="number"></td>
-                    <td><a th:href="@{'/' + *{type} + '/delete/{id}'(id = *{id})}"
+                    <td><a data-toggle="modal" data-target="#deleteModal"
                            class="btn btn-outline-light">Remove</a>
                         <a th:href="@{'/' + *{type} + '/details/{id}'(id = *{id})}"
                            class="btn btn-outline-light">Details</a></td>
+
+                    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog"
+                         aria-labelledby="deleteModalLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content" style="background-color: rgba(169,37,37,0.85)">
+                                <div class="modal-header">
+                                    <h5 class="modal-title  text-light text-md-center" id="deleteModalLabel">
+                                        Remove product, are you sure!
+                                    </h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <a  class="btn btn-outline-danger" style="border-radius: 4px"
+                                       th:href="@{'/' + *{type} + '/delete/{id}'(id = *{id})}">
+                                        Remove
+                                    </a>
+                                    <a class="btn btn-outline-light" style="border-radius: 4px"
+                                       data-dismiss="modal">Cancel
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </tr>
                 </tbody>
 
 
                 <script th:inline="javascript">
+                    window.onload = () => {
+                        getTotalAmount();
+                    }
                     async function calculate() {
 
                         let itemId = [[${allOrders}]];
@@ -106,13 +137,15 @@
             </table>
 
             <div>
-                <div style="font-size: 20px; color: whitesmoke; position: absolute; bottom: 20px; right: 135px;" th:if="${allOrders.size() != 0}">Total
+                <div style="font-size: 20px; color: whitesmoke; position: absolute; bottom: 20px; right: 135px;"
+                     th:if="${allOrders.size() != 0}">Total
                     amount:
                 </div>
                 <div id="totalAmount" th:if="${allOrders.size() != 0}"
                      style="font-size: 20px; color: whitesmoke; position: absolute; bottom: 20px; right: 65px;">0.00
                 </div>
-                <button class="btn btn-lg btn-outline-light" data-toggle="modal" data-target="#buyModal" th:if="${allOrders.size() != 0}"
+                <button class="btn btn-lg btn-outline-light" data-toggle="modal" data-target="#buyModal"
+                        th:if="${allOrders.size() != 0}"
                         >Buy all
                 </button>
 
@@ -123,34 +156,39 @@
                     }, 4000);
                 </script>
 
-                <div class="modal fade" id="buyModal" tabindex="-1" role="dialog"
+                <div class="modal fade shadow-lg" id="buyModal" tabindex="-1" role="dialog"
                      aria-labelledby="exampleModalLabel"
                      aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content" style="background-color: rgba(255,255,255,0.85)">
+                    <div class="modal-dialog modal-dialog-centered rounded" role="document">
+                        <div class="modal-content" style="background-color: rgba(30,59,110,1)">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">
+                                <h5 class="modal-title" id="exampleModalLabel" style="color: whitesmoke">
                                     <th:block sec:authentication="name"></th:block>
-                                    your order includes
+                                    your order includes:
                                 </h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body" th:each="o : ${allOrders}" th:object="${o}">
-                                <p style="color: gray" th:text="|*{name}|"></p>
+                                <p class="text-white text-left" th:text="|*{name}|"></p>
                             </div>
-                            <p id="buyTotal"></p>
+                            <p id="buyTotal" class="text-white text-right"></p>
                             <div class="modal-footer">
-                                <a type="button" class="btn btn-secondary">Buy and Save order</a>
-                                <a type="button" class="btn btn-secondary" th:href="@{/delete/all}">
+                                <a  class="btn btn-outline-light">Buy and Save order</a>
+                                <a  class="btn btn-outline-light" th:href="@{/delete/all}">
                                     Only buy
-                                    <!--                                    <a th:href="@{/delete/all}">Only buy</a>-->
                                 </a>
+                                <button class="btn btn-outline-light" data-dismiss="modal" aria-label="Close">Close
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
+
+
+
+
 
                 <div  class="alert alert-danger text-center" role="alert" style="width: 40%; margin: auto"
                      th:if="${deleted}">Product was removed from cart!

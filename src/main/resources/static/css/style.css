@@ -70,6 +70,7 @@ button::selection{
 
 
 .auth-forms {
+    margin-top: 100px;
     width: 30%;
     height: 50%;
     color: #005cbf;

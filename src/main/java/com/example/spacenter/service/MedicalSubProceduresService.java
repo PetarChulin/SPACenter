@@ -15,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 import static com.example.spacenter.service.CommonService.addProcedure;
@@ -123,6 +124,7 @@ public class MedicalSubProceduresService {
         UserEntity user = getUserEntity();
         laserProcedure.removeBuyer(user);
     }
+
 
 
 }

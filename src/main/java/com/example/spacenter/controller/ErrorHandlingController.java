@@ -31,6 +31,9 @@ public class ErrorHandlingController implements ErrorController {
 
             } else if (statusCode == HttpStatus.BAD_REQUEST.value()) {
                 errorPage = "error/400";
+
+            } else if (statusCode == HttpStatus.UNSUPPORTED_MEDIA_TYPE.value()) {
+                errorPage = "error/415";
             }
         }
         return errorPage;

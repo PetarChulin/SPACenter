@@ -15,7 +15,7 @@
     <th:block th:insert="fragments/navigation"></th:block>
 </header>
 <main>
-    <div class="bg-dark bg-opacity-75"><h1 class="text-center">Sapropel procedures
+    <div class="bg-dark bg-opacity-75" style="margin-top: 80px"><h1 class="text-center">Sapropel procedures
         <a class="btn btn-md btn-dark text-center" sec:authorize="hasAnyRole('ADMIN' , 'MODERATOR')"
            th:href="@{/medical/add/sapropel}">Add procedure</a></h1></div>
 
