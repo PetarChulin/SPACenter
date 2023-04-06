@@ -10,7 +10,7 @@ import java.util.Optional;
 @Service
 public class LaserProceduresInitService {
 
-    private LaserRepository laserRepository;
+    private final LaserRepository laserRepository;
 
     public LaserProceduresInitService(LaserRepository laserRepository) {
         this.laserRepository = laserRepository;
@@ -21,6 +21,7 @@ public class LaserProceduresInitService {
         initLaserProcedure();
         initLaserProcedure2();
         initLaserProcedure3();
+        initLaserProcedure4();
     }
 
     private void initLaserProcedure() {
@@ -77,7 +78,7 @@ public class LaserProceduresInitService {
         laser3.setName("Laser wart treatment");
         laser3.setType(laser3.getType());
         laser3.setImageUrl("/images/laser/karp.jpg");
-        laser3.setDescription("aser wart treatment is a safe and effective treatment that" +
+        laser3.setDescription("Laser wart treatment is a safe and effective treatment that" +
                 " does not cause any additional side effect and do not affect the nearby tissues." +
                 " Laser treatment can also be used successfully to remove papillomas," +
                 " molluscs, condylomas or other skin formations." +
@@ -89,6 +90,23 @@ public class LaserProceduresInitService {
 
         this.laserRepository.save(laser3);
     }
+
+    public void initLaserProcedure4(){
+
+        var laser4 = new LaserProcedure();
+        if (checkForExistingLaser("Mesotherapy – facial treatment")) return;
+
+        laser4.setId((long) Math.floor(Math.random() * 250));
+        laser4.setName("Mesotherapy – facial treatment");
+        laser4.setType(laser4.getType());
+        laser4.setImageUrl("/images/laser/mesotherapy.jpeg");
+        laser4.setDescription("This is a procedure during which small amount of active substances is injected under the skin." +
+                "This prevents aging processes, restores skin elasticity and firmness.");
+        laser4.setPrice(60.00);
+
+        this.laserRepository.save(laser4);
+    };
+
 
     private boolean checkForExistingLaser(String name) {
         Optional<LaserProcedure> entityName = this.laserRepository.findByName(name);

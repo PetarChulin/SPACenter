@@ -21,6 +21,8 @@ public abstract class BaseProcedureDTO {
     @NotNull
     private String description;
 
+    private String type;
+
     public BaseProcedureDTO() {
     }
 
@@ -54,5 +56,13 @@ public abstract class BaseProcedureDTO {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

@@ -11,12 +11,12 @@
 <main>
 
   <form class="mx-auto auth-forms"
-        th:method="post" th:action="@{/comment/add/laser/{id}(id=${sId})}" th:object="${commentsDTO}">
+        th:method="post" th:action="@{/comment/add/{type}/{id}(type = ${type}, id=${sId})}" th:object="${commentsDTO}">
 
 
     <h1 class="text-center mt-2"><span class="badge badge-pill ">Comments</span></h1>
     <div class="form-floating" style="width: 400px; margin: auto">
-      <input type="text" class="form-control auth-inputs" id="floatingInput"
+      <input class="form-control auth-inputs" type="text"  id="floatingInput"
              name="content" placeholder="Write a comment..." required minlength="10" maxlength="150"
              th:field="*{content}" th:errorclass="is-invalid"/>
       <small th:if="${#fields.hasErrors('content')}" th:errors="*{content}" class="text-danger"></small>

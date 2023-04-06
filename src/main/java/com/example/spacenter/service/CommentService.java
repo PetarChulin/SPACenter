@@ -5,18 +5,20 @@ import com.example.spacenter.model.entity.BaseProcedure;
 import com.example.spacenter.model.entity.Comment;
 import com.example.spacenter.model.entity.MedicalProcedures.LaserProcedure;
 import com.example.spacenter.model.entity.MedicalProcedures.SapropelProcedure;
+import com.example.spacenter.model.entity.SpaProcedures.SpaRituals;
+import com.example.spacenter.model.entity.SpaProcedures.SpaServices;
 import com.example.spacenter.model.entity.UserEntity;
 import com.example.spacenter.repositories.CommentsRepository;
 import com.example.spacenter.repositories.MedicalSubProceduresRepos.LaserRepository;
 import com.example.spacenter.repositories.MedicalSubProceduresRepos.SapropelRepository;
-import org.modelmapper.ModelMapper;
+import com.example.spacenter.repositories.SpaSubProceduresRepos.SpaRitualsRepository;
+import com.example.spacenter.repositories.SpaSubProceduresRepos.SpaServicesRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
-import java.util.Optional;
 
 import static com.example.spacenter.service.CommonService.getUserEntity;
 import static com.example.spacenter.service.CommonService.getUserId;
@@ -29,11 +31,21 @@ public class CommentService {
 
     private LaserRepository laserRepository;
 
+    private SpaRitualsRepository spaRitualsRepository;
 
-    public CommentService(CommentsRepository commentsRepository, SapropelRepository sapropelRepository, LaserRepository laserRepository) {
+    private SpaServicesRepository spaServicesRepository;
+
+
+    public CommentService(CommentsRepository commentsRepository,
+                          SapropelRepository sapropelRepository,
+                          LaserRepository laserRepository,
+                          SpaRitualsRepository spaRitualsRepository,
+                          SpaServicesRepository spaServicesRepository) {
         this.commentsRepository = commentsRepository;
         this.sapropelRepository = sapropelRepository;
         this.laserRepository = laserRepository;
+        this.spaRitualsRepository = spaRitualsRepository;
+        this.spaServicesRepository = spaServicesRepository;
     }
 
 
@@ -55,10 +67,26 @@ public class CommentService {
     }
 
     @Transactional
+    public void createSpaRitualComment(CommentsDTO commentsDTO, Long id) {
+
+        SpaRituals procedure = this.spaRitualsRepository.getById(id);
+        String procedureName = procedure.getName();
+        commentAdd(commentsDTO, procedure, procedureName);
+
+    }
+
+    @Transactional
+    public void createSpaServiceComment(CommentsDTO commentsDTO, Long id) {
+
+        SpaServices procedure = this.spaServicesRepository.getById(id);
+        String procedureName = procedure.getName();
+        commentAdd(commentsDTO, procedure, procedureName);
+
+    }
+
+    @Transactional
     public void deleteComment(Long id) {
 
-//        SapropelProcedure sapropelProcedure = this.sapropelRepository.findById(id).get();
-//        Comment comment = this.commentsRepository.findById(id).get();
         this.commentsRepository.deleteById(id);
     }
 

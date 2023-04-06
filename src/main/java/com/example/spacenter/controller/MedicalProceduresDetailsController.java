@@ -27,7 +27,7 @@ public class MedicalProceduresDetailsController {
     public ModelAndView sapropelDetails(@PathVariable Long id, ModelAndView model) {
 
         SapropelProcedure searched = this.sapropelRepository.findById(id).orElseThrow();
-        model.setViewName("SapropelProcedures/sapropel-details");
+        model.setViewName("details");
         model.addObject("searched" , searched);
 
         return model;
@@ -37,7 +37,7 @@ public class MedicalProceduresDetailsController {
     public ModelAndView laserDetails(@PathVariable Long id, ModelAndView model) {
 
         LaserProcedure searched = this.laserRepository.findById(id).orElseThrow();
-        model.setViewName("LaserProcedures/laser-details");
+        model.setViewName("details");
         model.addObject("searched" , searched);
 
         return model;

@@ -3,28 +3,27 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.w3.org/1999/xhtml">
 
-<th:block th:insert="fragments/bootstrap"></th:block>
+<th:block th:insert="~{fragments/bootstrap}"></th:block>
 
 <head>
-    <th:block th:insert="fragments/meta"></th:block>
+    <th:block th:insert="~{fragments/meta}"></th:block>
     <title>SPA rituals</title>
 
 </head>
 <body>
 <header>
-    <th:block th:insert="fragments/navigation"></th:block>
+    <th:block th:insert="~{fragments/navigation}"></th:block>
 </header>
 <main>
-    <div style="margin-top: 80px"><h1 class="text-center">SPA rituals
+    <div style="margin-top: 80px"><h1 class="text-center">SPA services
         <a class="btn btn-md btn-dark text-center" sec:authorize="hasAnyRole('ADMIN' , 'MODERATOR')"
-           th:href="@{/spa/add/spa-rituals}">Add procedure</a></h1></div>
+           th:href="@{/spa/add/spa-services}">Add procedure</a></h1></div>
 
 
     <div class="row " style="margin: auto; background-color: rgba(90,90,100, 0.7)">
 
-        <div class="col-md-3 " style="margin: auto; padding-top: 20px" th:each="p : ${spaRituals}" th:object="${p}">
-            <div class="card bg-dark text-white text-md-center box1 rounded"
-                 style="width: 18rem; height: 26rem; margin: auto">
+        <div class="col-md-3 " style="margin: auto; padding-top: 20px" th:each="p : ${spaServices}" th:object="${p}">
+            <div class="card bg-dark text-white text-md-center box1 rounded" style="width: 18rem; height: 26rem; margin: auto">
                 <img th:src="*{imageUrl}" class="card-img-top">
                 <div class="card-body">
                     <h5 th:id="*{name}" class="card-text" th:text="*{name}"></h5>
@@ -35,10 +34,9 @@
                            sec:authorize="isAuthenticated()" th:href="@{/delete/{id}(id = *{id})}"
                         >Delete</a>
                         <a class="btn btn-sm btn-outline-light mt-auto"
-                           sec:authorize="isAuthenticated()" th:href="@{/spa-rituals/buy/{id}(id = *{id})}"
+                           sec:authorize="isAuthenticated()" th:href="@{/spa-services/buy/{id}(id = *{id})}"
                         >Add to cart</a>
-                        <a class="btn btn-sm btn-outline-light mt-auto"
-                           th:href="@{/spa-rituals/details/{id}(id = *{id})}">Details</a>
+                        <a class="btn btn-sm btn-outline-light mt-auto" th:href="@{/spa-services/details/{id}(id = *{id})}">Details</a>
                     </div>
                 </div>
             </div>
@@ -52,20 +50,17 @@
 
         </div>
 
-        <ul class="pagination justify-content-center" style="margin-top: 20px" th:if="${!spaRituals.isEmpty()}">
+        <ul class="pagination justify-content-center" style="margin-top: 20px" th:if="${!spaServices.isEmpty()}">
             <div style="width: 40%; margin: auto">
-                <div id="warning" class="alert alert-warning text-center shadow-lg" role="alert"
-                     th:if="${alreadyInCart}">Already
+                <div id="warning" class="alert alert-warning text-center shadow-lg" role="alert" th:if="${alreadyInCart}">Already
                     in cart!
                 </div>
-                <div id="success" class="alert alert-success text-center shadow-lg" role="alert" th:if="${added}">
-                    Product added to cart!
+                <div id="success" class="alert alert-success text-center shadow-lg" role="alert" th:if="${added}">Product added to cart!
                 </div>
             </div>
             <div th:each="i: ${#numbers.sequence(1, totalPages)}">
                 <li class="page-item">
-                    <a class="btn btn-lg btn-outline-light"
-                       th:href="@{'/SPARituals/spa-rituals?size=4&page=' + ${i - 1}}">[[${i}]]</a>
+                    <a class="btn btn-lg btn-outline-light" th:href="@{'/SPACenter/spa-center?size=4&page=' + ${i - 1}}">[[${i}]]</a>
                 </li>
             </div>
         </ul>

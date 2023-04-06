@@ -80,7 +80,6 @@ public class MedicalControllerView {
     @GetMapping("/SapropelProcedures/sapropel-procedures")
     public String sapropel(Model model, @PageableDefault(sort = "name", size = 4) Pageable pageable) {
 
-
         var procedures = medicalSubProceduresService.getAllSapropel(pageable);
 
         model.addAttribute("sapropelProcedures" , procedures);
@@ -92,9 +91,7 @@ public class MedicalControllerView {
     @GetMapping("LaserProcedures/laser-procedures")
     public String laser(Model model, @PageableDefault(sort = "name", size = 4) Pageable pageable) {
 
-
         var procedures = medicalSubProceduresService.getAllLaser(pageable);
-
 
         model.addAttribute("laserProcedures" , procedures);
         model.addAttribute("totalPages" , procedures.getTotalPages());
@@ -103,25 +100,6 @@ public class MedicalControllerView {
         return "LaserProcedures/laser-procedures";
     }
 
-    @GetMapping("TherapyProcedures/therapy-procedures")
-    public String therapy (Model model) {
-
-//        List<MedicalProcedure> procedures = this.medicalProceduresRepository.findAll();
-//
-//        model.addAttribute("sapropel-procedures" , procedures);
-
-        return "TherapyProcedures/therapy-procedures";
-    }
-
-    @GetMapping("ParaffinProcedures/paraffin-procedures")
-    public String paraffin(Model model) {
-
-//        List<MedicalProcedure> procedures = this.medicalProceduresRepository.findAll();
-//
-//        model.addAttribute("sapropel-procedures" , procedures);
-
-        return "ParaffinProcedures/paraffin-procedures";
-    }
 
 
 }

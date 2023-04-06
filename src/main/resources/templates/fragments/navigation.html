@@ -4,11 +4,12 @@
 
         <a class="btn btn-outline-light" href="/home">Home</a>
         <form class="d-flex" th:action="@{/home}" th:method="get">
-            <input class="form-control me-2" style="width: 100%"
-                   type="text" name="keyword" id="keyword" size="20" th:value="${keyword}"
+            <input id="keyword" class="form-control me-2" style="width: 100%"
+                   type="text" name="keyword" size="20" th:value="${keyword}"
                    placeholder="Search..." required/>
             <button class="btn btn-outline-primary" type="submit">Search</button>
         </form>
+
         <input id="searched" onkeyup="filter()" class="form-control me-2" style="width: 30%"
                type="search" placeholder="Filter e.g. mask"
                aria-label="Search"/>

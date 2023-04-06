@@ -9,20 +9,23 @@
 <header>
     <th:block th:insert="~{/fragments/navigation}"></th:block>
 </header>
-<main><div class="bg-dark bg-opacity-75" style="margin-top: 80px"><h1 class="text-center">Laser procedures<a
+<main><div style="margin-top: 80px"><h1 class="text-center">Laser procedures<a
         class="btn btn-md btn-dark text-right" sec:authorize="hasAnyRole('ADMIN' , 'MODERATOR')"
         th:href="@{/medical/add/laser}">Add procedure</a></h1></div>
     </h1>
     <div class="row " style="margin: auto; background-color: rgba(90,90,100, 0.7)">
 
         <div class="col-md-3 " style="margin: auto; padding-top: 20px" th:each="p : ${laserProcedures}" th:object="${p}">
-            <div class="card bg-dark text-white text-md-center shadow-lg mb-5 rounded" style="width: 18rem; height: 26rem; margin: auto">
+            <div class="card bg-dark text-white text-md-center box1 rounded" style="width: 18rem; height: 26rem; margin: auto">
                 <img th:src="*{imageUrl}" class="card-img-top">
                 <div class="card-body">
                     <p th:id="*{name}" class="card-text" th:text="*{name}"></p>
                     <p class="card-text text-right" th:text="|Price: *{price} &euro;|"></p>
                 </div>
-                <div style="position:absolute;bottom:3px; right:2px;">
+                <div style="position:absolute;bottom:6px; right:6px;">
+                    <a class="btn btn-sm btn-outline-light mt-auto"
+                       sec:authorize="isAuthenticated()" th:href="@{/delete/{id}(id = *{id})}"
+                    >Delete</a>
                     <a class="btn btn-sm btn-outline-light mt-auto"
                        sec:authorize="isAuthenticated()" th:href="@{/laser/buy/{id}(id = *{id})}"
                     >Add to cart</a>

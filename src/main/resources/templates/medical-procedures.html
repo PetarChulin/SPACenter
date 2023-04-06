@@ -24,7 +24,7 @@
     <h1 class="text-center">Medical procedures</h1>
     <div class="row">
         <div class="col-md-3" style="margin: auto;" th:each="p :  ${mprocedures}" th:object="${p}">
-            <div class="card box-shadow bg-dark" style="width: 18rem; height: 30rem">
+            <div class="card box-shadow bg-dark box3" style="width: 18rem; height: 30rem">
                 <img th:src="*{imageUrl}" class="card-img-top">
                 <div class="card-body d-flex flex-column text-white">
                     <h5 class="card-title text-center" th:text="*{name}"></h5>

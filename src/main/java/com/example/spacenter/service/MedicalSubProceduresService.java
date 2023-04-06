@@ -1,10 +1,13 @@
 package com.example.spacenter.service;
 
+import com.example.spacenter.model.dto.BaseProcedureDTO;
 import com.example.spacenter.model.dto.MedicalProcedureDTO.LaserProceduresDTO;
 import com.example.spacenter.model.dto.MedicalProcedureDTO.SapropelProceduresDTO;
 import com.example.spacenter.model.entity.BaseProcedure;
 import com.example.spacenter.model.entity.MedicalProcedures.LaserProcedure;
 import com.example.spacenter.model.entity.MedicalProcedures.SapropelProcedure;
+import com.example.spacenter.model.entity.SpaProcedures.SpaRituals;
+import com.example.spacenter.model.entity.SpaProcedures.SpaServices;
 import com.example.spacenter.model.entity.UserEntity;
 import com.example.spacenter.repositories.MedicalSubProceduresRepos.LaserRepository;
 import com.example.spacenter.repositories.MedicalSubProceduresRepos.SapropelRepository;
@@ -18,8 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-import static com.example.spacenter.service.CommonService.addProcedure;
-import static com.example.spacenter.service.CommonService.getUserEntity;
+import static com.example.spacenter.service.CommonService.*;
 
 @Service
 public class MedicalSubProceduresService {
@@ -49,17 +51,13 @@ public class MedicalSubProceduresService {
         if (findByName.isPresent()) {
             return true;
         }
-        sapropelProcedure.setId((long) Math.floor(Math.random() * 10));
-        sapropelProcedure.setType(sapropelProcedure.getType());
-        sapropelProcedure.setName(sapropelProceduresDTO.getName());
-        sapropelProcedure.setImageUrl(sapropelProceduresDTO.getImageUrl());
-        sapropelProcedure.setDescription(sapropelProceduresDTO.getDescription());
-        sapropelProcedure.setPrice(sapropelProceduresDTO.getPrice());
-
+        setProperties(sapropelProceduresDTO, sapropelProcedure);
         this.sapropelRepository.save(sapropelProcedure);
 
         return true;
     }
+
+
 
 
     @Transactional
@@ -95,13 +93,7 @@ public class MedicalSubProceduresService {
         if (findByName.isPresent()) {
             return false;
         }
-        laserProcedure.setId((long) Math.floor(Math.random() * 10));
-        laserProcedure.setType(laserProcedure.getType());
-        laserProcedure.setName(laserProceduresDTO.getName());
-        laserProcedure.setImageUrl(laserProceduresDTO.getImageUrl());
-        laserProcedure.setPrice(laserProceduresDTO.getPrice());
-        laserProcedure.setDescription(laserProceduresDTO.getDescription());
-
+        setProperties(laserProceduresDTO, laserProcedure);
         this.laserRepository.save(laserProcedure);
 
         return true;
@@ -125,6 +117,13 @@ public class MedicalSubProceduresService {
         laserProcedure.removeBuyer(user);
     }
 
-
+    private static void setProperties(BaseProcedureDTO baseProcedureDTO, BaseProcedure baseProcedure) {
+        baseProcedure.setId((long) Math.floor(Math.random() * 10));
+        baseProcedure.setType(baseProcedure.getType());
+        baseProcedure.setName(baseProcedureDTO.getName());
+        baseProcedure.setImageUrl(baseProcedureDTO.getImageUrl());
+        baseProcedure.setDescription(baseProcedureDTO.getDescription());
+        baseProcedure.setPrice(baseProcedureDTO.getPrice());
+    }
 
 }

@@ -15,7 +15,7 @@
     <th:block th:insert="fragments/navigation"></th:block>
 </header>
 <main>
-    <div class="bg-dark bg-opacity-75" style="margin-top: 80px"><h1 class="text-center">Sapropel procedures
+    <div style="margin-top: 80px"><h1 class="text-center">Sapropel procedures
         <a class="btn btn-md btn-dark text-center" sec:authorize="hasAnyRole('ADMIN' , 'MODERATOR')"
            th:href="@{/medical/add/sapropel}">Add procedure</a></h1></div>
 
@@ -24,16 +24,18 @@
 
         <div class="col-md-3 " style="margin: auto; padding-top: 20px" th:each="p : ${sapropelProcedures}"
              th:object="${p}">
-            <div class="card bg-dark text-white text-md-center shadow-lg mb-5 rounded"
+            <div class="card bg-dark text-white text-md-center rounded box1"
                  style="width: 18rem; height: 26rem; margin: auto">
                 <img th:src="*{imageUrl}" class="card-img-top">
                 <div class="card-body">
                     <h5 th:id="*{name}" class="card-text" th:text="*{name}"></h5>
                     <p class="card-text text-right" th:text="|Price: *{price} &euro;|"></p>
 
-
                 </div>
-                <div style="position:absolute;bottom:3px; right:2px;">
+                <div style="position:absolute;bottom:6px; right:6px;">
+                    <a class="btn btn-sm btn-outline-light mt-auto"
+                       sec:authorize="isAuthenticated()" th:href="@{/delete/{id}(id = *{id})}"
+                    >Delete</a>
                     <a th:id="'Added' + *{name}" class="btn btn-sm btn-outline-light mt-auto"
                        sec:authorize="isAuthenticated()" th:href="@{/sapropel/buy/{id}(id = *{id})}"
                     >Add to cart</a>

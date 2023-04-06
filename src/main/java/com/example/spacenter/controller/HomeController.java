@@ -29,26 +29,20 @@ public class HomeController {
     private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
 
-//    @RequestMapping(value = "/home", method = RequestMethod.GET)
-//    public String home(Locale locale, Model model) {
-//        logger.info("Welcome to Healthy Spa Center homepage! Your locale is {}.", locale);
-//
-//        try {
-//            Thread.sleep(1000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        Date date = new Date();
-//        DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-//
-//        String formattedDate = dateFormat.format(date);
-//
-//        model.addAttribute("serverTime", formattedDate );
-//        return "index";
-//    }
+    @RequestMapping(value = "/home", method = RequestMethod.GET)
+    public String home(Locale locale, Model model, String keyword) {
+        logger.info("Welcome to Healthy Spa Center homepage! Your locale is {}.", locale);
 
-    @RequestMapping(path = {"/home"})
-    public String home(Model model, String keyword) {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Date date = new Date();
+        DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+        String formattedDate = dateFormat.format(date);
+        model.addAttribute("serverTime", formattedDate );
+
         if (keyword != null) {
             List<Object> list = service.findByKeyword(keyword);
             model.addAttribute("list", list);
@@ -57,4 +51,16 @@ public class HomeController {
         }
         return "index";
     }
+
+
+//    @RequestMapping(path = {"/home"})
+//    public String home(Model model, String keyword) {
+//        if (keyword != null) {
+//            List<Object> list = service.findByKeyword(keyword);
+//            model.addAttribute("list", list);
+//        } else {
+//            model.addAttribute("list", null);
+//        }
+//        return "index";
+//    }
 }

@@ -1,8 +1,11 @@
 package com.example.spacenter.controller;
 
+import com.example.spacenter.model.dto.BaseProcedureDTO;
 import com.example.spacenter.model.dto.MedicalProcedureDTO.LaserProceduresDTO;
 import com.example.spacenter.model.dto.MedicalProcedureDTO.SapropelProceduresDTO;
 import com.example.spacenter.model.dto.MedicalProceduresDTO;
+import com.example.spacenter.model.entity.MedicalProcedures.LaserProcedure;
+import com.example.spacenter.model.entity.MedicalProcedures.SapropelProcedure;
 import com.example.spacenter.repositories.MedicalProceduresRepository;
 import com.example.spacenter.repositories.MedicalSubProceduresRepos.SapropelRepository;
 import com.example.spacenter.repositories.UserRepository;
@@ -11,6 +14,7 @@ import com.example.spacenter.service.MedicalProcedureService;
 import com.example.spacenter.service.MedicalSubProceduresService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -39,34 +43,40 @@ public class MedicalControllerAdd {
     }
 
     @ModelAttribute("medicalProceduresDTO")
-    public MedicalProceduresDTO initMedicalProceduresDTO(){return new MedicalProceduresDTO();}
+    public MedicalProceduresDTO initMedicalProceduresDTO() {
+        return new MedicalProceduresDTO();
+    }
 
     @ModelAttribute("sapropelProceduresDTO")
-    public SapropelProceduresDTO initSapropelProceduresDTO(){return new SapropelProceduresDTO();}
+    public SapropelProceduresDTO initSapropelProceduresDTO() {
+        return new SapropelProceduresDTO();
+    }
 
     @ModelAttribute("laserProceduresDTO")
-    public LaserProceduresDTO initLaserProceduresDTO(){return new LaserProceduresDTO();}
+    public LaserProceduresDTO initLaserProceduresDTO() {
+        return new LaserProceduresDTO();
+    }
 
     @GetMapping("/medical/add")
     public String add() {
-
-
         return "add-medical-procedures";
-
     }
 
     @GetMapping("/medical/add/sapropel")
-    public String sapropel() {
-
+    public String sapropel(Model model) {
+        SapropelProcedure procedure = new SapropelProcedure();
+        String type = procedure.getType();
+        model.addAttribute("common" , "medical");
+        model.addAttribute("type",type);
         return "add-sapropel-procedures";
-
     }
 
     @GetMapping("/medical/add/laser")
-    public String laser() {
-
-
-
+    public String laser(Model model) {
+        LaserProcedure procedure = new LaserProcedure();
+        String type = procedure.getType();
+        model.addAttribute("common" , "medical");
+        model.addAttribute("type",type);
         return "add-laser-procedures";
 
     }
@@ -74,7 +84,7 @@ public class MedicalControllerAdd {
     @PostMapping("/medical/add")
     public String medicals(@Valid MedicalProceduresDTO medicalProceduresDTO,
                            BindingResult result,
-                           RedirectAttributes attributes){
+                           RedirectAttributes attributes) {
 
         if (result.hasErrors() || !this.medicalProcedureService.add(medicalProceduresDTO)) {
             attributes.addFlashAttribute("medicalProceduresDTO", medicalProceduresDTO);
@@ -91,8 +101,8 @@ public class MedicalControllerAdd {
     @PostMapping("/medical/add/sapropel")
 
     public String addSapropel(@Valid SapropelProceduresDTO sapropelProceduresDTO,
-                           BindingResult result,
-                           RedirectAttributes attributes){
+                              BindingResult result,
+                              RedirectAttributes attributes) {
 
         if (result.hasErrors() || !this.medicalSubProceduresService.addSapropelProcedure(sapropelProceduresDTO)) {
             attributes.addFlashAttribute("sapropelProceduresDTO", sapropelProceduresDTO);
@@ -106,8 +116,8 @@ public class MedicalControllerAdd {
 
     @PostMapping("/medical/add/laser")
     public String addLaser(@Valid LaserProceduresDTO laserProceduresDTO,
-                              BindingResult result,
-                              RedirectAttributes attributes){
+                           BindingResult result,
+                           RedirectAttributes attributes) {
 
         if (result.hasErrors() || !this.medicalSubProceduresService.addLaserProcedure(laserProceduresDTO)) {
             attributes.addFlashAttribute("laserProceduresDTO", laserProceduresDTO);

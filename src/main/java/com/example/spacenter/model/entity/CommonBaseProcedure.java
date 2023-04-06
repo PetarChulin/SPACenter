@@ -2,9 +2,8 @@ package com.example.spacenter.model.entity;
 
 import jakarta.persistence.*;
 
-@Entity
-@Table(name = "spa_services")
-public class SpaCenter {
+@MappedSuperclass
+public abstract class CommonBaseProcedure {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,11 +18,6 @@ public class SpaCenter {
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    @Column
-    private Double price;
-
-    public SpaCenter() {
-    }
 
     public Long getId() {
         return id;
@@ -57,12 +51,5 @@ public class SpaCenter {
         this.description = description;
     }
 
-    public Double getPrice() {
-        return price;
-    }
 
-    public void setPrice(Double price) {
-        this.price = price;
-    }
 }
-

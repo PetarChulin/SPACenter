@@ -23,8 +23,10 @@
 </header>
 <main>
 
-    <h1 style="margin-top: 80px">Welcome to Healthy Spa Center</h1>
-    <div class="row " style="margin: auto; background-color: rgba(204,204,215,0.7); border-radius: 6px">
+    <section class="fixed-top" style="z-index: -1; margin-top: 80px">
+
+    <h1 >Welcome to Healthy Spa Center</h1>
+    <div class="row" style="background-color: rgba(204,204,215,0.7); border-radius: 6px">
         <div class="col-md-3">
             <img src="/images/spa-1.jpg" class="card-img-top border"></div>
         <div class="col-md-3">
@@ -34,13 +36,13 @@
         <div class="col-md-3">
             <img src="/images/spa-4.jpg" class="card-img-top border"></div>
     </div>
-
+    </section>
 
     <div class="row " style="margin: auto; background-color: rgba(90,90,100, 0.4)">
-        <div class="col-md-3 " style="margin: auto; padding-top: 20px" th:each="p : ${list}"
+        <div class="col-md-3" style="margin-top: 80px; padding-top: 20px" th:each="p : ${list}"
              th:object="${p}">
-            <div class="card bg-dark text-white text-md-center shadow-lg mb-5 rounded"
-                 style="width: 18rem; height: 26rem; margin: auto">
+            <div class="card bg-dark text-white text-md-center rounded  box1"
+                 style="width: 18rem; height: 26rem; margin: auto;">
                 <img th:src="*{imageUrl}" class="card-img-top">
                 <div class="card-body">
                     <h5 th:id="*{name}" class="card-text" th:text="*{name}"></h5>
@@ -59,9 +61,9 @@
 
 
 
-    <div id="logout" th:if="${param.logout}"  style="width: 50%; margin: auto" class="alert alert-success text-center"
+    <div id="logout" th:if="${param.logout}"  style="width: 50%; margin-top: 80px" class="alert alert-success text-center"
     >Logged out successfully!</div>
-    <div id="login" th:if="${param.login}" sec:authorize="isAuthenticated" style="width: 50%; margin: auto" class="alert alert-primary text-center"
+    <div id="login" th:if="${param.login}" sec:authorize="isAuthenticated" style="width: 50%; margin-top: 80px" class="alert alert-primary text-center"
     >Login successfully!</div>
     <script>
         setTimeout(() => {

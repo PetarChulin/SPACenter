@@ -29,20 +29,36 @@ public class ProceduresInitService {
 
     @PostConstruct
     private void initSpaProcedures() {
+
         initSpaRituals();
+        initSpaCenterServices();
     }
 
     private void initSpaRituals() {
         var spaRitual = new SpaProcedure();
         if (checkForExistingSpa("SPA rituals")) return;
 
-        spaRitual.setId((long) Math.floor(Math.random() * 110));
+        spaRitual.setId((long) Math.floor(Math.random() * 120));
         spaRitual.setName("SPA rituals");
         spaRitual.setImageUrl("https://naturatermospa.com/wp-content/uploads/2019/09/spa-ritualai.jpg");
         spaRitual.setDescription("During SPA rituals, you will feel calm and experience unforgettable " +
                 "moments in which beauty and harmony prevail.");
 
         this.spaProceduresRepository.save(spaRitual);
+
+    }
+
+    private void initSpaCenterServices() {
+        var spaServices = new SpaProcedure();
+        if (checkForExistingSpa("SPA center")) return;
+
+        spaServices.setId((long) Math.floor(Math.random() * 110));
+        spaServices.setName("SPA center");
+        spaServices.setImageUrl("/images/spa_center/hammam.jpg");
+        spaServices.setDescription("The SPA centre invites you to the kingdom of beauty." +
+                "Try out the exclusive SPA services.");
+
+        this.spaProceduresRepository.save(spaServices);
 
     }
 

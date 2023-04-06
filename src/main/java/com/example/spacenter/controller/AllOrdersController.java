@@ -94,4 +94,22 @@ public class AllOrdersController {
 
         return "redirect:/cart";
     }
+
+    @GetMapping("/spa-services/buy/{id}")
+    public String buySpaService(@PathVariable Long id, RedirectAttributes attributes) {
+
+        spaSubProceduresService.addSpaServiceToCart(id);
+        checkForAvailability(attributes);
+
+        return "redirect:/SPACenter/spa-center";
+    }
+
+    @GetMapping("/spa-services/delete/{id}")
+    public String removeSpaService(@PathVariable Long id, RedirectAttributes attributes) {
+
+        spaSubProceduresService.deleteSpaServiceFromCart(id);
+        attributes.addFlashAttribute("deleted" , true);
+
+        return "redirect:/cart";
+    }
 }

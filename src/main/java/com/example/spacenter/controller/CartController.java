@@ -4,9 +4,11 @@ import com.example.spacenter.model.entity.Counter;
 import com.example.spacenter.model.entity.MedicalProcedures.LaserProcedure;
 import com.example.spacenter.model.entity.MedicalProcedures.SapropelProcedure;
 import com.example.spacenter.model.entity.SpaProcedures.SpaRituals;
+import com.example.spacenter.model.entity.SpaProcedures.SpaServices;
 import com.example.spacenter.repositories.MedicalSubProceduresRepos.LaserRepository;
 import com.example.spacenter.repositories.MedicalSubProceduresRepos.SapropelRepository;
 import com.example.spacenter.repositories.SpaSubProceduresRepos.SpaRitualsRepository;
+import com.example.spacenter.repositories.SpaSubProceduresRepos.SpaServicesRepository;
 import com.example.spacenter.service.CartService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,13 +28,16 @@ public class CartController {
     private LaserRepository laserRepository;
     private SpaRitualsRepository spaRitualsRepository;
 
+    private SpaServicesRepository spaServicesRepository;
+
     private CartService cartService;
 
     public CartController(SapropelRepository sapropelRepository, LaserRepository laserRepository,
-                          SpaRitualsRepository spaRitualsRepository, CartService cartService) {
+                          SpaRitualsRepository spaRitualsRepository, SpaServicesRepository spaServicesRepository, CartService cartService) {
         this.sapropelRepository = sapropelRepository;
         this.laserRepository = laserRepository;
         this.spaRitualsRepository = spaRitualsRepository;
+        this.spaServicesRepository = spaServicesRepository;
         this.cartService = cartService;
     }
 
@@ -45,11 +50,13 @@ public class CartController {
         List<SapropelProcedure> sapropelOrders = this.sapropelRepository.findByBuyers_Id(userId);
         List<LaserProcedure> laserOrders = this.laserRepository.findByBuyers_Id(userId);
         List<SpaRituals> spaRitualsOrders = this.spaRitualsRepository.findByBuyers_Id(userId);
+        List<SpaServices> spaServicesOrders = this.spaServicesRepository.findByBuyers_Id(userId);
 
         List<Object> allOrders = new ArrayList<>();
         allOrders.addAll(sapropelOrders);
         allOrders.addAll(laserOrders);
         allOrders.addAll(spaRitualsOrders);
+        allOrders.addAll(spaServicesOrders);
 
 
         int countOfSapropelOrders = sapropelOrders.size();
@@ -61,6 +68,7 @@ public class CartController {
         model.addAttribute("sapropelOrders", sapropelOrders);
         model.addAttribute("laserOrders", laserOrders);
         model.addAttribute("spaRitualsOrders", spaRitualsOrders);
+        model.addAttribute("spaServicesOrders", spaRitualsOrders);
 //        model.addAttribute("totalPrice", totalPrice);
         model.addAttribute("counter", new Counter());
         model.addAttribute("allOrders", allOrders);
@@ -69,10 +77,9 @@ public class CartController {
     }
 
     @GetMapping("/delete/all")
-    public String deleteAllFromCart(RedirectAttributes attributes) {
+    public String deleteAllFromCart() {
 
         this.cartService.deleteAllFromUserCart();
-
 
         return "redirect:/cart";
     }

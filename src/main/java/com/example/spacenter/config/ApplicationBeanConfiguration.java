@@ -32,13 +32,13 @@ public class ApplicationBeanConfiguration {
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                 .requestMatchers("/", "/home", "/register", "/medical-procedures", "/spa-procedures",
                         "/sapropel/details/**",
-                        "/laser/details/**", "/spa-rituals/details/**",
-                        "/SapropelProcedures/**", "/SPARituals/spa-rituals",
+                        "/laser/details/**", "/spa-rituals/details/**", "/spa-services/details/**",
+                        "/SapropelProcedures/**", "/SPARituals/spa-rituals", "/SPACenter/spa-center",
                         "/LaserProcedures/laser-procedures", "/LaserProcedures/laser/details/**").permitAll()
                 .requestMatchers("/logout", "/cart", "/sapropel/buy/**", "/sapropel/delete/**", "/comment/add/**",
-                        "/laser/buy/**", "/laser/delete/**", "/delete/all", "/change/username").authenticated()
+                       "/spa-services/**", "/spa-rituals/**", "/laser/buy/**", "/laser/delete/**", "/delete/all", "/change/username").authenticated()
                 .requestMatchers("/").hasRole(RoleEnum.USER.name())
-                .requestMatchers("/medical/add/**", "/laser/add/**", "/spa/add/**")
+                .requestMatchers("/medical/add/**", "/laser/add/**", "/spa/add/**", "/delete/**")
                 .hasAnyRole(RoleEnum.ADMIN.name(), RoleEnum.MODERATOR.name())
                 .requestMatchers("/change/role", "comment/delete/**").hasRole(RoleEnum.ADMIN.name())
                 .anyRequest().authenticated()
