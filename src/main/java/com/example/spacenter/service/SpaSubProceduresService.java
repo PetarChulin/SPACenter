@@ -15,8 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
-import static com.example.spacenter.service.CommonService.addProcedure;
-import static com.example.spacenter.service.CommonService.getUserId;
+import static com.example.spacenter.service.CommonService.*;
 
 @Service
 public class SpaSubProceduresService {
@@ -43,13 +42,7 @@ public class SpaSubProceduresService {
             return false;
         }
 
-        spaRituals.setId((long) Math.floor(Math.random() * 10));
-        spaRituals.setType(spaRituals.getType());
-        spaRituals.setName(spaRitualsDTO.getName());
-        spaRituals.setImageUrl(spaRitualsDTO.getImageUrl());
-        spaRituals.setDescription(spaRitualsDTO.getDescription());
-        spaRituals.setPrice(spaRitualsDTO.getPrice());
-
+        setProperties(spaRitualsDTO, spaRituals);
         this.spaRitualsRepository.save(spaRituals);
 
         return true;
@@ -64,13 +57,7 @@ public class SpaSubProceduresService {
             return false;
         }
 
-        spaServices.setId((long) Math.floor(Math.random() * 20));
-        spaServices.setType(spaServices.getType());
-        spaServices.setName(spaServicesDTO.getName());
-        spaServices.setImageUrl(spaServicesDTO.getImageUrl());
-        spaServices.setDescription(spaServicesDTO.getDescription());
-        spaServices.setPrice(spaServicesDTO.getPrice());
-
+        setProperties(spaServicesDTO, spaServices);
         this.spaServicesRepository.save(spaServices);
 
         return true;
@@ -79,6 +66,7 @@ public class SpaSubProceduresService {
     public Page<SpaRituals> getAllSpaRituals(Pageable pageable) {
         return spaRitualsRepository.findAll(pageable);
     }
+
     public Page<SpaServices> getAllSpaServices(Pageable pageable) {
         return spaServicesRepository.findAll(pageable);
     }
@@ -111,6 +99,7 @@ public class SpaSubProceduresService {
         addProcedure(spaServices, user);
 
     }
+
     @Transactional
     public void deleteSpaServiceFromCart(Long id) {
 

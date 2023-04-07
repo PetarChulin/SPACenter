@@ -7,7 +7,6 @@ import jakarta.persistence.*;
 @Table(name = "spa_services")
 public class SpaServices extends BaseProcedure {
 
-
     @Column
     private String type = "spa-services";
 

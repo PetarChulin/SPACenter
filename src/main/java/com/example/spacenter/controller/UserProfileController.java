@@ -49,22 +49,23 @@ public class UserProfileController {
 
         return "profile";
     }
+
     @PostMapping("/change/username")
     public String changeUsername(UserEntity entity,
                                  RedirectAttributes attributes,
                                  ChangePasswordDTO changePasswordDTO) {
 
-        if(!changePasswordDTO.getPassword().equals(changePasswordDTO.getRepeatPassword())) {
+        if (!changePasswordDTO.getPassword().equals(changePasswordDTO.getRepeatPassword())) {
             attributes.addFlashAttribute("mismatched", "Passwords mismatched");
         } else {
 
             Long userId = getUserId();
-        this.userProfileService.updateUsername(userId , entity.getUsername());
+            this.userProfileService.updateUsername(userId, entity.getUsername());
             this.userProfileService.updatePassword(userId, passwordEncoder.encode(entity.getPassword()));
             attributes.addFlashAttribute("message", "Username and password was changed! Please re-login.");
 
         }
-            return "redirect:/change/username";
+        return "redirect:/change/username";
     }
 
 //    @PutMapping("{id}")

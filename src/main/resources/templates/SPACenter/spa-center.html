@@ -7,12 +7,12 @@
 
 <head>
     <th:block th:insert="~{fragments/meta}"></th:block>
-    <title>SPA rituals</title>
-
+    <title>SPA Services</title>
 </head>
 <body>
 <header>
     <th:block th:insert="~{fragments/navigation}"></th:block>
+    <th:block th:insert="~{fragments/footer}"></th:block>
 </header>
 <main>
     <div style="margin-top: 80px"><h1 class="text-center">SPA services
@@ -30,16 +30,20 @@
                     <p class="card-text text-right" th:text="|Price: *{price} &euro;|"></p>
 
                     <div style="position:absolute;bottom:6px; right:6px;">
-                        <a class="btn btn-sm btn-outline-light mt-auto"
-                           sec:authorize="isAuthenticated()" th:href="@{/delete/{id}(id = *{id})}"
-                        >Delete</a>
-                        <a class="btn btn-sm btn-outline-light mt-auto"
-                           sec:authorize="isAuthenticated()" th:href="@{/spa-services/buy/{id}(id = *{id})}"
-                        >Add to cart</a>
-                        <a class="btn btn-sm btn-outline-light mt-auto" th:href="@{/spa-services/details/{id}(id = *{id})}">Details</a>
+                        <button data-toggle="modal" th:data-target="'#' + *{id}" class="btn btn-sm btn-outline-light"
+                                sec:authorize="hasRole('ADMIN')">Delete
+                        </button>
+                        <button class="btn btn-sm btn-outline-light mt-auto"
+                           sec:authorize="isAuthenticated()" data-toggle="modal" th:data-target="'#buy' + *{id}">
+                            Add to cart</button>
+                        <a class="btn btn-sm btn-outline-light mt-auto" th:href="@{/spa-services/details/{id}(id = *{id})}">
+                            Details</a>
                     </div>
                 </div>
             </div>
+
+            <th:block th:insert="~{fragments/delete-procedure-modal}"></th:block>
+            <th:block th:insert="~{fragments/buy-modal}"></th:block>
 
 
             <script>

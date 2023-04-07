@@ -61,7 +61,6 @@ public class CartController {
 
         int countOfSapropelOrders = sapropelOrders.size();
         int countOfAllOrders = allOrders.size();
-//        Double totalPrice = this.cartService.getTotalOrderPrice(userId);
 
         model.addAttribute("countOfSapropelOrders", countOfSapropelOrders);
         model.addAttribute("countOfAllOrders", countOfAllOrders);
@@ -69,7 +68,6 @@ public class CartController {
         model.addAttribute("laserOrders", laserOrders);
         model.addAttribute("spaRitualsOrders", spaRitualsOrders);
         model.addAttribute("spaServicesOrders", spaRitualsOrders);
-//        model.addAttribute("totalPrice", totalPrice);
         model.addAttribute("counter", new Counter());
         model.addAttribute("allOrders", allOrders);
 

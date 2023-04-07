@@ -1,6 +1,7 @@
 package com.example.spacenter.service;
 
 import com.example.spacenter.model.AppUserDetails;
+import com.example.spacenter.model.dto.BaseProcedureDTO;
 import com.example.spacenter.model.entity.BaseProcedure;
 import com.example.spacenter.model.entity.MedicalProcedures.LaserProcedure;
 import com.example.spacenter.model.entity.MedicalProcedures.SapropelProcedure;
@@ -74,6 +75,15 @@ public class CommonService {
         }
     }
 
+    static void setProperties(BaseProcedureDTO baseProcedureDTO, BaseProcedure baseProcedure) {
+        baseProcedure.setId((long) Math.floor(Math.random() * 10));
+        baseProcedure.setType(baseProcedure.getType());
+        baseProcedure.setName(baseProcedureDTO.getName());
+        baseProcedure.setImageUrl(baseProcedureDTO.getImageUrl());
+        baseProcedure.setDescription(baseProcedureDTO.getDescription());
+        baseProcedure.setPrice(baseProcedureDTO.getPrice());
+    }
+
     public static List<BaseProcedure> getAllProcedures() {
         List<SapropelProcedure> sapropelProcedures = sapropelRepository.findAll();
         List<LaserProcedure> laserProcedures = laserRepository.findAll();
@@ -107,5 +117,16 @@ public class CommonService {
             sapropelRepository.deleteById(id);
         }
         all.remove(procedureForDeletion);
+    }
+
+    public void findName(Long id) {
+        List<BaseProcedure> all = getAllProcedures();
+
+        BaseProcedure procedureForDeletion = all.stream()
+                .filter(p -> Objects.equals(p.getId(), id))
+                .findAny().orElseThrow();
+
+        String name = procedureForDeletion.getName();
+
     }
 }

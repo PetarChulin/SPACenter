@@ -117,13 +117,6 @@ public class MedicalSubProceduresService {
         laserProcedure.removeBuyer(user);
     }
 
-    private static void setProperties(BaseProcedureDTO baseProcedureDTO, BaseProcedure baseProcedure) {
-        baseProcedure.setId((long) Math.floor(Math.random() * 10));
-        baseProcedure.setType(baseProcedure.getType());
-        baseProcedure.setName(baseProcedureDTO.getName());
-        baseProcedure.setImageUrl(baseProcedureDTO.getImageUrl());
-        baseProcedure.setDescription(baseProcedureDTO.getDescription());
-        baseProcedure.setPrice(baseProcedureDTO.getPrice());
-    }
+
 
 }

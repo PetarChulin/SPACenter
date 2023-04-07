@@ -1,0 +1,25 @@
+<div class="modal fade" th:id="*{id}" tabindex="-1" role="dialog"
+     aria-labelledby="deleteModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content" style="background-color: rgba(106,5,140,0.85)">
+      <div class="modal-header">
+        <h5 class="modal-title  text-light text-md-center" id="deleteModalLabel"
+            th:text="|Delete *{name}, are you sure!|">
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-warning" style="border-radius: 4px"
+           th:href="@{/delete/{id}(id = *{id})}">
+          Delete
+        </a>
+        <a class="btn btn-outline-light" style="border-radius: 4px"
+           data-dismiss="modal">Cancel
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<th:block th:insert="~{/fragments/bootstrap}"></th:block>
+
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -14,11 +16,11 @@
             integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
             crossorigin="anonymous"></script>
     <title>Home</title>
+
 </head>
 <body>
 <header>
     <th:block th:insert="~{/fragments/navigation}"></th:block>
-    <th:block th:insert="~{/fragments/footer}"></th:block>
 
 </header>
 <main>
@@ -50,21 +52,23 @@
 
                 </div>
                 <div style="position:absolute;bottom:3px; right:2px;">
-                    <a th:id="'Added' + *{name}" class="btn btn-sm btn-outline-light mt-auto"
-                       sec:authorize="isAuthenticated()" th:href="@{'/' + *{type} + '/buy/' + *{id}}"
-                    >Add to cart</a>
+                    <a class="btn btn-sm btn-outline-light mt-auto"
+                       sec:authorize="isAuthenticated()" data-toggle="modal" th:data-target="'#buy' + *{id}">
+                        Add to cart</a>
                     <a class="btn btn-sm btn-outline-light mt-auto" th:href="@{'/' + *{type} + '/details/' + *{id}}">Details</a>
                 </div>
             </div>
+            <th:block th:insert="~{fragments/buy-modal}"></th:block>
             </div>
     </div>
 
-
-
-    <div id="logout" th:if="${param.logout}"  style="width: 50%; margin-top: 80px" class="alert alert-success text-center"
+    <div style="position: fixed; bottom: 20px;right: 10px; width: 50%;">
+    <div id="logout" th:if="${param.logout}" class="alert alert-success text-center" style="width: 50%"
     >Logged out successfully!</div>
-    <div id="login" th:if="${param.login}" sec:authorize="isAuthenticated" style="width: 50%; margin-top: 80px" class="alert alert-primary text-center"
+    <div id="login" th:if="${param.login}" sec:authorize="isAuthenticated" style="width: 50%;"
+     class="alert alert-primary text-center"
     >Login successfully!</div>
+    </div>
     <script>
         setTimeout(() => {
             document.querySelectorAll('div.alert').forEach(d => d.style.display = 'none')
@@ -72,6 +76,7 @@
 
 
     </script>
+
 </main>
 
 <footer class="footer bg-transparent py-2">
