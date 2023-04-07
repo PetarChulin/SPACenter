@@ -28,7 +28,7 @@ public class ProceduresInitService {
     }
 
     @PostConstruct
-    private void initSpaProcedures() {
+    public void initSpaProcedures() {
 
         initSpaRituals();
         initSpaCenterServices();

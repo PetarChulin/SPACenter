@@ -76,7 +76,7 @@ public class CommonService {
     }
 
     static void setProperties(BaseProcedureDTO baseProcedureDTO, BaseProcedure baseProcedure) {
-        baseProcedure.setId((long) Math.floor(Math.random() * 10));
+        baseProcedure.setId((long) Math.floor(Math.random() * 110));
         baseProcedure.setType(baseProcedure.getType());
         baseProcedure.setName(baseProcedureDTO.getName());
         baseProcedure.setImageUrl(baseProcedureDTO.getImageUrl());
@@ -119,14 +119,4 @@ public class CommonService {
         all.remove(procedureForDeletion);
     }
 
-    public void findName(Long id) {
-        List<BaseProcedure> all = getAllProcedures();
-
-        BaseProcedure procedureForDeletion = all.stream()
-                .filter(p -> Objects.equals(p.getId(), id))
-                .findAny().orElseThrow();
-
-        String name = procedureForDeletion.getName();
-
-    }
 }

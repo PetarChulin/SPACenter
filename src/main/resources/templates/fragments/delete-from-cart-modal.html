@@ -2,10 +2,10 @@
      aria-labelledby="deleteModalLabel"
      aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content" style="background-color: rgba(169,37,37,0.85)">
+    <div class="modal-content" style="background-color: rgba(106,5,140,0.85)">
       <div class="modal-header">
         <h5 class="modal-title  text-light text-md-center" id="deleteModalLabel"
-            th:text="|Remove *{name} from cart, are you sure!|">
+            th:text="|Remove *{name} from cart, are you sure?|">
         </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -13,7 +13,7 @@
       </div>
 
       <div class="modal-footer">
-        <a class="btn btn-outline-danger" style="border-radius: 4px"
+        <a class="btn btn-outline-warning" style="border-radius: 4px"
            th:href="@{'/' + *{type} + '/delete/{id}'(id = *{id})}">
           Remove
         </a>

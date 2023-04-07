@@ -35,9 +35,9 @@
                         <button data-toggle="modal" th:data-target="'#' + *{id}" class="btn btn-sm btn-outline-light"
                                 sec:authorize="hasRole('ADMIN')">Delete
                         </button>
-                        <a class="btn btn-sm btn-outline-light mt-auto"
+                        <button class="btn btn-sm btn-outline-light mt-auto"
                            sec:authorize="isAuthenticated()" data-toggle="modal" th:data-target="'#buy' + *{id}">
-                        Add to cart</a>
+                        Add to cart</button>
                         <a class="btn btn-sm btn-outline-light mt-auto"
                            th:href="@{/spa-rituals/details/{id}(id = *{id})}">Details</a>
                     </div>
