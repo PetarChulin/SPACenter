@@ -40,7 +40,7 @@ public class ProceduresInitService {
 
         spaRitual.setId((long) Math.floor(Math.random() * 120));
         spaRitual.setName("SPA rituals");
-        spaRitual.setImageUrl("https://naturatermospa.com/wp-content/uploads/2019/09/spa-ritualai.jpg");
+        spaRitual.setImageUrl("/images/spa_center/spa-ritualai.jpg");
         spaRitual.setDescription("During SPA rituals, you will feel calm and experience unforgettable " +
                 "moments in which beauty and harmony prevail.");
 
@@ -69,7 +69,7 @@ public class ProceduresInitService {
 
         sapropelProcedure.setId((long) Math.floor(Math.random() * 150));
         sapropelProcedure.setName("Sapropel procedures");
-        sapropelProcedure.setImageUrl("https://naturatermospa.com/wp-content/uploads/2019/10/image-2-432x324.jpeg");
+        sapropelProcedure.setImageUrl("/images/sapropel/image-2.jpeg");
         sapropelProcedure.setDescription("In the Natura Termo SPA you can try unique procedures for which sapropel of 38–40 ºC temperature is used.");
 
         this.medicalProceduresRepository.save(sapropelProcedure);
@@ -82,7 +82,7 @@ public class ProceduresInitService {
 
         laserProcedure.setId((long) Math.floor(Math.random() * 140));
         laserProcedure.setName("Laser Procedures and Dermatology");
-        laserProcedure.setImageUrl("https://naturatermospa.com/wp-content/uploads/2020/05/dermo-432x324.jpg");
+        laserProcedure.setImageUrl("/images/laser/dermo.jpg");
         laserProcedure.setDescription("Feel at ease choosing laser procedures performed by professional dermatologists.");
 
         this.medicalProceduresRepository.save(laserProcedure);

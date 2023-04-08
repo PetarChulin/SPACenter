@@ -16,9 +16,13 @@
             <div><h3 class="text-center" th:text="*{name}" style="color: ghostwhite; background-color: #23272b;
             border-top-left-radius: 8px; border-top-right-radius: 8px; height: 40px"></h3>
                 <a class="btn btn-sm btn-outline-light" sec:authorize="isAuthenticated()"
-                   style="position:absolute;top:3px; right:2px;"
+                   style="position:absolute;top:3px; right:20px;"
                    th:href="@{/comment/add/{type}/{id}(type = *{type}, id = *{id})}">
                     Leave comment</a>
+                <a class="btn btn-sm btn-outline-light"
+                   style="position:absolute;top:3px; right:2px;"
+                   th:href="@{/all-comments}">
+                    Show all comments</a>
             </div>
             <span class="d-flex">
     <img class="card-img-top" style="width: 50%; height: 50%;" th:src="*{imageUrl}" alt="">

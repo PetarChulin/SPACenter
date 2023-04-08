@@ -100,7 +100,6 @@ public class CommentsController {
     public String commentsSpaRitual(Model model, @PathVariable Long id) {
 
         SpaRituals procedure = this.spaRitualsRepository.findById(id).get();
-
         Long sId = procedure.getId();
         String type = procedure.getType();
         model.addAttribute("sId", sId);
@@ -138,8 +137,7 @@ public class CommentsController {
     }
 
 
-
-        @GetMapping("/comment/delete/{id}")
+    @GetMapping("/comment/delete/{id}")
     public String commentDelete(Model model, @PathVariable Long id) {
 
         this.commentService.deleteComment(id);
@@ -147,6 +145,12 @@ public class CommentsController {
 
 
         return "redirect:/all-comments";
+    }
+
+    @GetMapping("/show/comments")
+    public String showComments() {
+
+        return "/all-comments";
     }
 
 }

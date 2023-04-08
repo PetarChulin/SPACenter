@@ -49,10 +49,10 @@ public class CartService {
 
         UserEntity user = this.userRepository.getUsersById(id);
 
-        List<SapropelProcedure> sapropelOrders = this.sapropelRepository.findByBuyers_Id(id);
-        List<LaserProcedure> laserOrders = this.laserRepository.findByBuyers_Id(id);
-        List<SpaRituals> spaRitualOrders = this.spaRitualsRepository.findByBuyers_Id(id);
-        List<SpaServices> spaServicesOrders = this.spaServicesRepository.findByBuyers_Id(id);
+        var sapropelOrders = this.sapropelRepository.findByBuyers_Id(id);
+        var laserOrders = this.laserRepository.findByBuyers_Id(id);
+        var spaRitualOrders = this.spaRitualsRepository.findByBuyers_Id(id);
+        var spaServicesOrders = this.spaServicesRepository.findByBuyers_Id(id);
 
         allOrders(sapropelOrders, laserOrders, spaRitualOrders, spaServicesOrders, user);
 

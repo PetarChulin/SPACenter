@@ -13,6 +13,7 @@ import com.example.spacenter.repositories.MedicalSubProceduresRepos.SapropelRepo
 import com.example.spacenter.repositories.SpaSubProceduresRepos.SpaRitualsRepository;
 import com.example.spacenter.repositories.SpaSubProceduresRepos.SpaServicesRepository;
 import com.example.spacenter.repositories.UserRepository;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -99,6 +100,7 @@ public class CommonService {
         return allProcedures;
     }
 
+    @Cacheable("deletion")
     public void deleteProcedure(Long id) {
 
         List<BaseProcedure> all = getAllProcedures();
@@ -106,6 +108,7 @@ public class CommonService {
         BaseProcedure procedureForDeletion = all.stream()
                 .filter(p -> Objects.equals(p.getId(), id))
                 .findAny().orElseThrow();
+
 
         if (procedureForDeletion instanceof SpaServices) {
             spaServicesRepository.deleteById(id);

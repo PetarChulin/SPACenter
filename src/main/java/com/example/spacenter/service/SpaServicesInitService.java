@@ -67,29 +67,25 @@ public class SpaServicesInitService {
         service2.setId((long) Math.floor(Math.random() * 255));
         service2.setName("Classical Hammam Procedure with Jacuzzi");
         service2.setType(service2.getType());
-        service2.setImageUrl("/images/spa_center/hammam2.jpg");
-        service2.setDescription("A classic hammam treatment:\n" +
+        service2.setImageUrl("/images/spa_center/hammam.jpg");
+        service2.setDescription("Your body, relaxed and warmed in the jacuzzi, is ready to take on a unique " +
+                "Turkish hammam procedure. During the hammam, skin pores open up, the skin is peeled," +
+                " the soap massage is performed to immerse yourself in a real cloud of soap foam." +
+                " The soap foam wash procedure is combined with massage.\n" +
                 "\n" +
-                "    During the Hammam treatment the pores of the skin open up," +
-                " the body is ready to accept the soap massage, during which you will be covered in a true cloud of soap foam." +
-                " After the hammam treatment a positive effect to your body is felt: circulatory, lymphatic," +
-                " respiratory and nervous systems. On the heated marble beds, the most pleasant treatments are performed on the body:" +
-                " skin surface scrub and wash. The wash treatment with soap foam is coordinated with the massage." +
-                " Your body becomes light, and the skin – silky soft.\n" +
+                "A very pleasant hammam procedure also has positive effects on health, circulatory, lymphatic," +
+                " respiratory and nervous systems. The body procedures are performed on heated marble loungers." +
+                " The body becomes light and the skin silky-smooth.\n" +
                 "\n" +
-                "Treatment consists of:\n" +
+                " The procedure consists of:\n" +
                 "\n" +
-                "    body scrub and a massage with the „KESE“ glove;\n" +
-                "    Turkish bath and massage treatments are combined with foam from soap.\n" +
+                "    Jacuzzi;\n" +
+                "    full body scrub and massage with “KESE” glove;\n" +
+                "    Turkish washing and massage procedure with soap foam.\n" +
                 "\n" +
-                " \n" +
+                "The procedures are performed with the soap of sapropel mud with healing properties." +
                 "\n" +
-                "The treatment is performed in the water and sauna area, on the ground floor, with the" +
-                " “Atostogų parkas” soap from the healing properties of mud – sapropel.\n" +
-                "\n" +
-                "Duration: 30 min." +
-
-                "Duration: 60 min.");
+                "Duration of procedure: 60 min. ");
         service2.setPrice(49.00);
 
         this.spaServicesRepository.save(service2);

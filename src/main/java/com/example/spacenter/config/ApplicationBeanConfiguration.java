@@ -6,6 +6,9 @@ import com.example.spacenter.repositories.UserRepository;
 import com.example.spacenter.service.ApplicationUserDetailsService;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,6 +19,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 
 @Configuration
+@EnableCaching
 public class ApplicationBeanConfiguration {
 
     private final UserRepository userRepository;
@@ -28,7 +32,7 @@ public class ApplicationBeanConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.
                 authorizeHttpRequests()
-                .requestMatchers("/error", "/login-error", "/login", "all-comments").permitAll()
+                .requestMatchers("/error", "/login-error", "/login", "/show/comments", "/all-comments").permitAll()
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                 .requestMatchers("/", "/home", "/register", "/medical-procedures", "/spa-procedures",
                         "/sapropel/details/**",
@@ -36,11 +40,11 @@ public class ApplicationBeanConfiguration {
                         "/SapropelProcedures/**", "/SPARituals/spa-rituals", "/SPACenter/spa-center",
                         "/LaserProcedures/laser-procedures", "/LaserProcedures/laser/details/**").permitAll()
                 .requestMatchers("/logout", "/cart", "/sapropel/buy/**", "/sapropel/delete/**", "/comment/add/**",
-                       "/spa-services/**", "/spa-rituals/**", "/laser/buy/**", "/laser/delete/**", "/delete/all", "/change/username").authenticated()
+                        "/spa-services/**", "/spa-rituals/**", "/laser/buy/**", "/laser/delete/**", "/change/username").authenticated()
                 .requestMatchers("/").hasRole(RoleEnum.USER.name())
-                .requestMatchers("/medical/add/**", "/laser/add/**", "/spa/add/**", "/delete/**")
+                .requestMatchers("/medical/add/**", "/laser/add/**", "/spa/add/**")
                 .hasAnyRole(RoleEnum.ADMIN.name(), RoleEnum.MODERATOR.name())
-                .requestMatchers("/change/role", "comment/delete/**").hasRole(RoleEnum.ADMIN.name())
+                .requestMatchers("/change/role", "comment/delete/**", "/delete/procedureFromDB/**").hasRole(RoleEnum.ADMIN.name())
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -86,6 +90,12 @@ public class ApplicationBeanConfiguration {
     @Bean
     public RequestProcessingTimeInterceptor requestProcessingTimeInterceptor() {
         return new RequestProcessingTimeInterceptor();
+    }
+
+
+    @Bean
+    public CacheManager cacheManager() {
+        return new ConcurrentMapCacheManager("deletion");
     }
 
 
