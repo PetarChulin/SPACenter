@@ -27,17 +27,17 @@
 
     <section class="fixed-top" style="z-index: -1; margin-top: 80px">
 
-    <h1 >Welcome to Healthy Spa Center</h1>
-    <div class="row" style="background-color: rgba(204,204,215,0.7); border-radius: 6px">
-        <div class="col-md-3">
-            <img src="/images/spa-1.jpg" class="card-img-top border"></div>
-        <div class="col-md-3">
-            <img src="/images/spa-2.jpg" class="card-img-top border" ></div>
-        <div class="col-md-3">
-            <img src="/images/spa-3.jpg" class="card-img-top border"></div>
-        <div class="col-md-3">
-            <img src="/images/spa-4.jpg" class="card-img-top border"></div>
-    </div>
+        <h1>Welcome to Healthy Spa Center</h1>
+        <div class="row" style="background-color: rgba(204,204,215,0.7); border-radius: 6px">
+            <div class="col-md-3">
+                <img src="/images/spa-1.jpg" class="card-img-top border"></div>
+            <div class="col-md-3">
+                <img src="/images/spa-2.jpg" class="card-img-top border"></div>
+            <div class="col-md-3">
+                <img src="/images/spa-3.jpg" class="card-img-top border"></div>
+            <div class="col-md-3">
+                <img src="/images/spa-4.jpg" class="card-img-top border"></div>
+        </div>
     </section>
 
     <div class="row " style="margin: auto; background-color: rgba(90,90,100, 0.4)">
@@ -59,15 +59,20 @@
                 </div>
             </div>
             <th:block th:insert="~{fragments/buy-modal}"></th:block>
-            </div>
+        </div>
     </div>
 
     <div style="position: fixed; bottom: 20px;right: 10px; width: 50%;">
-    <div id="logout" th:if="${param.logout}" class="alert alert-success text-center" style="width: 50%"
-    >Logged out successfully!</div>
-    <div id="login" th:if="${param.login}" sec:authorize="isAuthenticated" style="width: 50%;"
-     class="alert alert-primary text-center"
-    >Login successfully!</div>
+        <div id="logout" th:if="${param.logout}" class="alert alert-success text-center" style="width: 50%"
+        >Logged out successfully!
+        </div>
+        <div id="login" th:if="${param.login}" sec:authorize="isAuthenticated" style="width: 50%;"
+             class="alert alert-primary text-center"
+        >Login successfully!
+        </div>
+
+    </div>
+
     </div>
     <script>
         setTimeout(() => {

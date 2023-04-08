@@ -24,13 +24,16 @@
 
             <div>
                 <label>Enter new username:</label>
+                <div id="existingName" th:if="${existingName != null}" class="alert alert-danger" role="alert">
+                    [[${existingName}]]
+                </div>
+                <div id="mismatched" th:if="${mismatched != null}" class="alert alert-danger" role="alert">
+                    [[${mismatched}]]
+                </div>
                 <input class="form-control" type="text" id="username" style="width: 65%; margin: auto"
                        placeholder="Please enter new username:" required minlength="3" maxlength="15"
                        th:field="*{username}"
                 />
-                <div id="mismatched" th:if="${mismatched != null}" class="alert alert-danger" role="alert">
-                    [[${mismatched}]]
-                </div>
                 <label style="padding-top: 20px">New password:</label>
                 <input class="form-control" type="password" id="password" style="width: 65%; margin: auto"
                        placeholder="Please enter new password:" required minlength="3" maxlength="15"
@@ -49,14 +52,8 @@
 
         <script>
             setTimeout(() => {
-                document.getElementById('message').style.display = 'none';
-
+                document.querySelectorAll('div.alert').forEach(d => d.style.display = 'none')
             }, 4000);
-            setTimeout(() => {
-                document.getElementById('mismatched').style.display = 'none';
-
-            }, 4000);
-
         </script>
 
 

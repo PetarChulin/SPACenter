@@ -55,7 +55,11 @@ public class UserProfileController {
                                  RedirectAttributes attributes,
                                  ChangePasswordDTO changePasswordDTO) {
 
-        if (!changePasswordDTO.getPassword().equals(changePasswordDTO.getRepeatPassword())) {
+        Optional<UserEntity> username = this.userRepository.findByUsername(changePasswordDTO.getUsername());
+
+        if (username.isPresent()) {
+            attributes.addFlashAttribute("existingName", "This username already exists! Try another one");
+        } else if (!changePasswordDTO.getPassword().equals(changePasswordDTO.getRepeatPassword())) {
             attributes.addFlashAttribute("mismatched", "Passwords mismatched");
         } else {
 
@@ -67,17 +71,4 @@ public class UserProfileController {
         }
         return "redirect:/change/username";
     }
-
-//    @PutMapping("{id}")
-//    public ResponseEntity<UserEntity> updateUsername(@PathVariable Long id, @RequestBody UserEntity details) {
-//        UserEntity user = userRepository.findById(id)
-//                .orElseThrow(() -> new ResourceNotFoundException("Employee not exist with id: " + id));
-//
-//        user.setUsername(details.getUsername());
-//
-//
-//        return ResponseEntity.ok(user);
-//    }
-
-
 }

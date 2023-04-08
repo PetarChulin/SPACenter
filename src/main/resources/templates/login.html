@@ -18,6 +18,7 @@
 <body style="background-image: url(/images/spa-1.jpg);">
 <header>
     <th:block th:insert="~{/fragments/navigation}"></th:block>
+    <th:block th:insert="~{/fragments/footer}"></th:block>
 </header>
 <main>
     <hr class="hr-5 w-50 "/>
@@ -46,17 +47,18 @@
         </div>
         <button type="submit" class="btn btn-primary auth-button">Login</button>
         <p class="errors text-danger" th:if="${badCredentials}">Incorrect username or password!</p>
-
+        <div id="register" th:if="${register}"  style="width: 80%;"
+        class="alert alert-warning text-center"
+        >Registration successful! Please login.
+        </div>
     </form>
 
+    <script>
+        setTimeout(() => {
+            document.querySelectorAll('div.alert').forEach(d => d.style.display = 'none')
+        }, 4000);
+    </script>
 </main>
-<footer class="footer bg-transparent py-2">
-    <div class="container-fluid text-center">
-        <div class="footer-background h5 text-primary text-stroke fixed-bottom">
-            &copy; PeterC 2023. All rights reserved.
-        </div>
-    </div>
-</footer>
 </body>
 </html>
 

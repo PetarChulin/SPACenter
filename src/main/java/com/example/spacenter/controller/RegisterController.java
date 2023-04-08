@@ -77,8 +77,8 @@ public class RegisterController {
 
             return "redirect:/register";
         }
-
-        return "redirect:/home";
+        attributes.addFlashAttribute("register", true);
+        return "redirect:/login";
 
     }
 }
