@@ -52,9 +52,9 @@
 
                 </div>
                 <div style="position:absolute;bottom:3px; right:2px;">
-                    <a class="btn btn-sm btn-outline-light mt-auto"
+                    <button class="btn btn-sm btn-outline-light mt-auto"
                        sec:authorize="isAuthenticated()" data-toggle="modal" th:data-target="'#buy' + *{id}">
-                        Add to cart</a>
+                        Add to cart</button>
                     <a class="btn btn-sm btn-outline-light mt-auto" th:href="@{'/' + *{type} + '/details/' + *{id}}">Details</a>
                 </div>
             </div>

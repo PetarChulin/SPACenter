@@ -34,7 +34,7 @@ public class SearchService {
     }
 
 
-    public List<Object> findByKeyword(String keyword) {
+    public  List<Object> findByKeyword(String keyword) {
 
         List<SapropelProcedure> sapropelProcedures = sapropelRepository.findByKeyword(keyword);
         List<LaserProcedure> laserProcedures = laserRepository.findByKeyword(keyword);
