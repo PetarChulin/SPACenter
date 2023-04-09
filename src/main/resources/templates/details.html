@@ -16,7 +16,7 @@
             <div><h3 class="text-center" th:text="*{name}" style="color: ghostwhite; background-color: #23272b;
             border-top-left-radius: 8px; border-top-right-radius: 8px; height: 40px"></h3>
                 <a class="btn btn-sm btn-outline-light" sec:authorize="isAuthenticated()"
-                   style="position:absolute;top:3px; right:20px;"
+                   style="position:absolute;top:3px; right:145px;"
                    th:href="@{/comment/add/{type}/{id}(type = *{type}, id = *{id})}">
                     Leave comment</a>
                 <a class="btn btn-sm btn-outline-light"

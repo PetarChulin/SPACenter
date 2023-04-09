@@ -19,7 +19,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -43,10 +42,10 @@ public class CommonService {
                          LaserRepository laserRepository, SpaRitualsRepository spaRitualsRepository,
                          SpaServicesRepository spaServicesRepository) {
         CommonService.userRepository = userRepository;
-        this.sapropelRepository = sapropelRepository;
-        this.laserRepository = laserRepository;
-        this.spaRitualsRepository = spaRitualsRepository;
-        this.spaServicesRepository = spaServicesRepository;
+        CommonService.sapropelRepository = sapropelRepository;
+        CommonService.laserRepository = laserRepository;
+        CommonService.spaRitualsRepository = spaRitualsRepository;
+        CommonService.spaServicesRepository = spaServicesRepository;
     }
 
     public static UserEntity getUserEntity() {

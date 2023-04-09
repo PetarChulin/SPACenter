@@ -48,38 +48,4 @@ public class CommonServiceTest {
         Mockito.verify(baseProcedure).setPrice(9.99);
     }
 
-
-
-
-//    @Test
-//    public void testGetAllProcedures() {
-//        // Create mock repository objects
-//        SapropelRepository sapropelRepository = Mockito.mock(SapropelRepository.class);
-//        LaserRepository laserRepository = Mockito.mock(LaserRepository.class);
-//        SpaRitualsRepository spaRitualsRepository = Mockito.mock(SpaRitualsRepository.class);
-//        SpaServicesRepository spaServicesRepository = Mockito.mock(SpaServicesRepository.class);
-//
-//        // Create mock procedure objects
-//        List<SapropelProcedure> sapropelProcedures = new ArrayList<>();
-//        List<LaserProcedure> laserProcedures = new ArrayList<>();
-//        List<SpaRituals> spaProcedures = new ArrayList<>();
-//        List<SpaServices> spaServices = new ArrayList<>();
-//        sapropelProcedures.add(new SapropelProcedure());
-//        laserProcedures.add(new LaserProcedure());
-//        spaProcedures.add(new SpaRituals());
-//        spaServices.add(new SpaServices());
-//
-//        Mockito.when(sapropelRepository.findAll()).thenReturn(sapropelProcedures);
-//        Mockito.when(laserRepository.findAll()).thenReturn(laserProcedures);
-//        Mockito.when(spaRitualsRepository.findAll()).thenReturn(spaProcedures);
-//        Mockito.when(spaServicesRepository.findAll()).thenReturn(spaServices);
-//
-//        List<BaseProcedure> allProcedures = CommonService.getAllProcedures();
-//
-//        Mockito.verify(sapropelRepository).findAll();
-//
-//        assertEquals(allProcedures.size(), sapropelProcedures.size() + laserProcedures.size() + spaProcedures.size() + spaServices.size());
-//    }
-
-
 }

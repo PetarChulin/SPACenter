@@ -6,6 +6,7 @@ import com.example.spacenter.service.CommentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -23,10 +24,12 @@ public class CommentsViewController {
     }
 
     @GetMapping("/all-comments")
-    public String allComments(Model model) {
+    public String allComments(Model model, RedirectAttributes attributes) {
 
         List<Comment> comments = this.commentsRepository.findAll();
         model.addAttribute("comments", comments);
+        attributes.addFlashAttribute("noComments", "There are no comments to show");
+
 
 
         return "all-comments";
