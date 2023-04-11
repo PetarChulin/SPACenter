@@ -2,7 +2,6 @@ package com.example.spacenter.repositories;
 
 import com.example.spacenter.model.entity.UserEntity;
 import jakarta.transaction.Transactional;
-import org.hibernate.Hibernate;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -20,7 +19,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
 
     @Query("SELECT u FROM UserEntity u WHERE u.email = :email")
-    public UserEntity getUserByEmail(@Param("email") String email);
+    UserEntity getUserByEmail(@Param("email") String email);
 
     Optional<UserEntity> findByUsername(String username);
 
@@ -47,4 +46,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
     @Query("select u from UserEntity as u order by u.id asc ")
     List<UserEntity> findAllUserById();
+
+
+    Object findByEmailOrUsername(String email, String username);
 }

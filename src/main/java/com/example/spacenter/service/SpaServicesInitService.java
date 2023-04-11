@@ -23,7 +23,7 @@ public class SpaServicesInitService {
 
     }
 
-    private void initSpaService1() {
+    void initSpaService1() {
 
         var service1 = new SpaServices();
         if (checkForExistingService("Classic hammam procedure")) return;

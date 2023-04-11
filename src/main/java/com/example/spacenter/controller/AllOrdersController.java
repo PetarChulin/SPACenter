@@ -63,7 +63,6 @@ public class AllOrdersController {
     public String buyLaser(@PathVariable Long id, RedirectAttributes attributes) {
 
         medicalSubProceduresService.addLaserToCart(id);
-
         checkForAvailability(attributes);
         return "redirect:/LaserProcedures/laser-procedures";
     }

@@ -1,5 +1,6 @@
 package com.example.spacenter.service;
 
+import com.example.spacenter.model.AppUserDetails;
 import com.example.spacenter.model.entity.MedicalProcedures.LaserProcedure;
 import com.example.spacenter.model.entity.MedicalProcedures.SapropelProcedure;
 import com.example.spacenter.model.entity.SpaProcedures.SpaRituals;
@@ -11,14 +12,24 @@ import com.example.spacenter.repositories.SpaSubProceduresRepos.SpaRitualsReposi
 import com.example.spacenter.repositories.SpaSubProceduresRepos.SpaServicesRepository;
 import com.example.spacenter.repositories.UserRepository;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.Arrays;
 import java.util.List;
 
+import static org.mockito.Mockito.when;
+
+
 @SpringBootTest
 public class CartServiceTest {
+
+    @Mock
+    private SecurityContext securityContext;
 
     @Test
     public void testDeleteAllFromUserCart_SuccessfulDeletion() {
@@ -29,9 +40,21 @@ public class CartServiceTest {
         SpaServicesRepository spaServicesRepository = Mockito.mock(SpaServicesRepository.class);
         MedicalSubProceduresService medicalSubProceduresService = Mockito.mock(MedicalSubProceduresService.class);
 
-        CartService service = new CartService(sapropelRepository,userRepository, medicalSubProceduresService, laserRepository, spaRitualsRepository, spaServicesRepository);
+        Authentication authentication = Mockito.mock(Authentication.class);
+        AppUserDetails userDetails = new AppUserDetails("username", "password", authentication.getAuthorities(), 1L);
 
-        Long userId = 12345L;
+        when(securityContext.getAuthentication()).thenReturn(authentication);
+        when(authentication.getPrincipal()).thenReturn(userDetails);
+
+        SecurityContextHolder.setContext(securityContext);
+
+        Long userId = userDetails.getId();
+
+        CartService service = new CartService(sapropelRepository,userRepository,
+                medicalSubProceduresService, laserRepository,
+                spaRitualsRepository, spaServicesRepository);
+
+
 
         UserEntity user = new UserEntity();
         Mockito.when(userRepository.getUsersById(userId)).thenReturn(user);
@@ -55,5 +78,8 @@ public class CartServiceTest {
         Mockito.verify(spaRitualsRepository).deleteAll(spaRitualsOrders);
         Mockito.verify(spaServicesRepository).deleteAll(spaServicesOrders);
     }
+
+
+
 
 }

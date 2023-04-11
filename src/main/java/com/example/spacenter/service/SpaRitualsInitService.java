@@ -1,6 +1,5 @@
 package com.example.spacenter.service;
 
-import com.example.spacenter.model.entity.MedicalProcedures.LaserProcedure;
 import com.example.spacenter.model.entity.SpaProcedures.SpaRituals;
 import com.example.spacenter.repositories.SpaSubProceduresRepos.SpaRitualsRepository;
 import jakarta.annotation.PostConstruct;
@@ -25,7 +24,7 @@ public class SpaRitualsInitService {
             initSpaRitual4();
     }
 
-    private void initSpaRitual1() {
+    void initSpaRitual1() {
 
         var ritual1 = new SpaRituals();
         if (checkForExistingRitual("Amber pint massage")) return;

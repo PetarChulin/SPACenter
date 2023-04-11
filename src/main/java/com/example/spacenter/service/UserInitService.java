@@ -47,7 +47,7 @@ public class UserInitService {
     }
 
 
-    private void initAdmin() {
+    void initAdmin() {
 
         Role adminRole = this.roleRepository.findByName("ADMIN");
 
@@ -64,7 +64,7 @@ public class UserInitService {
 
     }
 
-    private void initModerator() {
+    void initModerator() {
 
         Role moderatorRole = this.roleRepository.findByName("MODERATOR");
 
@@ -80,7 +80,7 @@ public class UserInitService {
         this.userRepository.save(moderator);
     }
 
-    private void initUser() {
+    void initUser() {
 
         Role userRole = this.roleRepository.findByName("USER");
 
@@ -97,7 +97,7 @@ public class UserInitService {
 
     }
 
-    private boolean checkExistence(String email, String username) {
+    boolean checkExistence(String email, String username) {
         Optional<UserEntity> entityEmail = this.userRepository.findByEmail(email);
         Optional<UserEntity> entityUsername = this.userRepository.findByUsername(username);
         if (entityEmail.isPresent() || entityUsername.isPresent()) {

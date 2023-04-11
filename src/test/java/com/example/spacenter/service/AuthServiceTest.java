@@ -7,11 +7,8 @@ import com.example.spacenter.repositories.RoleRepository;
 import com.example.spacenter.repositories.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Optional;
 
@@ -41,6 +38,10 @@ public class AuthServiceTest {
 
     @Test
     public void testRegister_SuccessfulRegistration() {
+
+        registerUserDTO.setUsername("peter");
+        registerUserDTO.setPassword("password");
+        registerUserDTO.setRepeatPassword("password");
 
         when(userRepository.findByEmail(anyString())).thenReturn(Optional.empty());
         when(userRepository.findByUsername(anyString())).thenReturn(Optional.empty());

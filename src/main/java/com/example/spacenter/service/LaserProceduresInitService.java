@@ -24,7 +24,8 @@ public class LaserProceduresInitService {
         initLaserProcedure4();
     }
 
-    private void initLaserProcedure() {
+
+    void initLaserProcedure() {
 
         var laser = new LaserProcedure();
         if (checkForExistingLaser("Carboxytherapy – facial treatment")) return;
@@ -108,7 +109,7 @@ public class LaserProceduresInitService {
     };
 
 
-    private boolean checkForExistingLaser(String name) {
+    boolean checkForExistingLaser(String name) {
         Optional<LaserProcedure> entityName = this.laserRepository.findByName(name);
         if (entityName.isPresent()) {
             System.out.println("This procedure exists");

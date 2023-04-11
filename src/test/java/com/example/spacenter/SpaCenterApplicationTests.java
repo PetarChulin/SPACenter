@@ -8,6 +8,7 @@ class SpaCenterApplicationTests {
 
     @Test
     void contextLoads() {
+
     }
 
 }

@@ -35,11 +35,9 @@ public class MedicalProcedureServiceTest {
 
 
         MedicalProceduresRepository medicalProceduresRepository = mock(MedicalProceduresRepository.class);
-
         when(medicalProceduresRepository.findByName(anyString())).thenReturn(Optional.empty());
 
         MedicalProcedureService medicalProcedureService = new MedicalProcedureService(medicalProceduresRepository);
-
         boolean result = medicalProcedureService.add(medicalProceduresDTO);
         assertTrue(result);
 
@@ -48,10 +46,7 @@ public class MedicalProcedureServiceTest {
 
     @Test
     public void testAdd_FailedAddition_DuplicateProcedureName() {
-//        MedicalProceduresDTO medicalProceduresDTO = new MedicalProceduresDTO();
-//        medicalProceduresDTO.setDescription("Test description");
-//        medicalProceduresDTO.setImageUrl("test-image-url");
-        // ...
+
 
         MedicalProceduresRepository medicalProceduresRepository = mock(MedicalProceduresRepository.class);
         when(medicalProceduresRepository.findByName(anyString())).thenReturn(Optional.of(mock(MedicalProcedure.class)));

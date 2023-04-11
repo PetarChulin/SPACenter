@@ -33,6 +33,7 @@ public class SpaSubProceduresService {
         this.spaServicesRepository = spaServicesRepository;
     }
 
+
     public boolean addSpaRituals(SpaRitualsDTO spaRitualsDTO) {
 
         SpaRituals spaRituals = new SpaRituals();

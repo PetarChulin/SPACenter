@@ -1,9 +1,7 @@
 package com.example.spacenter.service;
 
 import com.example.spacenter.model.entity.MedicalProcedures.SapropelProcedure;
-import com.example.spacenter.repositories.MedicalSubProceduresRepos.LaserRepository;
 import com.example.spacenter.repositories.MedicalSubProceduresRepos.SapropelRepository;
-import com.example.spacenter.repositories.SpaSubProceduresRepos.SpaRitualsRepository;
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
 
@@ -12,14 +10,13 @@ import java.util.Optional;
 @Service
 public class SapropelProceduresInitService {
 
-    private SapropelRepository sapropelRepository;
-    private LaserRepository laserRepository;
-    private SpaRitualsRepository spaRitualsRepository;
+    private final SapropelRepository sapropelRepository;
 
-    public SapropelProceduresInitService(SapropelRepository sapropelRepository, LaserRepository laserRepository, SpaRitualsRepository spaRitualsRepository) {
+
+    public SapropelProceduresInitService(SapropelRepository sapropelRepository
+    ) {
         this.sapropelRepository = sapropelRepository;
-        this.laserRepository = laserRepository;
-        this.spaRitualsRepository = spaRitualsRepository;
+
     }
 
     @PostConstruct
@@ -108,7 +105,7 @@ public class SapropelProceduresInitService {
         this.sapropelRepository.save(sapropel2);
     }
 
-    private void initSapropelProcedure1() {
+     void initSapropelProcedure1() {
 
         var sapropel1 = new SapropelProcedure();
         if (checkForExistingSapropel("Paraffin bath for feet")) return;

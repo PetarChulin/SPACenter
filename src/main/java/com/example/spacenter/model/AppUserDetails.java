@@ -14,6 +14,8 @@ public class AppUserDetails extends User {
         this.id = id;
     }
 
+
+
     public Long getId() {
         return id;
     }
