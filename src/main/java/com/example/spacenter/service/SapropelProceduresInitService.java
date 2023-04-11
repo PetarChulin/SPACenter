@@ -33,7 +33,7 @@ public class SapropelProceduresInitService {
         var sapropel5 = new SapropelProcedure();
         if (checkForExistingSapropel("Sapropel mask (for the back/ joints)")) return;
 
-        sapropel5.setId((long) Math.floor(Math.random() * 50));
+        sapropel5.setId((long) Math.floor(Math.random() * 91));
         sapropel5.setName("Sapropel mask (for the back/ joints)");
         sapropel5.setType(sapropel5.getType());
         sapropel5.setImageUrl("/images/sapropel/image-4.jpeg");
@@ -54,7 +54,7 @@ public class SapropelProceduresInitService {
         var sapropel4 = new SapropelProcedure();
         if (checkForExistingSapropel("Full body wrap with sapropel")) return;
 
-        sapropel4.setId((long) Math.floor(Math.random() * 60));
+        sapropel4.setId((long) Math.floor(Math.random() * 601));
         sapropel4.setName("Full body wrap with sapropel");
         sapropel4.setType(sapropel4.getType());
         sapropel4.setImageUrl("/images/sapropel/image-2.jpeg");

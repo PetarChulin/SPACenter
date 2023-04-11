@@ -16,21 +16,21 @@
     <th:block th:insert="~{fragments/footer}"></th:block>
 </header>
 <main>
-    <div  style="margin-top: 80px"><h1 class="text-center">Comments</h1>
+    <div  style="margin-top: 80px"><h1 class="text-center" th:text="|Comments for *{name}|"></h1>
 
 
         <div  class="row " style="margin: auto; background-color: rgba(90,90,100, 0.7)">
 
 
 
-            <div style="margin: auto; padding-top: 20px" th:each="p : ${comments}"
+            <div style="margin: auto; padding-top: 20px" th:each="p : ${commentsByProcedureId}"
                  th:object="${p}">
                 <div class="card bg-transparent text-bg-info text-md-center shadow-lg mb-5 rounded border-light"
                      style="width: 60rem; height: 7rem; margin: auto">
                     <div>
 
-                        <div id="comments" th:if="${noComments}" class="alert alert-danger" role="alert">
-                            There are no comments to show
+                        <div id="comments" th:if="${commentsByProcedureId.isEmpty()}" class="alert alert-danger" role="alert">
+                            There are no comments to show.
                         </div>
 
                         <div class="card-text text-sm-left "
@@ -48,7 +48,7 @@
                        style="position:absolute;bottom:3px; right:2px;"
                        th:href="@{/comment/delete/{id}(id = *{id})}">
                         Delete comment</a>
-                <div th:if="${deleted}" class="alert alert-danger text-center">Comment was deleted!</div>
+                    <div th:if="${deleted}" class="alert alert-danger text-center">Comment was deleted!</div>
                 </div>
             </div>
         </div>

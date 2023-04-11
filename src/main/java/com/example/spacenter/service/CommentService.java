@@ -18,22 +18,22 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Objects;
 
-import static com.example.spacenter.service.CommonService.getUserEntity;
-import static com.example.spacenter.service.CommonService.getUserId;
+import static com.example.spacenter.service.CommonService.*;
 
 @Service
 public class CommentService {
 
     private final CommentsRepository commentsRepository;
-    private SapropelRepository sapropelRepository;
+    private final SapropelRepository sapropelRepository;
 
-    private LaserRepository laserRepository;
+    private final LaserRepository laserRepository;
 
-    private SpaRitualsRepository spaRitualsRepository;
+    private final SpaRitualsRepository spaRitualsRepository;
 
-    private SpaServicesRepository spaServicesRepository;
+    private final SpaServicesRepository spaServicesRepository;
 
 
     public CommentService(CommentsRepository commentsRepository,
@@ -90,14 +90,14 @@ public class CommentService {
         this.commentsRepository.deleteById(id);
     }
 
-    public boolean isOwner(Long id) {
-
-        Comment comment = this.commentsRepository.findById(id).get();
-
-        Long userId = getUserId();
-
-        return Objects.equals(comment.getAuthor().getId(), userId);
-    }
+//    public boolean isOwner(Long id) {
+//
+//        Comment comment = this.commentsRepository.findById(id).get();
+//
+//        Long userId = getUserId();
+//
+//        return Objects.equals(comment.getAuthor().getId(), userId);
+//    }
 
     @Transactional
     void commentAdd(CommentsDTO commentsDTO, BaseProcedure procedure, String procedureName) {
@@ -128,4 +128,16 @@ public class CommentService {
         this.commentsRepository.save(comment);
     }
 
+    public List<Comment> showCommentsByProcedureId(Long id) {
+
+        List<BaseProcedure> all = getAllProcedures();
+
+        BaseProcedure procedure = all.stream()
+                .filter(p -> Objects.equals(p.getId(), id))
+                .findAny().orElseThrow();
+
+        String name = procedure.getName();
+        return commentsRepository.findCommentsByName(name);
+
+    }
 }

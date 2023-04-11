@@ -13,8 +13,12 @@
 <main><h1 class="text-center" style="margin-top: 80px; background-color: rgba(0,0,0, 0.46)">Product details</h1>
     <div class="container" th:object="${searched}">
         <div class="card" style="background-color: rgba(200,200,200,0.87); border-radius: 8px; height: 100%">
-            <div><h3 class="text-center" th:text="*{name}" style="color: ghostwhite; background-color: #23272b;
+            <div><h3 class="text-left" th:text="*{name}" style="color: ghostwhite; background-color: #23272b;
             border-top-left-radius: 8px; border-top-right-radius: 8px; height: 40px"></h3>
+                <a class="btn btn-sm btn-outline-light" sec:authorize="isAuthenticated()"
+                   style="position:absolute;top:3px; right:265px;"
+                   th:href="@{/comments-byProcedureName/{id}(id = *{id})}">
+                    Show comments for procedure</a>
                 <a class="btn btn-sm btn-outline-light" sec:authorize="isAuthenticated()"
                    style="position:absolute;top:3px; right:145px;"
                    th:href="@{/comment/add/{type}/{id}(type = *{type}, id = *{id})}">

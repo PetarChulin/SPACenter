@@ -30,7 +30,7 @@ public class LaserProceduresInitService {
         var laser = new LaserProcedure();
         if (checkForExistingLaser("Carboxytherapy – facial treatment")) return;
 
-        laser.setId((long) Math.floor(Math.random() * 40));
+        laser.setId((long) Math.floor(Math.random() * 44));
         laser.setName("Carboxytherapy – facial treatment");
         laser.setType(laser.getType());
         laser.setImageUrl("/images/laser/image-61.jpeg");
@@ -51,7 +51,7 @@ public class LaserProceduresInitService {
         var laser2 = new LaserProcedure();
         if (checkForExistingLaser("Laser acne treatment")) return;
 
-        laser2.setId((long) Math.floor(Math.random() * 50));
+        laser2.setId((long) Math.floor(Math.random() * 51));
         laser2.setName("Laser acne treatment");
         laser2.setType(laser2.getType());
         laser2.setImageUrl("/images/laser/lazeris.jpg");
@@ -106,7 +106,7 @@ public class LaserProceduresInitService {
         laser4.setPrice(60.00);
 
         this.laserRepository.save(laser4);
-    };
+    }
 
 
     boolean checkForExistingLaser(String name) {
