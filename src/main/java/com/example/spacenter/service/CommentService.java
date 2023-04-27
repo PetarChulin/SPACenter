@@ -140,4 +140,14 @@ public class CommentService {
         return commentsRepository.findCommentsByName(name);
 
     }
+
+    public String findNameById(Long id) {
+        List<BaseProcedure> all = getAllProcedures();
+
+        BaseProcedure procedure = all.stream()
+                .filter(p -> Objects.equals(p.getId(), id))
+                .findAny().orElseThrow();
+
+        return procedure.getName();
+    }
 }

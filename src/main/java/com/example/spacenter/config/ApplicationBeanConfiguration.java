@@ -16,6 +16,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.client.RestTemplate;
+
+import java.net.http.HttpHeaders;
 
 
 @Configuration
@@ -98,5 +101,8 @@ public class ApplicationBeanConfiguration {
         return new ConcurrentMapCacheManager("deletion");
     }
 
-
+    @Bean
+    public RestTemplate getRestTemplate() {
+        return new RestTemplate();
+    }
 }

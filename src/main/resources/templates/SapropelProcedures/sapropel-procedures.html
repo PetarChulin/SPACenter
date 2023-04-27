@@ -69,7 +69,8 @@
             <div th:each="i: ${#numbers.sequence(1, totalPages)}">
                 <li class="page-item">
                     <a class="btn btn-lg btn-outline-light"
-                       th:href="@{'/SapropelProcedures/sapropel-procedures?size=4&page=' + ${i - 1}}">[[${i}]]</a>
+                       th:href="@{'/SapropelProcedures/sapropel-procedures?size=4&page=' + ${i - 1}}">[[${i}]]
+                    </a>
                 </li>
             </div>
         </ul>

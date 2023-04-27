@@ -64,9 +64,10 @@ public class UserProfileController {
         } else {
 
             Long userId = getUserId();
-            this.userProfileService.updateUsername(userId, entity.getUsername());
-            this.userProfileService.updatePassword(userId, passwordEncoder.encode(entity.getPassword()));
-            attributes.addFlashAttribute("message", "Username and password was changed! Please re-login.");
+            this.userProfileService.updateUserDetails(userId,
+                    entity.getUsername(),
+                    passwordEncoder.encode(entity.getPassword()));
+            attributes.addFlashAttribute("confirmMessage", "Username and password was changed!");
 
         }
         return "redirect:/change/username";
